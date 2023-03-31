@@ -40,10 +40,10 @@ struct Exercise {
     // 운동 이름
     var name: String
     // 세트 Set 키워드로 인해 Per Set의 줄임을 사용
-    var set: [PSet]
+    var sets: [PSet]
     // 해당 운동 총 볼륨
     var totalVolume: Double {
-        let isChecked = self.set.filter { $0.check == true }
+        let isChecked = self.sets.filter { $0.check == true }
         let realVolume = isChecked.reduce(0) { $0 + (Double($1.reps)*$1.weight) }
         return realVolume
     }

@@ -9,8 +9,8 @@ import UIKit
 
 class WorkoutViewController: UIViewController {
 
-    var programVM: ProgramViewModel?
-    private var tableView: UITableView!
+    var exerciseVM: [ExerciseViewModel]?
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     
@@ -28,11 +28,12 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
         setupNav()
         setupTimer()
+        setupTableView()
     }
     
     // 운동 종료 버튼
     @IBAction func doneButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Completion", message: "Have you completed your workout session?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Completion", message: "Have you completed \n your workout session?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             if action.style == .default {
@@ -110,18 +111,63 @@ extension WorkoutViewController {
     }
 }
 
+// MARK: - 테이블뷰 관련 코드
+
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return exerciseVM?.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        guard let exercise = exerciseVM?[section] else { return 0 }
+        if exercise.isOpened {
+            return exercise.returnSets().count + 1
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let exerciseVM else { return UITableViewCell() }
+        if indexPath.row == 0 {
+            if exerciseVM[indexPath.section].isOpened {
+                let cell = tableView.dequeueReusableCell(withIdentifier: Cell.workoutSectionIdentifier) as! WorkoutSectionCell
+                cell.workoutNameLabel.text = exerciseVM[indexPath.section].returnName()
+                cell.triangleImageView.image = UIImage(systemName: "arrowtriangle.down.fill")
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: Cell.workoutSectionIdentifier) as! WorkoutSectionCell
+                cell.workoutNameLabel.text = exerciseVM[indexPath.section].returnName()
+                cell.triangleImageView.image = UIImage(systemName: "arrowtriangle.right.fill")
+                return cell
+            }
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cell.workoutRowIdentifier) as! WorkoutRowCell
+            cell.repsLabel.text = exerciseVM[indexPath.section].returnSets()[indexPath.row - 1].returnReps()
+            cell.repsLabel.text = exerciseVM[indexPath.section].returnSets()[indexPath.row - 1].returnWeight()
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let exerciseVM else { return }
+        // MARK: - 선택 취소 관련 코드인데 정확히 어떤 기능인지 모르겠음 공부해봐야함.
+        tableView.deselectRow(at: indexPath, animated: true)
+        exerciseVM[indexPath.section].isOpened.toggle()
+        tableView.reloadSections([indexPath.section], with: .none)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: Cell.workoutSectionIdentifier, bundle: nil), forCellReuseIdentifier: Cell.workoutSectionIdentifier)
+        tableView.register(UINib(nibName: Cell.workoutRowIdentifier, bundle: nil), forCellReuseIdentifier: Cell.workoutRowIdentifier)
     }
 }
 

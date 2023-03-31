@@ -11,16 +11,19 @@ var pushDaySample =  Program(exercises:
                                     [
                                         Exercise(target: .chest,
                                                  name: "Bench Press",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 60),
                                                     PSet(reps: 10,
                                                           weight: 60),
-                                                    PSet(reps: 10, weight: 60)
+                                                    PSet(reps: 10,
+                                                         weight: 60),
+                                                    PSet(reps: 10,
+                                                         weight: 60)
                                                  ]),
                                         Exercise(target: .shoulders,
                                                  name: "OHP",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 30),
                                                     PSet(reps: 10,
@@ -30,7 +33,7 @@ var pushDaySample =  Program(exercises:
                                                  ]),
                                         Exercise(target: .upperArms,
                                                  name: "Push Triceps",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 35),
                                                     PSet(reps: 10,
@@ -44,7 +47,7 @@ var pullDaySample =  Program(exercises:
                                     [
                                         Exercise(target: .back,
                                                  name: "Pull Up",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 75),
                                                     PSet(reps: 10,
@@ -54,7 +57,7 @@ var pullDaySample =  Program(exercises:
                                                  ]),
                                         Exercise(target: .back,
                                                  name: "Barbell Row",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 40),
                                                     PSet(reps: 10,
@@ -64,7 +67,7 @@ var pullDaySample =  Program(exercises:
                                                  ]),
                                         Exercise(target: .upperArms,
                                                  name: "Barbell Curl",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 35),
                                                     PSet(reps: 10,
@@ -79,7 +82,7 @@ var legDaySample =  Program(exercises:
                                     [
                                         Exercise(target: .upperLegs,
                                                  name: "Squat",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 80),
                                                     PSet(reps: 10,
@@ -89,7 +92,7 @@ var legDaySample =  Program(exercises:
                                                  ]),
                                         Exercise(target: .upperLegs,
                                                  name: "Dead Lift",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 100),
                                                     PSet(reps: 10,
@@ -99,7 +102,7 @@ var legDaySample =  Program(exercises:
                                                  ]),
                                         Exercise(target: .upperLegs,
                                                  name: "Leg Extension",
-                                                 set: [
+                                                 sets: [
                                                     PSet(reps: 10,
                                                          weight: 70),
                                                     PSet(reps: 10,
@@ -109,3 +112,9 @@ var legDaySample =  Program(exercises:
                                                  ])
                                     ],
                                 title: "Leg Day")
+
+public struct Cell {
+    static let workoutSectionIdentifier = "WorkoutSectionCell"
+    static let workoutRowIdentifier = "WorkoutRowCell"
+    private init() {}
+}

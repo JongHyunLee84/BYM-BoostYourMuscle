@@ -38,7 +38,7 @@ final class ProgramListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell이 선택되면 alert 띄우기
         let workoutTitle = programListVM.modelAt(indexPath.row).returnTitle()
-        let alert = UIAlertController(title: workoutTitle, message: "Would you like to start exercising with this program?", preferredStyle: .alert)
+        let alert = UIAlertController(title: workoutTitle, message: "Would you like to start exercising \n with this program?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             if action.style == .default {
@@ -54,7 +54,7 @@ final class ProgramListTableViewController: UITableViewController {
         if segue.identifier == "WorkoutViewController", let selectedRow = tableView.indexPathForSelectedRow?.row {
             let workoutVC = segue.destination as! WorkoutViewController
             // 데이터 전달
-            workoutVC.programVM = programListVM.modelAt(selectedRow)
+            workoutVC.exerciseVM = programListVM.modelAt(selectedRow).returnExercises()
         }
     }
 
