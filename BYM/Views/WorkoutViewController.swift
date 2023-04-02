@@ -6,30 +6,63 @@
 //
 
 import UIKit
+import AVFoundation
+
+
+
 
 class WorkoutViewController: UIViewController {
-
+    
     var exerciseVM: [ExerciseViewModel]?
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var mainTimerLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
-    
-    // 타이머 기능 구현
-    private var timer: Timer = Timer()
-    private var count: Int = 0
-    private var isTimerCounting: Bool = true
+    // Rest Views
+    @IBOutlet weak var restTimerLabel: UILabel!
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var soundButton: UIButton!
+    private var soundButtonToggle: Bool = true
+    // 메인 타이머 기능 구현
+    private var mainTimer: Timer = Timer()
+    private var mainTimerCount: Int = 0
+    private var isMainTimerCounting: Bool = true
     private var appDidEnterBackgroundDate: Date?
-
+    
+    // rest Timer 구현
+    private var restTimer: Timer = Timer()
+    private var restTimerCount: Int = 0
+    
+    // 쉬는 시간 끝났을 때 사운드
+    var player: AVAudioPlayer?
+    
     override func viewWillAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        mainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(mainTimerCounter), userInfo: nil, repeats: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNav()
+        setupResetButtons()
         setupTimer()
         setupTableView()
         setupForKeyBoard()
+    }
+    
+    // Rest Buttons Tapped
+    @IBAction func restButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    // 사운드 음소거 -> 진동
+    @IBAction func soundButtonTapped(_ sender: Any) {
+        soundButtonToggle.toggle()
+        if soundButtonToggle {
+            soundButton.setImage(UIImage(systemName: "speaker.wave.2"), for: .normal)
+        } else {
+            soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
+        }
     }
     
     // 운동 종료 버튼
@@ -41,30 +74,45 @@ class WorkoutViewController: UIViewController {
                 // 운동 종료시 세이브 해야할 코드들
                 self.navigationController?.popViewController(animated: true)
             }
-            }))
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     
     // 타이머 시작/정지 버튼
     @IBAction func startAndStopButtonTapped(_ sender: UIButton) {
         
-        if isTimerCounting {
-            isTimerCounting = false
-            timer.invalidate()
+        if isMainTimerCounting {
+            isMainTimerCounting = false
+            mainTimer.invalidate()
             startStopButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
         }
         else {
-            isTimerCounting = true
+            isMainTimerCounting = true
             startStopButton.setImage(UIImage(systemName: "pause.circle"), for: .normal)
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+            mainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(mainTimerCounter), userInfo: nil, repeats: true)
         }
     }
     
-    @objc func timerCounter() -> Void {
-        count = count + 1
-        let time = secondsToHoursMinutesSeconds(seconds: count)
+    @objc func mainTimerCounter() {
+        mainTimerCount += 1
+        let time = secondsToHoursMinutesSeconds(seconds: mainTimerCount)
         let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
-        timerLabel.text = timeString
+        mainTimerLabel.text = timeString
+    }
+    
+    @objc func restTimerCounter() {
+        restTimerCount -= 1
+        restTimerLabel.text = "\(restTimerCount) sec"
+        if restTimerCount == 0 {
+            restTimer.invalidate()
+            restTimerLabel.text = "Start!"
+            if soundButtonToggle {
+                playSound()
+            } else {
+                // 진동
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            }
+        }
     }
     
     func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int) {
@@ -89,19 +137,19 @@ class WorkoutViewController: UIViewController {
 
     @objc func applicationDidEnterBackground() {
         // 타이머가 작동 중일 때만 백그라운드 대응을 하게 만든 guard
-        guard isTimerCounting else { return }
+        guard isMainTimerCounting else { return }
                 self.appDidEnterBackgroundDate = Date()
     }
 
     @objc func applicationWillEnterForeground() {
         // 타이머가 작동 중일 때만 백그라운드 대응을 하게 만든 guard
-        guard isTimerCounting else { return }
+        guard isMainTimerCounting else { return }
         guard let previousDate = appDidEnterBackgroundDate else { return }
         let calendar = Calendar.current
         let difference = calendar.dateComponents([.second], from: previousDate, to: Date())
         let seconds = difference.second!
         // 실제 타이머와 비교했을 때 background -> foreground 과정에서 1초 정도 오차가 있어서 빼줌
-        count += seconds - 1
+        mainTimerCount += seconds - 1
     }
 }
 
@@ -111,6 +159,14 @@ extension WorkoutViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    func setupResetButtons() {
+        minusButton.layer.cornerRadius = 10
+        minusButton.layer.masksToBounds = true
+        resetButton.layer.cornerRadius = 10
+        resetButton.layer.masksToBounds = true
+        plusButton.layer.cornerRadius = 10
+        plusButton.layer.masksToBounds = true
+    }
     // 뷰 아무 곳 터치시 키보드 내리기
     func setupForKeyBoard() {
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
@@ -181,7 +237,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 80
+            return 65
         }
         return 50
     }
@@ -200,11 +256,41 @@ extension WorkoutViewController: WorkoutRowCellDelegate {
     }
 
     func checkButtonTapped(cell: WorkoutRowCell) {
-        if let indexPath  = tableView.indexPath(for: cell) {
-            exerciseVM?[indexPath.section].returnSets()[indexPath.row - 1].toggleCheck()
+        if let indexPath  = tableView.indexPath(for: cell), let exercise = exerciseVM?[indexPath.section] {
+            let pSet = exercise.returnSets()[indexPath.row - 1]
+            pSet.toggleCheck()
+            // 체크 버튼 눌렸을 때 휴식 타이머 기능 시작
+            if let pSet = exerciseVM?[indexPath.section].returnSets()[indexPath.row - 1], pSet.returnCheck()  {
+                // 체크할 때마다 Timer가 연속으로 할당되니까 매번 invalidate 시킴
+                restTimer.invalidate()
+                restTimerCount = 3  //exercise.returnRest()
+                restTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(restTimerCounter), userInfo: nil, repeats: true)
+            }
+            
             tableView.reloadRows(at: [indexPath], with: .automatic)
-//            tableView.reloadData()
         }
     }
 
 }
+
+// bell sound extension
+extension WorkoutViewController {
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "ES_Boxing Bell Ring 2 - SFX Producer", withExtension: "wav") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
+

@@ -41,6 +41,8 @@ struct Exercise {
     var name: String
     // 세트 Set 키워드로 인해 Per Set의 줄임을 사용
     var sets: [PSet]
+    // 세트 당 쉬는 시간
+    var rest: Int = 60
     // 해당 운동 총 볼륨
     var totalVolume: Double {
         let isChecked = self.sets.filter { $0.check == true }

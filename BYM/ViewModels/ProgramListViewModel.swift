@@ -69,6 +69,10 @@ class ExerciseViewModel {
         return self.setsVM
     }
     
+    func returnRest() -> Int {
+        return exercise.rest
+    }
+    
 }
 
 class PSetViewModel {
