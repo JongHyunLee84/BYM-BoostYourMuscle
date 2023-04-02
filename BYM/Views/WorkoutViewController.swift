@@ -29,6 +29,7 @@ class WorkoutViewController: UIViewController {
         setupNav()
         setupTimer()
         setupTableView()
+        setupForKeyBoard()
     }
     
     // 운동 종료 버튼
@@ -104,10 +105,17 @@ class WorkoutViewController: UIViewController {
     }
 }
 
-// 네비게이션 바 없앰
+// 네비게이션 바 없앰, 키보드 내리기
 extension WorkoutViewController {
     func setupNav() {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    // 뷰 아무 곳 터치시 키보드 내리기
+    func setupForKeyBoard() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 }
 
@@ -145,8 +153,17 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cell.workoutRowIdentifier) as! WorkoutRowCell
-            cell.repsLabel.text = exerciseVM[indexPath.section].returnSets()[indexPath.row - 1].returnReps()
-            cell.repsLabel.text = exerciseVM[indexPath.section].returnSets()[indexPath.row - 1].returnWeight()
+            // MARK: - 바뀐 셀로 데이터 넣어주기
+            let pset = exerciseVM[indexPath.section].returnSets()[indexPath.row - 1]
+            cell.delegate = self
+            cell.setLabel.text = String(indexPath.row)
+            cell.repsTF.text = pset.returnReps()
+            cell.weightTF.text = pset.returnWeight()
+            let checkButton = cell.checkButton
+            pset.returnCheck()  ?
+                                checkButton?.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                                :
+                                checkButton?.setImage(UIImage(systemName: "square"), for: .normal)
             return cell
         }
     }
@@ -155,11 +172,17 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         guard let exerciseVM else { return }
         // MARK: - 선택 취소 관련 코드인데 정확히 어떤 기능인지 모르겠음 공부해봐야함.
         tableView.deselectRow(at: indexPath, animated: true)
-        exerciseVM[indexPath.section].isOpened.toggle()
-        tableView.reloadSections([indexPath.section], with: .none)
+        if indexPath.row == 0 {
+            exerciseVM[indexPath.section].isOpened.toggle()
+            tableView.reloadSections([indexPath.section], with: .none)
+        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 80
+        }
         return 50
     }
     
@@ -171,3 +194,17 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension WorkoutViewController: WorkoutRowCellDelegate {
+    func doneButtonTapped() {
+        view.endEditing(true)
+    }
+
+    func checkButtonTapped(cell: WorkoutRowCell) {
+        if let indexPath  = tableView.indexPath(for: cell) {
+            exerciseVM?[indexPath.section].returnSets()[indexPath.row - 1].toggleCheck()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+//            tableView.reloadData()
+        }
+    }
+
+}

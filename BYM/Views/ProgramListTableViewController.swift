@@ -43,19 +43,13 @@ final class ProgramListTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             if action.style == .default {
                 // 운동 시작 뷰로 넘어가기
-                self.performSegue(withIdentifier: "WorkoutViewController", sender: self)
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "WorkoutViewController") as! WorkoutViewController
+                nextViewController.exerciseVM = self.programListVM.modelAt(indexPath.row).returnExercises()
+                self.navigationController?.pushViewController(nextViewController, animated: true)
             }
             }))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    // WorkoutViewController로 넘어갈 때 데이터 전달을 위한 메서드
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "WorkoutViewController", let selectedRow = tableView.indexPathForSelectedRow?.row {
-            let workoutVC = segue.destination as! WorkoutViewController
-            // 데이터 전달
-            workoutVC.exerciseVM = programListVM.modelAt(selectedRow).returnExercises()
-        }
     }
 
 }

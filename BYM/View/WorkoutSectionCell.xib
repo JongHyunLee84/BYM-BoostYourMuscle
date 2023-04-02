@@ -18,27 +18,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A02-J8-Ujx">
-                        <rect key="frame" x="20" y="5" width="250" height="34"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="tnm-D6-9KD"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.right.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-1Y-7hQ">
-                        <rect key="frame" x="287.66666666666669" y="7.6666666666666643" width="17.333333333333314" height="29"/>
-                        <color key="tintColor" systemColor="labelColor"/>
-                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-wf-Z32">
+                        <rect key="frame" x="10" y="11.999999999999998" width="300" height="20.333333333333329"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A02-J8-Ujx">
+                                <rect key="frame" x="0.0" y="0.0" width="265.66666666666669" height="20.333333333333332"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="tnm-D6-9KD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.right.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-1Y-7hQ">
+                                <rect key="frame" x="282.66666666666669" y="2.6666666666666652" width="17.333333333333314" height="15.333333333333336"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </imageView>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="A02-J8-Ujx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Aos-fb-ujL"/>
-                    <constraint firstAttribute="bottom" secondItem="A02-J8-Ujx" secondAttribute="bottom" constant="5" id="Rae-j8-35t"/>
-                    <constraint firstItem="A02-J8-Ujx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Tuf-7Z-N1p"/>
-                    <constraint firstAttribute="bottom" secondItem="tjU-1Y-7hQ" secondAttribute="bottom" constant="5" id="j1g-aD-PjZ"/>
-                    <constraint firstItem="tjU-1Y-7hQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="qey-in-rEj"/>
-                    <constraint firstAttribute="trailing" secondItem="tjU-1Y-7hQ" secondAttribute="trailing" constant="15" id="yuB-U0-1se"/>
+                    <constraint firstItem="rRj-wf-Z32" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="EOo-hc-RSJ"/>
+                    <constraint firstAttribute="trailing" secondItem="rRj-wf-Z32" secondAttribute="trailing" constant="10" id="bGQ-Qn-5Nk"/>
+                    <constraint firstItem="rRj-wf-Z32" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="h0E-h2-0Bh"/>
+                    <constraint firstItem="rRj-wf-Z32" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yI7-FI-kHP"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -46,7 +49,7 @@
                 <outlet property="triangleImageView" destination="tjU-1Y-7hQ" id="85T-ZR-KGB"/>
                 <outlet property="workoutNameLabel" destination="A02-J8-Ujx" id="wex-N8-z7y"/>
             </connections>
-            <point key="canvasLocation" x="27.480916030534349" y="19.718309859154932"/>
+            <point key="canvasLocation" x="136" y="26"/>
         </tableViewCell>
     </objects>
     <resources>
