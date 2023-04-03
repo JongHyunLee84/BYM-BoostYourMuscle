@@ -51,7 +51,7 @@ struct Exercise {
     }
 }
 
-enum Target: String {
+enum Target: String, CaseIterable {
     case back //등
     case cardio // 유산소
     case chest // 가슴
