@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddSetTableViewCell: UITableViewCell {
+class AddWorkoutTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!

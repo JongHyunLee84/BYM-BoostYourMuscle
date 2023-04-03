@@ -104,7 +104,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetTableViewCell", for: indexPath) as! AddSetTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddWorkoutTableViewCell", for: indexPath) as! AddWorkoutTableViewCell
         cell.numberLabel.text = "1"
         cell.weightLabel.text = "60kg"
         cell.respsLabel.text = "10reps"

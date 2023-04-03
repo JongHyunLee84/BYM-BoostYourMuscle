@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddedWorkoutTableViewCell: UITableViewCell {
+class AddProgramTableViewCell: UITableViewCell {
 
     @IBOutlet weak var workoutNameLabel: UILabel!
     @IBOutlet weak var targetLabel: UILabel!

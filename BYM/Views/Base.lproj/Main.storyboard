@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnp-8Q-knn">
-                                <rect key="frame" x="20" y="167" width="374" height="100"/>
+                                <rect key="frame" x="20" y="167.33333333333334" width="374" height="100.00000000000003"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="trV-d7-K1h"/>
                                 </constraints>
@@ -122,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="491.33333333333331" width="414" height="224.66666666666669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddSetTableViewCell" id="1ph-j5-un8" customClass="AddSetTableViewCell" customModule="BYM" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddWorkoutTableViewCell" id="1ph-j5-un8" customClass="AddWorkoutTableViewCell" customModule="BYM" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1ph-j5-un8" id="fKT-Mb-UCe">
@@ -298,7 +298,7 @@
                                 <rect key="frame" x="0.0" y="264" width="414" height="472"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddedWorkoutCell" rowHeight="69" id="vaM-4U-WFN" customClass="AddedWorkoutTableViewCell" customModule="BYM" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddProgramTableViewCell" rowHeight="69" id="vaM-4U-WFN" customClass="AddProgramTableViewCell" customModule="BYM" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vaM-4U-WFN" id="9Za-Cf-YDa">
@@ -618,6 +618,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="k6N-y7-fCf" id="9zK-fk-Z1B"/>
                         <outlet property="mainTimerLabel" destination="AqA-Re-gnJ" id="DDl-TN-BQP"/>
                         <outlet property="minusButton" destination="cN1-bs-Ta4" id="h1T-ba-73j"/>
                         <outlet property="plusButton" destination="ZeC-FV-prM" id="DHo-cm-wIM"/>
