@@ -25,9 +25,9 @@ class ProgramListViewModel {
 
 class ProgramViewModel {
     
-    private var program: Program
+    private var program: Programs
     private var excercisesVM: [ExerciseViewModel]
-    init(program: Program) {
+    init(program: Programs) {
         self.program = program
         excercisesVM = program.exercises.map { ExerciseViewModel(exercise: $0) }
     }
@@ -43,12 +43,12 @@ class ProgramViewModel {
 }
 
 class ExerciseViewModel {
-    private var exercise: Exercise
+    private var exercise: Exercises
     private var setsVM: [PSetViewModel]
     //expadable View를 위한 bool 타입 속성
     var isOpened: Bool = false
     
-    init(exercise: Exercise) {
+    init(exercise: Exercises) {
         self.exercise = exercise
         setsVM = exercise.sets.map{ PSetViewModel(pset: $0) }
     }
@@ -76,9 +76,9 @@ class ExerciseViewModel {
 }
 
 class PSetViewModel {
-    private var pset: PSet
+    private var pset: PSets
     
-    init(pset: PSet) {
+    init(pset: PSets) {
         self.pset = pset
     }
     func returnWeight() -> String {
