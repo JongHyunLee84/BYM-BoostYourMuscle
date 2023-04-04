@@ -13,13 +13,13 @@ struct DailyWorkOut {
     
     // 2. 총 볼륨
     var totalVolume: Double {
-        let exercises = programs.exercises
+        let exercises = program.exercises
         let total = exercises.reduce(0) { $0 + $1.totalVolume }
         return total
     }
     // 3. 날짜
     var today: Data = Data() // 초기화 시 항상 당일 날짜
     // 4. 프로그램
-    var programs: Programs
+    var program: Program
     
 }

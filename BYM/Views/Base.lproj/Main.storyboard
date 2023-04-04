@@ -161,7 +161,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="numberLabel" destination="SBb-ql-562" id="MAt-RF-7rt"/>
-                                            <outlet property="respsLabel" destination="fYs-I2-3kh" id="RPY-se-KuP"/>
+                                            <outlet property="repsLabel" destination="fYs-I2-3kh" id="Rg5-Cm-eEr"/>
                                             <outlet property="weightLabel" destination="3cD-ZO-tmZ" id="eAy-gC-oTA"/>
                                         </connections>
                                     </tableViewCell>

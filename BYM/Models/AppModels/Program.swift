@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Programs {
+struct Program {
     
     // 운동 배열
-    var exercises: [Exercises]
+    var exercises: [Exercise]
     
     // 프로그램 제목
     var title: String

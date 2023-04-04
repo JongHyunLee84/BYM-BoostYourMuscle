@@ -21,4 +21,8 @@ final class ProgramListTableViewCell: UITableViewCell {
         delegate?.editButtonTapped()
     }
     
+    func setupCell(_ vm: ProgramViewModel) {
+        programTitleLabel.text = vm.title
+    }
+    
 }

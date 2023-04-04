@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Exercises {
+struct Exercise {
     
     // 운동 부위
     var target: Target
     // 운동 이름
     var name: String
     // 세트 Set 키워드로 인해 Per Set의 줄임을 사용
-    var sets: [PSets]
+    var sets: [PSet]
     // 세트 당 쉬는 시간
     var rest: Int = 60
     // 해당 운동 총 볼륨

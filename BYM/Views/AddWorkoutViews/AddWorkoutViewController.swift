@@ -8,14 +8,11 @@
 import UIKit
 
 class AddWorkoutViewController: UIViewController {
-
-    @IBOutlet weak var targetPickerView: UIPickerView! {
-        didSet {
-            targetPickerView.delegate = self
-            targetPickerView.dataSource = self
-        }
-    }
     
+    // MARK: - exercise와 workout이 같은 개념임
+//    private var exerciseVM = ExerciseViewModel(exercise: Exer)
+    
+    @IBOutlet weak var targetPickerView: UIPickerView!
     @IBOutlet weak var workoutNameTF: UITextField!
     @IBOutlet weak var restTimeTF: UITextField!
     @IBOutlet weak var setsWeightTF: UITextField!
@@ -27,13 +24,7 @@ class AddWorkoutViewController: UIViewController {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var addSetButton: UIButton!
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
-    }
-    
+    @IBOutlet weak var tableView: UITableView!
     
     private var target: Target? {
         didSet {
@@ -45,7 +36,8 @@ class AddWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-
+        setupTableView()
+        setupPickerView()
     }
     // MARK: - (-10,+10) 구분해서 TF에 추가시키기
     @IBAction func restTimeButtonTapped(_ sender: UIButton) {
@@ -77,6 +69,11 @@ extension AddWorkoutViewController {
 // MARK: - PickerView Extension
 
 extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func setupPickerView() {
+        targetPickerView.delegate = self
+        targetPickerView.dataSource = self
+    }
+    
     // pickerView에 담긴 아이템의 컴포넌트 갯수 (= 휠의 갯수)
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -98,6 +95,10 @@ extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource
 }
 
 extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -105,9 +106,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddWorkoutTableViewCell", for: indexPath) as! AddWorkoutTableViewCell
-        cell.numberLabel.text = "1"
-        cell.weightLabel.text = "60kg"
-        cell.respsLabel.text = "10reps"
+        //        cell.setupUI(<#T##vm: PSetViewModel##PSetViewModel#>)
         return cell
     }
     

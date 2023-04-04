@@ -7,50 +7,61 @@
 
 import Foundation
 
-class ProgramListViewModel {
+final class ProgramListViewModel {
+    
+    private let service = CoreDataService()
     private var programList: [ProgramViewModel] = []
+    
+    init() {
+        let programViewModels = service.fetchProgram().compactMap { program in
+            ProgramViewModel(program: program)
+        }
+        self.programList = programViewModels
+    }
     
     func addProgram(_ vm: ProgramViewModel) {
         programList.append(vm)
+        service.saveProgram(Program(exercises: vm.program.exercises,
+                                    title: vm.title))
     }
     
     func numberOfRows() -> Int {
         self.programList.count
     }
     
-    func modelAt(_ index: Int) -> ProgramViewModel {
+    func returnViewModelAt(_ index: Int) -> ProgramViewModel {
         return programList[index]
     }
 }
 
-class ProgramViewModel {
+final class ProgramViewModel {
     
-    private var program: Programs
+    fileprivate var program: Program
     private var excercisesVM: [ExerciseViewModel]
-    init(program: Programs) {
+    init(program: Program) {
         self.program = program
         excercisesVM = program.exercises.map { ExerciseViewModel(exercise: $0) }
     }
     
-    func returnTitle() -> String {
+    var title: String {
         return program.title
     }
     
-    func returnExercises() -> [ExerciseViewModel] {
+    var exercises: [ExerciseViewModel] {
         return self.excercisesVM
     }
 
 }
 
-class ExerciseViewModel {
-    private var exercise: Exercises
+final class ExerciseViewModel {
+    private var exercise: Exercise
     private var setsVM: [PSetViewModel]
     //expadable View를 위한 bool 타입 속성
     var isOpened: Bool = false
     
-    init(exercise: Exercises) {
+    init(exercise: Exercise) {
         self.exercise = exercise
-        setsVM = exercise.sets.map{ PSetViewModel(pset: $0) }
+        setsVM = exercise.sets.compactMap{ PSetViewModel(pset: $0) }
     }
     
     func returnName() -> String {
@@ -75,11 +86,17 @@ class ExerciseViewModel {
     
 }
 
-class PSetViewModel {
-    private var pset: PSets
+final class PSetViewModel {
+    static var creatNumber = 1
     
-    init(pset: PSets) {
+    private var pset: PSet
+    // 뷰에 몇 번째 세트인지 보여주기 위함.
+    var setNumber: String {
+        return String(Self.creatNumber)
+    }
+    init(pset: PSet) {
         self.pset = pset
+        Self.creatNumber += 1
     }
     func returnWeight() -> String {
         // 소수점이 있는지 여부 % 쓰려니까 이제 못 쓰게함

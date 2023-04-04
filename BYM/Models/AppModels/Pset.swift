@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PSets {
+struct PSet {
     // 횟수
     var reps: Int
     // 무게

@@ -19,3 +19,5 @@ enum Target: String, CaseIterable {
     case upperLegs // 하체(Basic)
     case waist // 허리
 }
+
+
