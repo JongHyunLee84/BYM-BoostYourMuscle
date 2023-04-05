@@ -9,6 +9,7 @@ import UIKit
 
 protocol WorkoutRowCellDelegate: AnyObject {
     func checkButtonTapped(cell: WorkoutRowCell)
+    func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String)
     func doneButtonTapped()
 }
 
@@ -19,7 +20,7 @@ class WorkoutRowCell: UITableViewCell {
     @IBOutlet weak var repsTF: UITextField!
     @IBOutlet weak var checkButton: UIButton!
     // 체크 버튼 토글을 위한 델리게이트
-    var delegate: WorkoutRowCellDelegate?
+    weak var delegate: WorkoutRowCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +33,8 @@ class WorkoutRowCell: UITableViewCell {
     }
     
 }
+
+// MARK: - cell안에 TF 관련 Delegate
 
 extension WorkoutRowCell: UITextFieldDelegate {
     
@@ -65,5 +68,10 @@ extension WorkoutRowCell: UITextFieldDelegate {
     // 텍스트필드 수정 시작 시 모든 텍스트가 선택되어 한번에 지울 수 있게
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectAll(nil)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        delegate?.textFieldDidEndEditing(cell: self, tag: textField.tag, value: textField.text ?? "0")
     }
 }

@@ -17,13 +17,14 @@ final class CoreDataService {
             var model: Program = Program(exercises: [], title: "")
             model.title = entity.title ?? ""
             model.exercises = entity.exerciseArray.compactMap {
-                var exercise = Exercise(target: .back, name: "", sets: [])
+                var exercise = Exercise()
                 if let target = Target(rawValue: $0.target ?? "chest") {
                     exercise = Exercise(target: target,
                                         name: $0.name ?? "",
-                                        sets: $0.psetArray.compactMap {
-                        let pset = PSet(reps: Int($0.reps),
-                                        weight: $0.weight)
+                                        rest: Int($0.rest),
+                                        sets: $0.psetArray.compactMap { pset in
+                        let pset = PSet(reps: Int(pset.reps),
+                                        weight: pset.weight)
                         return pset
                     }
                     )

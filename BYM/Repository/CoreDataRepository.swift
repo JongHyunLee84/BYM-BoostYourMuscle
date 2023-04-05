@@ -51,7 +51,8 @@ final class CoreDataRepository {
                     let entity = PsetEntity(entity: description, insertInto: context)
                     entity.reps = Int64($0.reps)
                     entity.weight = $0.weight
-                    exerciseEntity.addToExerciseToPset(entity) }
+                    exerciseEntity.addToExerciseToPset(entity)
+                }
                 
                 programData.addToProgramToExercise(exerciseEntity)
             }

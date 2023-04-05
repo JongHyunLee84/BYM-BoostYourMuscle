@@ -34,11 +34,11 @@ extension ProgramListTableViewController {
                 // 운동 시작 뷰로 넘어가기
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: Identifier.workoutVCIdentifier) as! WorkoutViewController
-                nextViewController.exerciseVM = self.programListVM.returnViewModelAt(indexPath.row).exercises
+                nextViewController.exerciseListVM = self.programListVM.returnViewModelAt(indexPath.row).returnExercises()
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }
             }))
         self.present(alert, animated: true, completion: nil)
     }
+    
 }
-

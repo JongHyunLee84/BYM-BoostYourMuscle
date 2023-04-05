@@ -23,4 +23,22 @@ struct Exercise {
         let realVolume = isChecked.reduce(0) { $0 + (Double($1.reps)*$1.weight) }
         return realVolume
     }
+    
+    // 지정생성자
+    init(target: Target, name: String, rest: Int, sets: [PSet]) {
+        self.target = target
+        self.name = name
+        self.sets = sets
+        self.rest = rest
+    }
+    
+    // reset가 60으로 기본 설정된 init
+    init(target: Target, name: String, sets: [PSet]) {
+        self.init(target: target, name: name, rest: 60, sets: sets)
+    }
+    
+    // 나중에 데이터 채워 넣으려고 만든 init
+    init() {
+        self.init(target: .back, name: "", rest: 60, sets: [])
+    }
 }

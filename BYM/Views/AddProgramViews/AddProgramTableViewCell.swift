@@ -18,5 +18,10 @@ class AddProgramTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    func setupUI(_ vm: ExerciseViewModel) {
+        workoutNameLabel.text = vm.returnName()
+        targetLabel.text = vm.returnTarget()
+        setsLabel.text = vm.returnSets()
+    }
 
 }

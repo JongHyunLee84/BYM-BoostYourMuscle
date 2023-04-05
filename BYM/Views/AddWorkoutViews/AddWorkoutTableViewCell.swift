@@ -18,8 +18,8 @@ class AddWorkoutTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func setupUI(_ vm: PSetViewModel) {
-        numberLabel.text = vm.setNumber
+    func setupUI(_ vm: PSetViewModel, index: Int) {
+        numberLabel.text = "\(index + 1) set"
         weightLabel.text = vm.returnWeight()
         repsLabel.text = vm.returnReps()
         

@@ -116,7 +116,10 @@ var legDaySample =  Program(exercises:
 public struct Identifier {
     static let workoutSectionIdentifier = "WorkoutSectionCell"
     static let workoutRowIdentifier = "WorkoutRowCell"
+    static let addWorkoutTableViewCell = "AddWorkoutTableViewCell"
+    static let addProgramTableViewCell = "AddProgramTableViewCell"
     static let addProgramVCIdentifier = "AddProgramViewController"
+    static let toAddWorkoutViewController = "toAddWorkoutViewController"
     static let workoutVCIdentifier = "WorkoutViewController"
     static let soundButtonKey = "soundButtonKey"
     private init() {}
