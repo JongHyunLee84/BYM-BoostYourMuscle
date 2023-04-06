@@ -2,7 +2,7 @@
 //  ExerciseEntity+CoreDataProperties.swift
 //  BYM
 //
-//  Created by 이종현 on 2023/04/04.
+//  Created by 이종현 on 2023/04/06.
 //
 //
 
@@ -16,9 +16,10 @@ extension ExerciseEntity {
         return NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
     }
 
-    @NSManaged public var target: String?
     @NSManaged public var name: String?
     @NSManaged public var rest: Int64
+    @NSManaged public var target: String?
+    @NSManaged public var id: Int64
     @NSManaged public var exerciseToProgram: ProgramEntity?
     @NSManaged public var exerciseToPset: Set<PsetEntity>?
     
@@ -27,7 +28,6 @@ extension ExerciseEntity {
             return $0.id > $1.id
         }
     }
-
 
 }
 

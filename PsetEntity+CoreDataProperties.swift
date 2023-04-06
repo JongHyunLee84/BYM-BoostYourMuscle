@@ -2,7 +2,7 @@
 //  PsetEntity+CoreDataProperties.swift
 //  BYM
 //
-//  Created by 이종현 on 2023/04/04.
+//  Created by 이종현 on 2023/04/06.
 //
 //
 
@@ -16,9 +16,10 @@ extension PsetEntity {
         return NSFetchRequest<PsetEntity>(entityName: "PsetEntity")
     }
 
+    @NSManaged public var check: Bool
     @NSManaged public var reps: Int64
     @NSManaged public var weight: Double
-    @NSManaged public var check: Bool
+    @NSManaged public var id: Int64
     @NSManaged public var psetToExercise: ExerciseEntity?
 
 }

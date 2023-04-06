@@ -2,7 +2,7 @@
 //  ExerciseEntity+CoreDataClass.swift
 //  BYM
 //
-//  Created by 이종현 on 2023/04/04.
+//  Created by 이종현 on 2023/04/06.
 //
 //
 
