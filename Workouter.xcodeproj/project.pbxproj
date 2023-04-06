@@ -62,6 +62,7 @@
 		F26D707129DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PsetEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F26D707429DEE1F100EA2CBD /* TableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHelper.swift; sourceTree = "<group>"; };
 		F26D707629DEEB9500EA2CBD /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		F26D707C29DEFEFA00EA2CBD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2707B1429DAA3AD00F35D22 /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		F2707B1529DAA3AD00F35D22 /* Workout+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Workout+Extension.swift"; sourceTree = "<group>"; };
 		F2707B1629DAA3AD00F35D22 /* Workout+Table+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Workout+Table+Extension.swift"; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		F29D290229D4018900491123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F29D290729D4018B00491123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F29D290A29D4018B00491123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F29D290C29D4018B00491123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F29D291529D4030E00491123 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListTableViewCell.swift; sourceTree = "<group>"; };
 		F29D292029D43A0800491123 /* ProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModel.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		F29D28FA29D4018900491123 /* Workouter */ = {
 			isa = PBXGroup;
 			children = (
-				F29D290C29D4018B00491123 /* Info.plist */,
+				F26D707C29DEFEFA00EA2CBD /* Info.plist */,
 				F2FA05C729DB0FC9003F6CED /* System */,
 				F2E5B0A529DC36E800E9C2F3 /* Service */,
 				F2E5B0A429DC36AE00E9C2F3 /* Repository */,
@@ -557,7 +557,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BYM/Info.plist;
+				INFOPLIST_FILE = Workouter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -590,7 +590,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BYM/Info.plist;
+				INFOPLIST_FILE = Workouter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
