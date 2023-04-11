@@ -11,7 +11,8 @@ import UIKit
 
 class AddProgramViewController: UIViewController {
     private var programVM: ProgramViewModel = ProgramViewModel()
-
+    // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
+    private var exerciseVM: ExerciseViewModel = ExerciseViewModel()
     @IBOutlet weak var programNameTF: UITextField!
     @IBOutlet weak var addWorkoutButton: UIButton!
     @IBOutlet weak var searchWorkoutButton: UIButton!
@@ -51,7 +52,11 @@ class AddProgramViewController: UIViewController {
         
         if segue.identifier == Identifier.toAddWorkoutViewController {
             let vc = segue.destination as! AddWorkoutViewController
-            vc.dataClosure = { [weak self] exerciseVM in
+            vc.exerciseVM = self.exerciseVM
+            vc.viewDisappear =  { [weak self] exerciseVM in
+                self?.exerciseVM = exerciseVM
+            }
+            vc.addButtonTapped = { [weak self] exerciseVM in
                 self?.programVM.addExercise(exerciseVM)
                 self?.tableView.reloadData()
             }

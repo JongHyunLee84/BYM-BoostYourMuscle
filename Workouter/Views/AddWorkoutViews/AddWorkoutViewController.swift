@@ -9,11 +9,11 @@ import UIKit
 
 class AddWorkoutViewController: UIViewController {
     
-    // MARK: - exercise와 workout이 같은 개념임
-    private var exerciseVM = ExerciseViewModel()
+    // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴. 
+    var exerciseVM = ExerciseViewModel()
     // 이전 뷰에 데이터 passing
-    var dataClosure: ((ExerciseViewModel) -> Void)? = { exerciseVM in }
-    
+    var addButtonTapped: ((ExerciseViewModel) -> Void)? = { _ in }
+    var viewDisappear: ((ExerciseViewModel) -> Void)? = { _ in }
     @IBOutlet weak var targetPickerView: UIPickerView!
     @IBOutlet weak var workoutNameTF: UITextField!
     @IBOutlet weak var restTimeTF: UITextField!
@@ -28,6 +28,15 @@ class AddWorkoutViewController: UIViewController {
     private lazy var buttons: [UIButton] = [addWorkoutButton, minusButton, plusButton, addSetButton]
     @IBOutlet weak var tableView: UITableView!
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewDisappear!(exerciseVM)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
+        setupUI()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
@@ -64,8 +73,9 @@ class AddWorkoutViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
             self.present(alert, animated: true, completion: nil)
         } else {
-            guard let dataClosure else { print("no dataClosure"); return }
-            dataClosure(exerciseVM)
+            guard let addButtonTapped else { print("no dataClosure"); return }
+            addButtonTapped(exerciseVM)
+            exerciseVM = ExerciseViewModel() // add가 눌려서 뷰가 사라질 때는 빈 VM을 이전뷰로 보내기 위해
             dismiss(animated: true)
         }
     }
@@ -73,6 +83,14 @@ class AddWorkoutViewController: UIViewController {
 }
 
 extension AddWorkoutViewController {
+    func setupUI() {
+        workoutNameTF.text = exerciseVM.name
+        targetPickerView.selectRow(Target.allCases.firstIndex(of: exerciseVM.target)!, inComponent: 0, animated: true)
+        restTimeTF.text = "\(exerciseVM.returnRest())"
+        setsWeightTF.text = String(Int(exerciseVM.sets.last?.weight ?? 60))
+        setsRespsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
+    }
+    
     func setupButtons() {
         buttons.forEach { button in
             button.layer.cornerRadius = 8
@@ -112,6 +130,7 @@ extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return Target.allCases[row].rawValue
     }
+    
     
 }
 
@@ -155,6 +174,8 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+// MARK: - TextField Delegate
 
 extension AddWorkoutViewController: UITextFieldDelegate {
     func setupTFDelegate() {

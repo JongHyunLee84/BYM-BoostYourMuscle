@@ -71,7 +71,11 @@ final class ExerciseViewModel {
     
     func changeRestTime(_ tag: Int) -> String {
         if tag.isZero {
-            exercise.rest -= 10
+            if (exercise.rest-10) <= 0 {
+                exercise.rest = 0
+            } else {
+                exercise.rest -= 10
+            }
         } else {
             exercise.rest += 10
         }
