@@ -85,6 +85,10 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         exerciseListVM?.swapAt(sourceIndexPath.row, destinationIndexPath.row)
     }
     
+    // isEditing에서 delete 기능은 없앰
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
     
     
     func setupTableView() {
