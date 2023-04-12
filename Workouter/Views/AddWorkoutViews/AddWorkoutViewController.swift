@@ -12,8 +12,9 @@ class AddWorkoutViewController: UIViewController {
     // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴. 
     var exerciseVM = ExerciseViewModel()
     // 이전 뷰에 데이터 passing
-    var addButtonTapped: ((ExerciseViewModel) -> Void)? = { _ in }
-    var viewDisappear: ((ExerciseViewModel) -> Void)? = { _ in }
+    var addButtonTapped: ((ExerciseViewModel) -> Void) = { _ in }
+    var viewDisappear: ((ExerciseViewModel) -> Void) = { _ in }
+    var addedWorkout: ((ExerciseViewModel) -> Void) = { _ in }
     @IBOutlet weak var targetPickerView: UIPickerView!
     @IBOutlet weak var workoutNameTF: UITextField!
     @IBOutlet weak var restTimeTF: UITextField!
@@ -30,7 +31,7 @@ class AddWorkoutViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewDisappear!(exerciseVM)
+        viewDisappear(exerciseVM)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -73,8 +74,8 @@ class AddWorkoutViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
             self.present(alert, animated: true, completion: nil)
         } else {
-            guard let addButtonTapped else { print("no dataClosure"); return }
-            addButtonTapped(exerciseVM)
+            addButtonTapped(exerciseVM) // addProgramView에게 보냄
+            addedWorkout(exerciseVM) // searchWorkoutView에게 보냄
             exerciseVM = ExerciseViewModel() // add가 눌려서 뷰가 사라질 때는 빈 VM을 이전뷰로 보내기 위해
             dismiss(animated: true)
         }
@@ -84,7 +85,7 @@ class AddWorkoutViewController: UIViewController {
 
 extension AddWorkoutViewController {
     func setupUI() {
-        workoutNameTF.text = exerciseVM.name
+        workoutNameTF.text = exerciseVM.name.capitalized
         targetPickerView.selectRow(Target.allCases.firstIndex(of: exerciseVM.target)!, inComponent: 0, animated: true)
         restTimeTF.text = "\(exerciseVM.returnRest())"
         setsWeightTF.text = String(Int(exerciseVM.sets.last?.weight ?? 60))

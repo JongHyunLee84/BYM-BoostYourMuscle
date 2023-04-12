@@ -253,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPL-96-TcE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-114.49275362318842" y="-1200"/>
+            <point key="canvasLocation" x="1113" y="-1862"/>
         </scene>
         <!--Add Program View Controller-->
         <scene sceneID="Cun-UA-pPa">
@@ -274,16 +274,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Koh-BG-S5x">
-                                <rect key="frame" x="100" y="256" width="175" height="30"/>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Add Workout"/>
-                                <connections>
-                                    <segue destination="1TK-JM-qpL" kind="presentation" identifier="toAddWorkoutViewController" id="Rgf-79-BTE"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0kJ-fp-5oU">
                                 <rect key="frame" x="0.0" y="311" width="375" height="501"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -337,20 +327,43 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="5rY-Wg-HKc">
+                                <rect key="frame" x="45.666666666666657" y="257" width="284" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Koh-BG-S5x">
+                                        <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Add Workout"/>
+                                        <connections>
+                                            <segue destination="1TK-JM-qpL" kind="presentation" identifier="toAddWorkoutViewController" id="Rgf-79-BTE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saS-QP-egb">
+                                        <rect key="frame" x="172" y="0.0" width="112" height="30"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Search Workout"/>
+                                        <connections>
+                                            <segue destination="2J1-yq-whJ" kind="show" identifier="SearchWorkoutViewController" id="vqh-xP-0LG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Xf-Y8-ARH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0Xf-Y8-ARH" firstAttribute="trailing" secondItem="2vS-Cu-8AB" secondAttribute="trailing" constant="20" id="2KY-va-McF"/>
-                            <constraint firstItem="0Xf-Y8-ARH" firstAttribute="trailing" secondItem="Koh-BG-S5x" secondAttribute="trailing" constant="100" id="5af-n5-JnF"/>
+                            <constraint firstItem="5rY-Wg-HKc" firstAttribute="centerX" secondItem="sBi-yL-bP5" secondAttribute="centerX" id="8J8-ln-NZO"/>
                             <constraint firstItem="2vS-Cu-8AB" firstAttribute="leading" secondItem="0Xf-Y8-ARH" secondAttribute="leading" constant="20" id="BLP-Gk-l8r"/>
+                            <constraint firstItem="5rY-Wg-HKc" firstAttribute="top" secondItem="2vS-Cu-8AB" secondAttribute="bottom" constant="26.666666666666657" id="Dnp-MF-Ev2"/>
+                            <constraint firstItem="0kJ-fp-5oU" firstAttribute="top" secondItem="5rY-Wg-HKc" secondAttribute="bottom" constant="24" id="KGH-aW-OQW"/>
                             <constraint firstItem="2vS-Cu-8AB" firstAttribute="top" secondItem="bLE-QK-Lux" secondAttribute="bottom" constant="8" symbolic="YES" id="KpZ-aB-RyO"/>
-                            <constraint firstItem="0kJ-fp-5oU" firstAttribute="top" secondItem="Koh-BG-S5x" secondAttribute="bottom" constant="25" id="NOj-bH-czU"/>
                             <constraint firstItem="0Xf-Y8-ARH" firstAttribute="trailing" secondItem="0kJ-fp-5oU" secondAttribute="trailing" id="OI7-Sg-NTW"/>
-                            <constraint firstItem="Koh-BG-S5x" firstAttribute="top" secondItem="2vS-Cu-8AB" secondAttribute="bottom" constant="25.666666666666657" id="RyD-ka-FG9"/>
                             <constraint firstItem="bLE-QK-Lux" firstAttribute="top" secondItem="0Xf-Y8-ARH" secondAttribute="top" constant="20" id="UWn-Gq-h1F"/>
-                            <constraint firstItem="Koh-BG-S5x" firstAttribute="centerX" secondItem="sBi-yL-bP5" secondAttribute="centerX" id="V2D-zF-oI1"/>
-                            <constraint firstItem="Koh-BG-S5x" firstAttribute="leading" secondItem="0Xf-Y8-ARH" secondAttribute="leading" constant="100" id="Y8X-Tf-jc9"/>
                             <constraint firstAttribute="bottom" secondItem="0kJ-fp-5oU" secondAttribute="bottom" id="aVo-lZ-gLG"/>
                             <constraint firstItem="0kJ-fp-5oU" firstAttribute="leading" secondItem="0Xf-Y8-ARH" secondAttribute="leading" id="hHv-Aq-0Aj"/>
                             <constraint firstItem="0Xf-Y8-ARH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bLE-QK-Lux" secondAttribute="trailing" symbolic="YES" id="tuz-6p-KmO"/>
@@ -370,12 +383,210 @@
                     <connections>
                         <outlet property="addWorkoutButton" destination="Koh-BG-S5x" id="fqR-Wl-gHB"/>
                         <outlet property="programNameTF" destination="2vS-Cu-8AB" id="5Hh-cK-faV"/>
+                        <outlet property="searchWorkoutButton" destination="saS-QP-egb" id="v1a-fm-6N6"/>
                         <outlet property="tableView" destination="0kJ-fp-5oU" id="wTG-h6-Z1F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aif-zb-FeK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="672.46376811594212" y="-1199.3303571428571"/>
+            <point key="canvasLocation" x="734" y="-1200"/>
+        </scene>
+        <!--Chest-->
+        <scene sceneID="pDf-Bi-3ld">
+            <objects>
+                <viewController id="2J1-yq-whJ" customClass="SearchWorkoutViewController" customModule="Workouter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6bH-2S-3JZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVe-Wu-IhY">
+                                <rect key="frame" x="0.0" y="91" width="375" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jc1-Qc-mmt">
+                                        <rect key="frame" x="0.0" y="5" width="587" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5e-vu-0HP">
+                                                <rect key="frame" x="0.0" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="chest"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="KDV-ZP-NFC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsW-Eu-3Vj">
+                                                <rect key="frame" x="86" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="lower legs"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="Ekg-L7-ZOg"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYd-ME-5Tc">
+                                                <rect key="frame" x="172" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="shoulders"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="eAz-WY-xB5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odc-r6-fWR">
+                                                <rect key="frame" x="258" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="upper arms"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="IJT-Q1-2j7"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrX-oJ-1rC">
+                                                <rect key="frame" x="344" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="upper legs"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="IS2-wj-9eJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0y-sB-SYN">
+                                                <rect key="frame" x="430" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="lower arms"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="t3A-YA-KaO"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKu-YU-I0v">
+                                                <rect key="frame" x="516" y="0.0" width="71" height="40"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="back"/>
+                                                <connections>
+                                                    <action selector="targetButtonTapped:" destination="2J1-yq-whJ" eventType="touchUpInside" id="mvh-A2-wsf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Jc1-Qc-mmt" firstAttribute="trailing" secondItem="adW-kc-yKg" secondAttribute="trailing" id="3ai-pJ-bcC"/>
+                                    <constraint firstItem="Jc1-Qc-mmt" firstAttribute="width" secondItem="adW-kc-yKg" secondAttribute="width" priority="250" id="Fue-vF-BqX"/>
+                                    <constraint firstItem="Jc1-Qc-mmt" firstAttribute="bottom" secondItem="adW-kc-yKg" secondAttribute="bottom" id="QLF-Rt-dAS"/>
+                                    <constraint firstItem="Sh2-La-1iS" firstAttribute="top" secondItem="Jc1-Qc-mmt" secondAttribute="top" constant="-5" id="TNV-V1-oXp"/>
+                                    <constraint firstItem="Sh2-La-1iS" firstAttribute="bottom" secondItem="Jc1-Qc-mmt" secondAttribute="bottom" constant="5" id="YZM-te-lN6"/>
+                                    <constraint firstItem="adW-kc-yKg" firstAttribute="leading" secondItem="Jc1-Qc-mmt" secondAttribute="leading" id="eSI-38-vTF"/>
+                                    <constraint firstAttribute="height" constant="50" id="mE8-rq-pwM"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="adW-kc-yKg"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Sh2-La-1iS"/>
+                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ud1-Ag-jDS">
+                                <rect key="frame" x="0.0" y="156" width="375" height="656"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchWorkoutTableViewCell" rowHeight="106" id="Njq-iG-OzP" customClass="SearchWorkoutTableViewCell" customModule="Workouter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="106"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Njq-iG-OzP" id="XAE-u7-4SW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jz4-ka-QTB">
+                                                    <rect key="frame" x="10" y="10" width="150" height="86"/>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="7XK-2r-DKS">
+                                                    <rect key="frame" x="168" y="10" width="150" height="86"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lw3-zt-zDc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="32.333333333333336"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RIc-ch-eJV">
+                                                            <rect key="frame" x="0.0" y="32.333333333333336" width="150" height="26.666666666666664"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nmr-D0-3nz">
+                                                            <rect key="frame" x="0.0" y="59" width="150" height="27"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APm-94-jLZ">
+                                                    <rect key="frame" x="342" y="42.333333333333336" width="23" height="21.666666666666664"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="plus" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="plusButtonTapped:" destination="Njq-iG-OzP" eventType="touchUpInside" id="hux-yZ-pxz"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Jz4-ka-QTB" firstAttribute="top" secondItem="XAE-u7-4SW" secondAttribute="top" constant="10" id="0he-Zq-Rhh"/>
+                                                <constraint firstItem="7XK-2r-DKS" firstAttribute="width" secondItem="XAE-u7-4SW" secondAttribute="width" multiplier="0.4" id="9ua-qo-RAk"/>
+                                                <constraint firstItem="7XK-2r-DKS" firstAttribute="bottom" secondItem="Jz4-ka-QTB" secondAttribute="bottom" id="LVy-nw-oTP"/>
+                                                <constraint firstItem="7XK-2r-DKS" firstAttribute="top" secondItem="Jz4-ka-QTB" secondAttribute="top" id="ROk-ub-eU5"/>
+                                                <constraint firstAttribute="trailing" secondItem="APm-94-jLZ" secondAttribute="trailing" constant="10" id="Yys-AP-1Zz"/>
+                                                <constraint firstItem="7XK-2r-DKS" firstAttribute="leading" secondItem="Jz4-ka-QTB" secondAttribute="trailing" constant="8" symbolic="YES" id="j6l-5k-eXC"/>
+                                                <constraint firstItem="Jz4-ka-QTB" firstAttribute="width" secondItem="XAE-u7-4SW" secondAttribute="width" multiplier="0.4" id="lab-LT-yA8"/>
+                                                <constraint firstItem="APm-94-jLZ" firstAttribute="centerY" secondItem="XAE-u7-4SW" secondAttribute="centerY" id="nV7-RS-Jqk"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jz4-ka-QTB" secondAttribute="bottom" constant="10" id="rK5-ew-GHz"/>
+                                                <constraint firstItem="Jz4-ka-QTB" firstAttribute="leading" secondItem="XAE-u7-4SW" secondAttribute="leading" constant="10" id="tVr-Dl-xbY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="equipmentLabel" destination="nmr-D0-3nz" id="LXk-FO-kDI"/>
+                                            <outlet property="nameLabel" destination="Lw3-zt-zDc" id="ZEe-cf-YfS"/>
+                                            <outlet property="targetLabel" destination="RIc-ch-eJV" id="O9v-ZE-hDW"/>
+                                            <outlet property="workoutImageView" destination="Jz4-ka-QTB" id="KdY-Pw-sc6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KIK-5p-7bT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ud1-Ag-jDS" firstAttribute="top" secondItem="VVe-Wu-IhY" secondAttribute="bottom" constant="15" id="6Zm-X1-WN5"/>
+                            <constraint firstAttribute="trailing" secondItem="VVe-Wu-IhY" secondAttribute="trailing" id="H3d-ei-sBE"/>
+                            <constraint firstItem="VVe-Wu-IhY" firstAttribute="top" secondItem="KIK-5p-7bT" secondAttribute="top" id="Pah-79-4u3"/>
+                            <constraint firstItem="Ud1-Ag-jDS" firstAttribute="leading" secondItem="6bH-2S-3JZ" secondAttribute="leading" id="Rs7-hy-boy"/>
+                            <constraint firstAttribute="bottom" secondItem="Ud1-Ag-jDS" secondAttribute="bottom" id="eiX-sp-SQM"/>
+                            <constraint firstAttribute="trailing" secondItem="Ud1-Ag-jDS" secondAttribute="trailing" id="p7D-l8-6aq"/>
+                            <constraint firstItem="VVe-Wu-IhY" firstAttribute="leading" secondItem="6bH-2S-3JZ" secondAttribute="leading" id="tMY-ky-KK3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chest" largeTitleDisplayMode="never" id="RXO-lQ-QWi"/>
+                    <connections>
+                        <outlet property="backButton" destination="uKu-YU-I0v" id="abI-9g-zGr"/>
+                        <outlet property="chestButton" destination="E5e-vu-0HP" id="K43-ef-egq"/>
+                        <outlet property="lowerArmsButton" destination="s0y-sB-SYN" id="TtQ-ln-pbE"/>
+                        <outlet property="lowerLegsButton" destination="NsW-Eu-3Vj" id="pYO-ln-cW8"/>
+                        <outlet property="shouldersButton" destination="PYd-ME-5Tc" id="EZe-hI-4bb"/>
+                        <outlet property="tableView" destination="Ud1-Ag-jDS" id="qUf-NI-1n0"/>
+                        <outlet property="upperArmsButton" destination="Odc-r6-fWR" id="wfd-GI-nGn"/>
+                        <outlet property="upperLegButton" destination="DrX-oJ-1rC" id="L0m-LH-ONu"/>
+                        <segue destination="1TK-JM-qpL" kind="presentation" identifier="toAddWorkoutViewController" id="yWl-Kd-Bm7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6J-nO-q4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1533.5999999999999" y="-1200"/>
         </scene>
         <!--Programs-->
         <scene sceneID="lNQ-Ej-qX4">
@@ -666,10 +877,14 @@
             <point key="canvasLocation" x="-263.19999999999999" y="-538.38080959520244"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rgf-79-BTE"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="labelColor"/>
     <resources>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="ellipsis" catalog="system" width="32" height="32"/>
         <image name="pause.circle" catalog="system" width="128" height="123"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="speaker.wave.2" catalog="system" width="128" height="88"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

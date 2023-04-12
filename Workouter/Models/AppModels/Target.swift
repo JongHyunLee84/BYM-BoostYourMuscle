@@ -8,16 +8,16 @@
 import Foundation
 
 enum Target: String, CaseIterable {
-    case back //등
-    case cardio // 유산소
-    case chest // 가슴
-    case lowerArms // 전완
-    case lowerLegs // 종아리
-    case neck // 목
-    case shoulders // 어깨
-    case upperArms // 상완
-    case upperLegs // 하체(Basic)
-    case waist // 허리
+    case back = "back" //등
+    case cardio = "cardio" // 유산소
+    case chest = "chest" // 가슴
+    case lowerArms = "lower arms" // 전완
+    case lowerLegs = "lower legs" // 종아리
+    case neck = "neck" // 목
+    case shoulders = "shoulders" // 어깨
+    case upperArms = "upper arms" // 상완
+    case upperLegs = "upper legs" // 하체(Basic)
+    case waist = "waist" // 허리
 }
 
 

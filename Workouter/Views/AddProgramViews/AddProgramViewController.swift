@@ -11,6 +11,7 @@ import UIKit
 
 class AddProgramViewController: UIViewController {
     private var programVM: ProgramViewModel = ProgramViewModel()
+
     // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
     private var exerciseVM: ExerciseViewModel = ExerciseViewModel()
     @IBOutlet weak var programNameTF: UITextField!
@@ -60,19 +61,31 @@ class AddProgramViewController: UIViewController {
                 self?.programVM.addExercise(exerciseVM)
                 self?.tableView.reloadData()
             }
+        } else if segue.identifier == Identifier.searchWorkoutViewController {
+            let vc = segue.destination as! SearchWorkoutViewController
+            vc.passWorkoutList = { [weak self] exerciseList in
+                exerciseList.forEach { vm in
+                    self?.programVM.addExercise(vm)
+                }
+                self?.tableView.reloadData()
+            }
+
         }
+        
     }
+    
+    
+
     
 }
 
 // MARK: - Setup Extension
 extension AddProgramViewController {
     func setupUI() {
-        addWorkoutButton.layer.cornerRadius = 9
+        addWorkoutButton.layer.cornerRadius = 8
         addWorkoutButton.layer.masksToBounds = true
-        // MARK: - 나중에 기능 개발하고
-//        searchWorkoutButton.layer.cornerRadius = 9
-//        searchWorkoutButton.layer.masksToBounds = true
+        searchWorkoutButton.layer.cornerRadius = 8
+        searchWorkoutButton.layer.masksToBounds = true
         
     }
     

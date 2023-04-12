@@ -5,7 +5,7 @@
 //  Created by 이종현 on 2023/04/03.
 //
 
-import Foundation
+import UIKit
 
 struct Exercise {
     
@@ -25,6 +25,13 @@ struct Exercise {
         let realVolume = isChecked.reduce(0) { $0 + (Double($1.reps)*$1.weight) }
         return realVolume
     }
+    
+    // 서버에서 오는 Exercise 맞춤
+    var gifUrl: String?
+    var gif: UIImage? 
+    var equipment: String?
+    
+    
     init(target: Target, name: String, rest: Int, id: Int, sets: [PSet]) {
         self.target = target
         self.name = name
@@ -49,4 +56,11 @@ struct Exercise {
     init() {
         self.init(target: .back, name: "", rest: 60, sets: [])
     }
+    
+    init(target: Target, name: String, gifUrl: String?, equipment: String) {
+        self.init(target: target, name: name, rest: 60, sets: [])
+        self.gifUrl = gifUrl
+        self.equipment = equipment
+    }
+    
 }
