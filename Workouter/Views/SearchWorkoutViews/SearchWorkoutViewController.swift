@@ -97,8 +97,6 @@ extension SearchWorkoutViewController {
         }
     }
     
-    // 뷰 아무 곳 터치시 키보드 내리기
-    
 }
 
 // MARK: - RX 관련
