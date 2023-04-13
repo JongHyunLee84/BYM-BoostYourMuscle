@@ -15,15 +15,26 @@ final class ProgramListTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func addButtonTapped(_ sender: Any) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: Identifier.addProgramVCIdentifier) as! AddProgramViewController
-        nextViewController.dataClosure = {
-            self.programListVM.fetchProgramVMList()
-            self.tableView.reloadData()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Identifier.addProgramViewController {
+            let vc = segue.destination as! AddProgramViewController
+            vc.dataClosure = {
+                self.programListVM.fetchProgramVMList()
+                self.tableView.reloadData()
+            }
+            
         }
-        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
+    
+//    @IBAction func addButtonTapped(_ sender: Any) {
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: Identifier.addProgramVCIdentifier) as! AddProgramViewController
+//        nextViewController.dataClosure = {
+//            self.programListVM.fetchProgramVMList()
+//            self.tableView.reloadData()
+//        }
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
+//    }
     
 }
 

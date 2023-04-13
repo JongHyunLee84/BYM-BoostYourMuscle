@@ -14,7 +14,7 @@ class APIService {
         return APIRepository.fetchWorkoutDataByTargetRx(target)
             .map { entities in
                 return entities.map { Exercise(target: Target(rawValue: $0.bodyPart)!,
-                                               name: $0.name,
+                                               name: $0.name.capitalized,
                                                gifUrl: $0.gifURL,
                                                equipment: $0.equipment)}
             }

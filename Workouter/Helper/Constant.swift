@@ -118,11 +118,11 @@ public struct Identifier {
     static let workoutRowIdentifier = "WorkoutRowCell"
     static let addWorkoutTableViewCell = "AddWorkoutTableViewCell"
     static let addProgramTableViewCell = "AddProgramTableViewCell"
-    static let addProgramVCIdentifier = "AddProgramViewController"
     static let toAddWorkoutViewController = "toAddWorkoutViewController"
     static let workoutVCIdentifier = "WorkoutViewController"
     static let soundButtonKey = "soundButtonKey"
     static let searchWorkoutTableViewCell = "SearchWorkoutTableViewCell"
     static let searchWorkoutViewController = "SearchWorkoutViewController"
+    static let addProgramViewController = "AddProgramViewController"
     private init() {}
 }
