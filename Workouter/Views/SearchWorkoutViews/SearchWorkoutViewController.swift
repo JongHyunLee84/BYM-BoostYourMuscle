@@ -123,9 +123,19 @@ extension SearchWorkoutViewController {
                     }} ?? Observable<[Exercise]>.just([])
             }
             .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell, cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
-                // gif 변환하는 과정이 너무 느려서 일단 다른 것들 업로드 하고 마지막에 변환시켜줌.
-                UIImage.gifImageWithURL(item.gifUrl!) { img in
+            .drive(tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
+                                      cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
+// Rx 버전으로 만들어봄
+//                if let gifUrl = item.gifUrl {
+//                    UIImage.gifImageWithURL(gifUrl)
+//                        .asDriver(onErrorJustReturn: nil)
+//                        .drive(cell.workoutImageView.rx.image)
+//                        .disposed(by: self.disposeBag)
+//                }
+//                이미 다 UIImage로 변환됐다면 아래 코드
+//                cell.workoutImageView.image = item.gif
+//                 gif 변환하는 과정이 너무 느려서 일단 다른 것들 업로드 하고 마지막에 변환시켜줌.
+                UIImage.gifImageWithURL(item.gifUrl ?? "") { img in
                     DispatchQueue.main.async {
                         cell.workoutImageView.image = img
                     }
@@ -166,4 +176,5 @@ extension SearchWorkoutViewController: UITableViewDelegate {
         100
     }
 }
+
 

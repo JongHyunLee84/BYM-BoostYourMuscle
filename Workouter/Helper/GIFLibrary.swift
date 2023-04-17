@@ -8,6 +8,7 @@
 
 import UIKit
 import ImageIO
+import RxSwift
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -26,6 +27,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 extension UIImage {
     
     public class func gifImageWithData(_ data: Data) -> UIImage? {
+        
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             print("image doesn't exist")
             return nil
@@ -48,6 +50,21 @@ extension UIImage {
             }
             completion(gifImageWithData(imageData))
         }
+    }
+
+    // MARK: - 리턴받으며 미리 UIImage로 변환할 때
+    public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
+
+            guard let bundleURL = URL(string: gifUrl)
+                else {
+                    print("image named \"\(gifUrl)\" doesn't exist")
+                    return nil
+            }
+            guard let imageData = try? Data(contentsOf: bundleURL) else {
+                print("image named \"\(gifUrl)\" into NSData")
+                return nil
+            }
+           return gifImageWithData(imageData)
     }
     
     public class func gifImageWithName(_ name: String) -> UIImage? {
@@ -182,3 +199,4 @@ extension UIImage {
         return animation
     }
 }
+

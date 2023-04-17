@@ -28,9 +28,8 @@ struct Exercise {
     
     // 서버에서 오는 Exercise 맞춤
     var gifUrl: String?
-    var gif: UIImage? 
+    var gif: UIImage?
     var equipment: String?
-    
     
     init(target: Target, name: String, rest: Int, id: Int, sets: [PSet]) {
         self.target = target
@@ -57,9 +56,16 @@ struct Exercise {
         self.init(target: .back, name: "", rest: 60, sets: [])
     }
     
-    init(target: Target, name: String, gifUrl: String?, equipment: String) {
+    init(target: Target, name: String, gifUrl: String, equipment: String) {
         self.init(target: target, name: name, rest: 60, sets: [])
         self.gifUrl = gifUrl
+        self.equipment = equipment
+    }
+    
+    // MARK: - 일단 모두 다 UIImage로 변환시키는 방식
+    init(target: Target, name: String, gif: UIImage?, equipment: String) {
+        self.init(target: target, name: name, rest: 60, sets: [])
+        self.gif = gif
         self.equipment = equipment
     }
     

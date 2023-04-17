@@ -26,16 +26,6 @@ final class ProgramListTableViewController: UITableViewController {
         }
     }
     
-//    @IBAction func addButtonTapped(_ sender: Any) {
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: Identifier.addProgramVCIdentifier) as! AddProgramViewController
-//        nextViewController.dataClosure = {
-//            self.programListVM.fetchProgramVMList()
-//            self.tableView.reloadData()
-//        }
-//        self.navigationController?.pushViewController(nextViewController, animated: true)
-//    }
-    
 }
 
 extension ProgramListTableViewController: ProgramListViewDelegate {
