@@ -30,7 +30,6 @@
 		F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775329E56B6200127AB9 /* APIRepository.swift */; };
 		F27B775629E56E3F00127AB9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775529E56E3F00127AB9 /* APIService.swift */; };
 		F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775729E56EFA00127AB9 /* ServerEntity.swift */; };
-		F27B775A29E579D700127AB9 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775929E579D700127AB9 /* SearchViewModel.swift */; };
 		F2881C7529DBDC77006CB7EE /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */; };
 		F2881C7C29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */; };
 		F2881C8329DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7D29DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift */; };
@@ -43,13 +42,14 @@
 		F29173EB29D709320021B39F /* WorkoutRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29173E929D709320021B39F /* WorkoutRowCell.swift */; };
 		F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D28FB29D4018900491123 /* AppDelegate.swift */; };
 		F29D28FE29D4018900491123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D28FD29D4018900491123 /* SceneDelegate.swift */; };
-		F29D290329D4018900491123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F29D290129D4018900491123 /* Main.storyboard */; };
 		F29D290829D4018B00491123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29D290729D4018B00491123 /* Assets.xcassets */; };
 		F29D290B29D4018B00491123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F29D290929D4018B00491123 /* LaunchScreen.storyboard */; };
 		F29D291629D4030E00491123 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D291529D4030E00491123 /* DailyWorkout.swift */; };
 		F29D291F29D417B500491123 /* ProgramListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */; };
 		F29D292129D43A0800491123 /* ProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D292029D43A0800491123 /* ProgramListViewModel.swift */; };
 		F29D292529D45FF300491123 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D292429D45FF300491123 /* Constant.swift */; };
+		F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A706962A1E31C800044A06 /* SearchViewModel.swift */; };
+		F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */; };
 		F2E5B0A829DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E5B0A729DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift */; };
 		F2FA05C329DB0E39003F6CED /* WorkoutRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FA05C229DB0E39003F6CED /* WorkoutRowCell.xib */; };
 		F2FA05C929DB160F003F6CED /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05C829DB160F003F6CED /* Program.swift */; };
@@ -84,7 +84,6 @@
 		F27B775329E56B6200127AB9 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
 		F27B775529E56E3F00127AB9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		F27B775729E56EFA00127AB9 /* ServerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerEntity.swift; sourceTree = "<group>"; };
-		F27B775929E579D700127AB9 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		F2881C7B29DBDF61006CB7EE /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		F2881C7D29DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgramEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -98,13 +97,14 @@
 		F29D28F829D4018900491123 /* Workouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29D28FB29D4018900491123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29D28FD29D4018900491123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F29D290229D4018900491123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F29D290729D4018B00491123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F29D290A29D4018B00491123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F29D291529D4030E00491123 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListTableViewCell.swift; sourceTree = "<group>"; };
 		F29D292029D43A0800491123 /* ProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModel.swift; sourceTree = "<group>"; };
 		F29D292429D45FF300491123 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F2A706962A1E31C800044A06 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramUIView.swift; sourceTree = "<group>"; };
 		F2E5B0A729DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgramList+TableV+Extension.swift"; sourceTree = "<group>"; };
 		F2FA05C229DB0E39003F6CED /* WorkoutRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutRowCell.xib; sourceTree = "<group>"; };
 		F2FA05C829DB160F003F6CED /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
@@ -208,7 +208,6 @@
 		F28D6FD429D952670003596B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F29D290129D4018900491123 /* Main.storyboard */,
 				F29D290929D4018B00491123 /* LaunchScreen.storyboard */,
 				F2FA05C429DB0E65003F6CED /* ProgramListViews */,
 				F2707B2429DB0D7900F35D22 /* WorkoutViews */,
@@ -270,7 +269,7 @@
 				F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */,
 				F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */,
 				F26CB67329DD8D06009F9925 /* PsetViewModel.swift */,
-				F27B775929E579D700127AB9 /* SearchViewModel.swift */,
+				F2A706962A1E31C800044A06 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -331,6 +330,7 @@
 			children = (
 				F2707B1829DAA3AD00F35D22 /* AddProgramViewController.swift */,
 				F2707B1E29DAD7A000F35D22 /* AddProgramTableViewCell.swift */,
+				F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */,
 			);
 			path = AddProgramViews;
 			sourceTree = "<group>";
@@ -387,6 +387,7 @@
 				TargetAttributes = {
 					F29D28F729D4018900491123 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -417,7 +418,6 @@
 				F2FA05C329DB0E39003F6CED /* WorkoutRowCell.xib in Resources */,
 				F29D290829D4018B00491123 /* Assets.xcassets in Resources */,
 				F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */,
-				F29D290329D4018900491123 /* Main.storyboard in Resources */,
 				F29173E829D7091E0021B39F /* WorkoutSectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,16 +498,17 @@
 				F29173E729D7091E0021B39F /* WorkoutSectionCell.swift in Sources */,
 				F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */,
 				F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */,
+				F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */,
 				F26D707229DE793300EA2CBD /* PsetEntity+CoreDataClass.swift in Sources */,
 				F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */,
 				F2881C8A29DC2CC3006CB7EE /* CoreDataService.swift in Sources */,
-				F27B775A29E579D700127AB9 /* SearchViewModel.swift in Sources */,
 				F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */,
 				F26D707329DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift in Sources */,
 				F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */,
 				F26D707529DEE1F100EA2CBD /* TableViewHelper.swift in Sources */,
 				F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */,
 				F29D28FE29D4018900491123 /* SceneDelegate.swift in Sources */,
+				F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */,
 				F2FA05C929DB160F003F6CED /* Program.swift in Sources */,
 				F2881C8329DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift in Sources */,
 				F29D292129D43A0800491123 /* ProgramListViewModel.swift in Sources */,
@@ -519,14 +520,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F29D290129D4018900491123 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F29D290229D4018900491123 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F29D290929D4018B00491123 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -658,6 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
@@ -666,7 +660,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -681,6 +675,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -692,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
@@ -700,7 +696,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

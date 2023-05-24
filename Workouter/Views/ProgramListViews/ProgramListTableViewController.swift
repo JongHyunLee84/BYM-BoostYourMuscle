@@ -13,19 +13,47 @@ final class ProgramListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
+        setupTableView()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Identifier.addProgramViewController {
-            let vc = segue.destination as! AddProgramViewController
-            vc.dataClosure = {
-                self.programListVM.fetchProgramVMList()
-                self.tableView.reloadData()
-            }
-            
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == Identifier.addProgramViewController {
+//            let vc = segue.destination as! AddProgramViewController
+//            vc.dataClosure = {
+//                self.programListVM.fetchProgramVMList()
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
+    
+}
+
+// UI
+extension ProgramListTableViewController {
+    private func setupTableView() {
+        tableView.rowHeight = 80
+    }
+    
+    private func setupNavigationBar() {
+        self.title = "Programs"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(addButtonDidTapped))
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    @objc private func addButtonDidTapped() {
+        let vc = AddProgramViewController()
+        vc.dataClosure = {
+            self.programListVM.fetchProgramVMList()
+            self.tableView.reloadData()
         }
+        navigationController?.pushViewController(vc,
+                                                 animated: true)
     }
-    
 }
 
 extension ProgramListTableViewController: ProgramListViewDelegate {

@@ -124,5 +124,6 @@ public struct Identifier {
     static let searchWorkoutTableViewCell = "SearchWorkoutTableViewCell"
     static let searchWorkoutViewController = "SearchWorkoutViewController"
     static let addProgramViewController = "AddProgramViewController"
+    static let programListCell = "ProgramListCell"
     private init() {}
 }
