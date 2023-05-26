@@ -8,20 +8,49 @@
 import UIKit
 
 class AddProgramTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var workoutNameLabel: UILabel!
-    @IBOutlet weak var targetLabel: UILabel!
-    @IBOutlet weak var setsLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var exerciseVM: ExerciseViewModel?
+    
+    private func uiLabelWillReturned(_ title: String) -> UILabel {
+        let lb = UILabel()
+        lb.font = .systemFont(ofSize: 17)
+        lb.text = title
+        lb.textAlignment = .center
+        return lb
     }
 
-    func setupUI(_ vm: ExerciseViewModel) {
-        workoutNameLabel.text = vm.returnName()
-        targetLabel.text = vm.returnTarget()
-        setsLabel.text = vm.returnSets()
+    private lazy var workoutNameLabel: UILabel = uiLabelWillReturned("Name")
+    private lazy var targetLabel: UILabel = uiLabelWillReturned("Target")
+    private lazy var setsLabel: UILabel = uiLabelWillReturned("Sets")
+    
+    private lazy var stackView: UIStackView = {
+        let stv = UIStackView(arrangedSubviews: [workoutNameLabel, targetLabel, setsLabel])
+        stv.axis = .horizontal
+        stv.distribution = .fillEqually
+        return stv
+    }()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            setupUI()
+        }
+
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    func setupUI() {
+        guard let exerciseVM else { return }
+        workoutNameLabel.text = exerciseVM.returnName()
+        targetLabel.text = exerciseVM.returnTarget()
+        setsLabel.text = exerciseVM.returnSets()
+        
+        addSubview(stackView)
+        
+        stackView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
     }
 
 }
