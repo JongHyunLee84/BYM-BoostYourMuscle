@@ -11,21 +11,15 @@ final class ProgramListTableViewController: UITableViewController {
     
     let programListVM = ProgramListViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == Identifier.addProgramViewController {
-//            let vc = segue.destination as! AddProgramViewController
-//            vc.dataClosure = {
-//                self.programListVM.fetchProgramVMList()
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
     
 }
 
@@ -33,6 +27,7 @@ final class ProgramListTableViewController: UITableViewController {
 extension ProgramListTableViewController {
     private func setupTableView() {
         tableView.rowHeight = 80
+        tableView.register(ProgramListTableViewCell.self, forCellReuseIdentifier: Identifier.programListCell)
     }
     
     private func setupNavigationBar() {
@@ -42,7 +37,6 @@ extension ProgramListTableViewController {
                                                                  target: self,
                                                                  action: #selector(addButtonDidTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .black
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc private func addButtonDidTapped() {

@@ -10,6 +10,7 @@
 		EF5DA0490C82889892F69047 /* Pods_Workouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58D2F8960A7F520F6AC868 /* Pods_Workouter.framework */; };
 		F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */ = {isa = PBXBuildFile; fileRef = F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */; };
 		F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2168A852A20E07600F86BCD /* SwiftUIView.swift */; };
+		F23707BF2A221C9C00864663 /* AddWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */; };
 		F26CB67029DD8CF5009F9925 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */; };
 		F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */; };
 		F26CB67429DD8D06009F9925 /* PsetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67329DD8D06009F9925 /* PsetViewModel.swift */; };
@@ -64,6 +65,7 @@
 		B0CB19D6AF5B51153613C7D9 /* Pods-Workouter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouter.release.xcconfig"; path = "Target Support Files/Pods-Workouter/Pods-Workouter.release.xcconfig"; sourceTree = "<group>"; };
 		F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ES_Boxing Bell Ring 2 - SFX Producer.wav"; sourceTree = "<group>"; };
 		F2168A852A20E07600F86BCD /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutUIView.swift; sourceTree = "<group>"; };
 		F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
 		F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		F26CB67329DD8D06009F9925 /* PsetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsetViewModel.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */,
+				F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */,
 				F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */,
 			);
 			path = AddWorkoutViews;
@@ -512,6 +515,7 @@
 				F26D707529DEE1F100EA2CBD /* TableViewHelper.swift in Sources */,
 				F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */,
 				F29D28FE29D4018900491123 /* SceneDelegate.swift in Sources */,
+				F23707BF2A221C9C00864663 /* AddWorkoutUIView.swift in Sources */,
 				F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */,
 				F2FA05C929DB160F003F6CED /* Program.swift in Sources */,
 				F2881C8329DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift in Sources */,

@@ -62,13 +62,13 @@ final class AddProgramUIView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupConstraints()
         setupForKeyBoard()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupConstraints()
         setupForKeyBoard()
     }
     
@@ -84,7 +84,7 @@ final class AddProgramUIView: UIView {
         }
     }
     
-    private func setupUI() {
+    private func         setupConstraints() {
         self.backgroundColor = .white
         [programNameLabel, programNameTF, buttonsStackView].forEach { view in
             addSubview(view)
@@ -99,7 +99,7 @@ final class AddProgramUIView: UIView {
             make.leading.trailing.equalToSuperview().inset(20)
         }
         buttonsStackView.snp.makeConstraints { make in
-            make.top.equalTo(programNameTF.snp.bottom).offset(20)
+            make.top.equalTo(programNameTF.snp.bottom).offset(40)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         tableview.snp.makeConstraints { make in
@@ -127,4 +127,33 @@ extension AddProgramUIView: UITextFieldDelegate {
     
 }
 
+import SwiftUI
 
+#if canImport(SwiftUI) && DEBUG
+struct AddProgramViewPreview<View: UIView>: UIViewRepresentable {
+    let view: View
+    
+    init(_ builder: @escaping () -> View) {
+        view = builder()
+    }
+    
+    // MARK: UIViewRepresentable
+    func makeUIView(context: Context) -> UIView {
+        return view
+    }
+    
+    func updateUIView(_ view: UIView, context: Context) {
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+}
+#endif
+struct AddProgramPreviews_Previews: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            // Return whatever controller you want to preview
+            let vc = AddProgramUIView()
+            return vc
+        }
+    }
+}

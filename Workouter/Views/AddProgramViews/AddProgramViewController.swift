@@ -20,6 +20,7 @@ class AddProgramViewController: UIViewController {
         view.tableview.dataSource = self
         view.addWorkoutButtonAction = addWorkoutButtonTapped
         view.searchWorkoutButtonAction = searchWorkoutButtonTapped
+        view.tableview.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
         return view
     }()
     
@@ -75,7 +76,7 @@ extension AddProgramViewController {
     
     @objc private func saveButtonDidTapped(_ sender: Any) {
         if customView.programNameTF.text == "" || programVM.exercisesVM.count.isZero {
-            let alert = UIAlertController(title: "Missing Information", message: "Program should have name \n and at least on workout", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Missing Information", message: "Program should have name \n and at least one workout", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
             self.present(alert, animated: true, completion: nil)
         }else {

@@ -31,7 +31,7 @@ struct BestInClassPreviews_Previews: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             // Return whatever controller you want to preview
-            let vc = AddProgramTableViewCell()
+            let vc = AddWorkoutUIView()
             return vc
         }
     }

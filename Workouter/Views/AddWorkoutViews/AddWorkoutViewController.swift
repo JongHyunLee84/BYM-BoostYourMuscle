@@ -15,19 +15,27 @@ class AddWorkoutViewController: UIViewController {
     var addButtonTapped: ((ExerciseViewModel) -> Void) = { _ in }
     var viewDisappear: ((ExerciseViewModel) -> Void) = { _ in }
     var addedWorkout: ((ExerciseViewModel) -> Void) = { _ in }
-    @IBOutlet weak var targetPickerView: UIPickerView!
-    @IBOutlet weak var workoutNameTF: UITextField!
-    @IBOutlet weak var restTimeTF: UITextField!
-    @IBOutlet weak var setsWeightTF: UITextField!
-    @IBOutlet weak var setsRespsTF: UITextField!
-    
-    // 버튼 corner radius
-    @IBOutlet weak var addWorkoutButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var addSetButton: UIButton!
-    private lazy var buttons: [UIButton] = [addWorkoutButton, minusButton, plusButton, addSetButton]
-    @IBOutlet weak var tableView: UITableView!
+ 
+    private lazy var customView: AddWorkoutUIView = {
+        let view = AddWorkoutUIView()
+        view.addWorkoutAction = addWorkoutTapped
+        view.minusButtonAction = minusAndPlusButtonTapped(_:)
+        view.plusButtonAction = minusAndPlusButtonTapped(_:)
+        view.setsAddButtonAction = setsAddButtonTapped
+        view.workoutNameTF.delegate = self
+        view.targetPickerView.delegate = self
+        view.targetPickerView.dataSource = self
+        view.restTimeTF.delegate = self
+        view.setsWeightTF.delegate = self
+        view.setsRepsTF.delegate = self
+        view.tableView.dataSource = self
+        view.tableView.delegate = self
+        view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
+        return view
+    }()
+    override func loadView() {
+        view = customView
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -36,39 +44,24 @@ class AddWorkoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
-        setupUI()
+        passDataToUI()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtons()
-        setupTableView()
-        setupPickerView()
-        setupForKeyBoard()
-        setupTFDelegate()
     }
-    // MARK: - (-10,+10) 구분해서 TF에 추가시키기
-    @IBAction func restTimeButtonTapped(_ sender: UIButton) {
-        restTimeTF.text = exerciseVM.changeRestTime(sender.tag)
-    }
-    // MARK: - 테이블 뷰에 해당 리스트 추가시켜야함
-    @IBAction func setsAddButtonTapped(_ sender: Any) {
-        guard setsWeightTF.text != "" && setsRespsTF.text != "" else { print("no data in TF"); return }
-        exerciseVM.addPSet(weight: setsWeightTF.text, reps: setsRespsTF.text)
-        // MARK: - 바인딩을 하는게 맞나?
-        tableView.reloadData()
-    }
+    
     // MARK: - 해당 뷰 내리면서 workout 데이터 이전 뷰에 저장시키고 테이블 뷰에 보여줘야함 (데이터 추가 안된거 있으면 저장 x)
-    @IBAction func addWorkoutTapeed(_ sender: Any) {
-        if exerciseVM.numberOfSets.isZero || restTimeTF.text == "" || workoutNameTF.text == "" {
+    private func addWorkoutTapped() {
+        if exerciseVM.numberOfSets.isZero || customView.restTimeTF.text == "" || customView.workoutNameTF.text == "" {
             // 입력되지 않은 뷰가 있다면 alert
             var message = ""
-            if workoutNameTF.text == "" {
+            if customView.workoutNameTF.text == "" {
                 message = "Please enter name of this workout"
-            }else if restTimeTF.text == "" {
+            }else if customView.restTimeTF.text == "" {
                 message = "Please enter rest time"
             } else {
                 message = "Please add at least one set to your workout."
-                
+
             }
             let alert = UIAlertController(title: "Missing Information", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
@@ -80,39 +73,38 @@ class AddWorkoutViewController: UIViewController {
             dismiss(animated: true)
         }
     }
+    
+    // MARK: - (-10,+10) 구분해서 TF에 추가시키기
+    private func minusAndPlusButtonTapped(_ tag : Int) {
+        customView.restTimeTF.text = exerciseVM.changeRestTime(tag)
+    }
+    
+    // MARK: - 테이블 뷰에 해당 리스트 추가시켜야함
+    private func setsAddButtonTapped() {
+        guard customView.setsWeightTF.text != "" && customView.setsRepsTF.text != "" else { print("no data in TF"); return }
+        exerciseVM.addPSet(weight: customView.setsWeightTF.text, reps: customView.setsRepsTF.text)
+        // MARK: - 바인딩을 하는게 맞나?
+        customView.tableView.reloadData()
+    }
+
 
 }
 
 extension AddWorkoutViewController {
-    func setupUI() {
-        workoutNameTF.text = exerciseVM.name.capitalized
-        targetPickerView.selectRow(Target.allCases.firstIndex(of: exerciseVM.target)!, inComponent: 0, animated: true)
-        restTimeTF.text = "\(exerciseVM.returnRest())"
-        setsWeightTF.text = String(Int(exerciseVM.sets.last?.weight ?? 60))
-        setsRespsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
+    func passDataToUI() {
+        customView.workoutNameTF.text = exerciseVM.name.capitalized
+        customView.targetPickerView.selectRow(Target.allCases.firstIndex(of: exerciseVM.target)!, inComponent: 0, animated: true)
+        customView.restTimeTF.text = "\(exerciseVM.returnRest())"
+        customView.setsWeightTF.text = String(Int(exerciseVM.sets.last?.weight ?? 60))
+        customView.setsRepsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
     }
     
-    func setupButtons() {
-        buttons.forEach { button in
-            button.layer.cornerRadius = 8
-            button.layer.masksToBounds = true
-        }
-    }
-    // 뷰 아무 곳 터치시 키보드 내리기
-        func setupForKeyBoard() {
-            let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-            tap.cancelsTouchesInView = false
-            view.addGestureRecognizer(tap)
-        }
 }
 
 // MARK: - PickerView Extension
 
 extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func setupPickerView() {
-        targetPickerView.delegate = self
-        targetPickerView.dataSource = self
-    }
+
     
     // pickerView에 담긴 아이템의 컴포넌트 갯수 (= 휠의 갯수)
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -138,10 +130,6 @@ extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource
 // MARK: - TableView 관련 Extension
 
 extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
-    func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if exerciseVM.numberOfSets.isZero {
@@ -155,7 +143,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.addWorkoutTableViewCell, for: indexPath) as! AddWorkoutTableViewCell
         let row = indexPath.row
-        cell.setupUI(exerciseVM.returnPsetAt(row), index: row)
+        cell.passDataToUI(exerciseVM.returnPsetAt(row), index: row)
         return cell
     }
     
@@ -179,13 +167,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TextField Delegate
 
 extension AddWorkoutViewController: UITextFieldDelegate {
-    func setupTFDelegate() {
-        restTimeTF.delegate = self
-        setsWeightTF.delegate = self
-        setsRespsTF.delegate = self
-        workoutNameTF.delegate = self
-    }
-    
+
     // 텍스트필드 수정 시작 시 모든 텍스트가 선택되어 한번에 지울 수 있게
         func textFieldDidBeginEditing(_ textField: UITextField) {
             textField.selectAll(nil)
@@ -193,9 +175,9 @@ extension AddWorkoutViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 {
-            exerciseVM.saveName(workoutNameTF.text ?? "")
+            exerciseVM.saveName(customView.workoutNameTF.text ?? "")
         } else if textField.tag == 2 {
-            exerciseVM.saveRest(restTimeTF.text ?? "0")
+            exerciseVM.saveRest(customView.restTimeTF.text ?? "0")
         }
     }
     
