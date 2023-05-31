@@ -14,82 +14,24 @@ class AddWorkoutUIView: UIView {
     var plusButtonAction: ((Int) -> Void)?
     var setsAddButtonAction: (() -> Void)?
     
-    private func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil) -> UIButton {
-        let bt = UIButton(type: .system)
-        bt.setTitle(t, for: .normal)
-        if let s {
-            bt.titleLabel?.font = .systemFont(ofSize: s)
-        }
-        bt.setTitleColor(.black, for: .normal)
-        bt.backgroundColor = .opaqueSeparator
-        bt.layer.cornerRadius = 8
-        bt.layer.masksToBounds = true
-        return bt
-    }
-    private func uiTextFieldWillReturned(placeholder p: String? = nil, text t: String? = nil, tag: Int = 0) -> UITextField {
-        let tf = UITextField()
-        tf.placeholder = p
-        tf.text = t
-        tf.font = .systemFont(ofSize: 15, weight: .medium)
-        tf.backgroundColor = .quaternarySystemFill
-        tf.textAlignment = .center
-        tf.layer.cornerRadius = 8
-        tf.layer.masksToBounds = true
-        tf.tag = tag
-        return tf
-    }
-    private func uiLabelWillReturned(title t: String) -> UILabel {
-        let lb = UILabel()
-        lb.text = t
-        lb.font = .systemFont(ofSize: 15, weight: .medium)
-        return lb
-    }
-    private func uiStackViewWillReturned(views vs: [UIView], alignment ali: UIStackView.Alignment = .center) -> UIStackView {
-        let stv = UIStackView(arrangedSubviews: vs)
-        stv.axis = .horizontal
-        stv.alignment = ali
-        stv.spacing = 20
-        stv.distribution = .fillEqually
-        return stv
-    }
-    private lazy var workoutNameLabel: UILabel = uiLabelWillReturned(title: "Workout Name:")
-    private lazy var addWorkoutButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "Add")
-        bt.addTarget(self, action: #selector(addWorkoutTapeed), for: .touchUpInside)
-        return bt
-    }()
-    lazy var workoutNameTF: UITextField = uiTextFieldWillReturned(placeholder: "ex. Bench Press", tag: 1)
-    private lazy var targetLabel: UILabel = uiLabelWillReturned(title: "Target:")
-    lazy var targetPickerView: UIPickerView = UIPickerView()
-    private lazy var restLabel: UILabel = uiLabelWillReturned(title: "Rest Time:")
-    lazy var restTimeTF: UITextField = uiTextFieldWillReturned(text: "60", tag: 2)
-    private lazy var secLabel: UILabel = uiLabelWillReturned(title: "sec")
-    private lazy var minusButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "-10", fontSize: 15)
-        bt.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
-        return bt
-    }()
-    private lazy var plusButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "+10", fontSize: 15)
-        bt.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-        return bt
-    }()
-    private lazy var minusAndPlusSTV: UIStackView = uiStackViewWillReturned(views: [minusButton, plusButton])
-    private lazy var setsLabel: UILabel = uiLabelWillReturned(title: "Sets:")
-    lazy var setsWeightTF: UITextField = uiTextFieldWillReturned(text: "60")
-    private lazy var kgLabel: UILabel = uiLabelWillReturned(title: "kg")
-    lazy var setsRepsTF: UITextField = uiTextFieldWillReturned(text: "10")
-    private lazy var repsLabel: UILabel = uiLabelWillReturned(title: "reps")
-    private lazy var addSetButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "Add", fontSize: 15)
-        bt.addTarget(self, action: #selector(setsAddButtonTapped), for: .touchUpInside)
-        return bt
-    }()
-    lazy var tableView: UITableView = {
-        let tv = UITableView()
-        tv.rowHeight = 45
-        return tv
-    }()
+    let workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Workout Name:")
+    let addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", target: AddWorkoutUIView.self, action: #selector(addWorkoutTapped))
+    let workoutNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Bench Press", tag: 1)
+    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target:")
+    let targetPickerView: UIPickerView = UIPickerView()
+    let restLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Rest Time:")
+    let restTimeTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", tag: 2)
+    let secLabel: UILabel = CommonUI.uiLabelWillReturned(title: "sec")
+    let minusButton: UIButton = CommonUI.uiButtonWillReturned(title: "-10", fontSize: 15, target: AddWorkoutUIView.self, action: #selector(minusButtonTapped))
+    let plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 15, target: AddWorkoutUIView.self, action: #selector(plusButtonTapped))
+    let setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets:")
+    let setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60")
+    let kgLabel: UILabel = CommonUI.uiLabelWillReturned(title: "kg")
+    let setsRepsTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "10")
+    let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps")
+    let addSetButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", fontSize: 15, target: AddWorkoutUIView.self, action: #selector(setsAddButtonTapped))
+    let tableView: UITableView = UITableView()
+    lazy var minusAndPlusSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [minusButton, plusButton])
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -204,7 +146,7 @@ class AddWorkoutUIView: UIView {
             self.addGestureRecognizer(tap)
         }
     
-    @objc private func addWorkoutTapeed() { addWorkoutAction?() }
+    @objc private func addWorkoutTapped() { addWorkoutAction?() }
     @objc private func minusButtonTapped() { minusButtonAction?(0) }
     @objc private func plusButtonTapped() { plusButtonAction?(1)}
     @objc private func setsAddButtonTapped() { setsAddButtonAction?() }

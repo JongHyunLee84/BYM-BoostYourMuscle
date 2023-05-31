@@ -16,23 +16,8 @@ class AddWorkoutViewController: UIViewController {
     var viewDisappear: ((ExerciseViewModel) -> Void) = { _ in }
     var addedWorkout: ((ExerciseViewModel) -> Void) = { _ in }
  
-    private lazy var customView: AddWorkoutUIView = {
-        let view = AddWorkoutUIView()
-        view.addWorkoutAction = addWorkoutTapped
-        view.minusButtonAction = minusAndPlusButtonTapped(_:)
-        view.plusButtonAction = minusAndPlusButtonTapped(_:)
-        view.setsAddButtonAction = setsAddButtonTapped
-        view.workoutNameTF.delegate = self
-        view.targetPickerView.delegate = self
-        view.targetPickerView.dataSource = self
-        view.restTimeTF.delegate = self
-        view.setsWeightTF.delegate = self
-        view.setsRepsTF.delegate = self
-        view.tableView.dataSource = self
-        view.tableView.delegate = self
-        view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
-        return view
-    }()
+    private lazy var customView: AddWorkoutUIView = setupCustomView()
+    
     override func loadView() {
         view = customView
     }
@@ -90,13 +75,32 @@ class AddWorkoutViewController: UIViewController {
 
 }
 
+// MARK: - UI
+
 extension AddWorkoutViewController {
-    func passDataToUI() {
+    private func passDataToUI() {
         customView.workoutNameTF.text = exerciseVM.name.capitalized
         customView.targetPickerView.selectRow(Target.allCases.firstIndex(of: exerciseVM.target)!, inComponent: 0, animated: true)
         customView.restTimeTF.text = "\(exerciseVM.returnRest())"
         customView.setsWeightTF.text = String(Int(exerciseVM.sets.last?.weight ?? 60))
         customView.setsRepsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
+    }
+    
+    private func setupCustomView() -> AddWorkoutUIView {
+        let view = AddWorkoutUIView()
+        view.addWorkoutAction = addWorkoutTapped
+        view.minusButtonAction = minusAndPlusButtonTapped(_:)
+        view.plusButtonAction = minusAndPlusButtonTapped(_:)
+        view.setsAddButtonAction = setsAddButtonTapped
+        view.workoutNameTF.delegate = self
+        view.targetPickerView.delegate = self
+        view.targetPickerView.dataSource = self
+        view.restTimeTF.delegate = self
+        view.setsWeightTF.delegate = self
+        view.setsRepsTF.delegate = self
+        view.tableView.dataSource = self
+        view.tableView.delegate = self
+        view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
     }
     
 }
@@ -164,7 +168,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: - TextField Delegate
+// MARK: - TextField Extension
 
 extension AddWorkoutViewController: UITextFieldDelegate {
 
