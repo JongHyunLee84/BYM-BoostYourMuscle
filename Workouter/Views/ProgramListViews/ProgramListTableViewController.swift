@@ -42,6 +42,7 @@ extension ProgramListTableViewController {
     @objc private func addButtonDidTapped() {
         let vc = AddProgramViewController()
         vc.dataClosure = {
+            // AddProgramView에서 추가하고 나올 때 다시 fetch하고 reload
             self.programListVM.fetchProgramVMList()
             self.tableView.reloadData()
         }

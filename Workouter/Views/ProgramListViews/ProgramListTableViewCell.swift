@@ -16,34 +16,8 @@ final class ProgramListTableViewCell: UITableViewCell {
     
     weak var delegate: ProgramListViewDelegate?
     
-    private lazy var programTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.systemFont(ofSize: 25, weight: .medium)
-        lb.textColor = .black
-        lb.text = "Label"
-        return lb
-    }()
-    
-    private lazy var editButton: UIButton = {
-        let bt = UIButton()
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 25,
-                                                      weight: .bold,
-                                                      scale: .medium)
-        
-        let ellipsis = UIImage(systemName: "ellipsis", withConfiguration: largeConfig)
-        bt.setImage(ellipsis, for: .normal)
-        bt.imageView?.tintColor = .black
-
-        return bt
-    }()
-    
-    private lazy var stackView: UIStackView = {
-        let stv = UIStackView(arrangedSubviews: [programTitleLabel, editButton])
-        stv.axis = .horizontal
-        stv.distribution = .equalSpacing
-        addSubview(stv)
-        return stv
-    }()
+    let programTitleLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
+    let editButton: UIButton = CommonUI.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,10 +29,16 @@ final class ProgramListTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        addSubview(stackView)
+        self.selectionStyle = .none
         
-        stackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(35)
+        [programTitleLabel, editButton].forEach { contentView.addSubview($0) }
+        
+        programTitleLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+        }
+        editButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
         }
     }
@@ -73,10 +53,9 @@ final class ProgramListTableViewCell: UITableViewCell {
         let usersItem = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { [weak self] _ in
             self?.delegate?.deleteProgram(self)
         }
-        
-        print("will return menu")
         return UIMenu(title: "Menu", options: .displayInline, children: [usersItem])
     }
+
     
 }
 

@@ -27,6 +27,17 @@ final class CommonUI {
         
         return bt
     }
+    
+    static func uiImageButtonWillReturned(_ name: String, size: CGFloat, weight: UIImage.SymbolWeight, scale: UIImage.SymbolScale) -> UIButton {
+        let bt = UIButton()
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: size,
+                                                      weight: weight,
+                                                      scale: scale)
+        let ellipsis = UIImage(systemName: name, withConfiguration: largeConfig)
+        bt.setImage(ellipsis, for: .normal)
+        bt.tintColor = .black
+        return bt
+    }
 
     static func uiTextFieldWillReturned(placeholder p: String? = nil, text t: String? = nil, tag: Int = 0) -> UITextField {
         let tf = UITextField()
@@ -41,18 +52,18 @@ final class CommonUI {
         return tf
     }
 
-    static func uiLabelWillReturned(title t: String) -> UILabel {
+    static func uiLabelWillReturned(title t: String, size: CGFloat = 15, weight: UIFont.Weight = .black) -> UILabel {
         let lb = UILabel()
         lb.text = t
-        lb.font = .systemFont(ofSize: 15, weight: .medium)
+        lb.font = .systemFont(ofSize: size, weight: weight)
         return lb
     }
     
-    static func uiStackViewWillReturned(views vs: [UIView], alignment ali: UIStackView.Alignment = .center) -> UIStackView {
+    static func uiStackViewWillReturned(views vs: [UIView], alignment ali: UIStackView.Alignment = .center, axis: NSLayoutConstraint.Axis = .horizontal, spacing: CGFloat = 20) -> UIStackView {
         let stv = UIStackView(arrangedSubviews: vs)
-        stv.axis = .horizontal
+        stv.axis = axis
         stv.alignment = ali
-        stv.spacing = 20
+        stv.spacing = spacing 
         stv.distribution = .fillEqually
         return stv
     }

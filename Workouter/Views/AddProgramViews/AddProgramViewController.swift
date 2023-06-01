@@ -71,7 +71,7 @@ extension AddProgramViewController {
                                                                  target: self,
                                                                  action: #selector(saveButtonDidTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .black
-        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {

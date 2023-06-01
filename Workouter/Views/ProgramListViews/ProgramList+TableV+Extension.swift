@@ -20,8 +20,7 @@ extension ProgramListTableViewController {
         }
         return programListVM.numberOfRows
     }
-
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.programListCell, for: indexPath) as!  ProgramListTableViewCell
         cell.delegate = self

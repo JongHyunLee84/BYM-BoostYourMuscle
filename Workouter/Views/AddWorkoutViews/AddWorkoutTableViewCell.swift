@@ -8,24 +8,12 @@
 import UIKit
 
 class AddWorkoutTableViewCell: UITableViewCell {
-
-    private func uiLabelWillReturned(title t: String) -> UILabel {
-        let lb = UILabel()
-        lb.text = t
-        lb.textAlignment = .center
-        lb.font = .systemFont(ofSize: 17, weight: .medium)
-        return lb
-    }
     
-    private lazy var numberLabel: UILabel = uiLabelWillReturned(title: "1")
-    private lazy var weightLabel: UILabel = uiLabelWillReturned(title: "60 kg")
-    private lazy var repsLabel: UILabel = uiLabelWillReturned(title: "10 reps")
-    private lazy var stackView: UIStackView = {
-        let stv = UIStackView(arrangedSubviews: [numberLabel,weightLabel,repsLabel])
-        stv.axis = .horizontal
-        stv.distribution = .fillEqually
-        return stv
-    }()
+    let numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
+    let weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
+    let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "10 reps")
+    lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel])
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
@@ -43,7 +31,6 @@ class AddWorkoutTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         addSubview(stackView)
-        
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(25)

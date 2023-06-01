@@ -101,6 +101,7 @@ extension AddWorkoutViewController {
         view.tableView.dataSource = self
         view.tableView.delegate = self
         view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
+        return view
     }
     
 }
