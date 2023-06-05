@@ -56,7 +56,7 @@ class WorkoutViewController: UIViewController {
         setupButtonsUI()
         setupTimer()
         setupTableView()
-        setupForKeyBoard()
+        KeyboardManager.setupKeyborad(self.view)
         setupRestcount()
     }
     

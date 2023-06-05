@@ -15,28 +15,28 @@ class AddWorkoutUIView: UIView {
     var setsAddButtonAction: (() -> Void)?
     
     let workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Workout Name:")
-    let addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", target: self, action: #selector(addWorkoutTapped))
+    lazy var addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", target: self, action: #selector(addWorkoutTapped))
     let workoutNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Bench Press", tag: 1)
     let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target:")
     let targetPickerView: UIPickerView = UIPickerView()
     let restLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Rest Time:")
     let restTimeTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", tag: 2)
     let secLabel: UILabel = CommonUI.uiLabelWillReturned(title: "sec")
-    let minusButton: UIButton = CommonUI.uiButtonWillReturned(title: "-10", fontSize: 15, target: self, action: #selector(minusButtonTapped))
-    let plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 15, target: self, action: #selector(plusButtonTapped))
+    lazy var minusButton: UIButton = CommonUI.uiButtonWillReturned(title: "-10", fontSize: 15, target: self, action: #selector(minusButtonTapped))
+    lazy var plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 15, target: self, action: #selector(plusButtonTapped))
     let setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets:")
     let setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60")
     let kgLabel: UILabel = CommonUI.uiLabelWillReturned(title: "kg")
     let setsRepsTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "10")
     let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps")
-    let addSetButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", fontSize: 15, target: self, action: #selector(setsAddButtonTapped))
+    lazy var addSetButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", fontSize: 15, target: self, action: #selector(setsAddButtonTapped))
     let tableView: UITableView = UITableView()
     lazy var minusAndPlusSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [minusButton, plusButton])
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
-        setupForKeyBoard()
+        KeyboardManager.setupKeyborad(self)
     }
     
     required init?(coder: NSCoder) {
@@ -138,13 +138,6 @@ class AddWorkoutUIView: UIView {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
-    // 뷰 아무 곳 터치시 키보드 내리기
-        func setupForKeyBoard() {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
-            tap.cancelsTouchesInView = false
-            self.addGestureRecognizer(tap)
-        }
     
     @objc private func addWorkoutTapped() { addWorkoutAction?() }
     @objc private func minusButtonTapped() { minusButtonAction?(0) }

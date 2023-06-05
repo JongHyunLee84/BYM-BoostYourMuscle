@@ -30,12 +30,6 @@ extension WorkoutViewController {
             soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
         }
     }
-    // 뷰 아무 곳 터치시 키보드 내리기
-    func setupForKeyBoard() {
-        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
     // 타이머가 백그라운드에서도 동작하게 하는 코드
     func setupTimer() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)

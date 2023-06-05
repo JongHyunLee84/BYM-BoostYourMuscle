@@ -11,65 +11,25 @@ final class AddProgramUIView: UIView {
     var addWorkoutButtonAction: (() -> Void)?
     var searchWorkoutButtonAction: (() -> Void)?
     var programVM: ProgramViewModel?
-    lazy var tableview: UITableView = {
-        let tv = UITableView()
-        tv.rowHeight = 70
-        return tv
-    }()
-    private lazy var programNameLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "Program Name"
-        lb.font = .boldSystemFont(ofSize: 21)
-        return lb
-    }()
     
-    lazy var programNameTF: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "ex. Push Day"
-        tf.autocapitalizationType = .none
-        tf.delegate = self
-        return tf
-    }()
+    let programNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
+    let programNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Push Day")
+    lazy var addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add Workout", target: self, action: #selector(addWorkoutButtonDidTapped))
+    lazy var searchWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Search Workout", target: self, action: #selector(searchWorkoutButtonDidTapped))
+    let tableView: UITableView = UITableView()
+    lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [addWorkoutButton, searchWorkoutButton], alignment: .fill, spacing: 25)
     
-    private func uiButtonWillReturned(title t: String) -> UIButton {
-        let bt = UIButton(type: .system)
-        bt.setTitle(t, for: .normal)
-        bt.setTitleColor(.black, for: .normal)
-        bt.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
-        bt.backgroundColor = .opaqueSeparator
-        bt.layer.cornerRadius = 8
-        bt.layer.masksToBounds = true
-        return bt
-    }
-    private lazy var addWorkoutButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "Add Workout")
-        bt.addTarget(self, action: #selector(addWorkoutButtonDidTapped), for: .touchUpInside)
-        return bt
-    }()
-    private lazy var searchWorkoutButton: UIButton = {
-        let bt = uiButtonWillReturned(title: "Search Workout")
-        bt.addTarget(self, action: #selector(searchWorkoutButtonDidTapped), for: .touchUpInside)
-        return bt
-    }()
-    
-    private lazy var buttonsStackView: UIStackView = {
-        let stv = UIStackView(arrangedSubviews: [addWorkoutButton, searchWorkoutButton])
-        stv.axis = .horizontal
-        stv.spacing = 25
-        stv.distribution = .fillEqually
-        return stv
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
-        setupForKeyBoard()
+        KeyboardManager.setupKeyborad(self)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraints()
-        setupForKeyBoard()
+        KeyboardManager.setupKeyborad(self)
     }
     
     @objc private func addWorkoutButtonDidTapped() {
@@ -84,37 +44,29 @@ final class AddProgramUIView: UIView {
         }
     }
     
-    private func         setupConstraints() {
+    private func setupConstraints() {
         self.backgroundColor = .white
-        [programNameLabel, programNameTF, buttonsStackView].forEach { view in
-            addSubview(view)
-        }
-        addSubview(tableview)
+        tableView.rowHeight = 70
+        [programNameLabel, programNameTF, buttonsSTV, tableView].forEach { addSubview($0) }
+        
         programNameLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().inset(20)
         }
         programNameTF.snp.makeConstraints { make in
             make.top.equalTo(programNameLabel.snp.bottom).offset(20)
+            make.height.equalTo(30)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-        buttonsStackView.snp.makeConstraints { make in
-            make.top.equalTo(programNameTF.snp.bottom).offset(40)
+        buttonsSTV.snp.makeConstraints { make in
+            make.top.equalTo(programNameTF.snp.bottom).offset(25)
             make.leading.trailing.equalToSuperview().inset(20)
         }
-        tableview.snp.makeConstraints { make in
-            make.top.equalTo(buttonsStackView.snp.bottom).offset(20)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(buttonsSTV.snp.bottom).offset(20)
             make.trailing.leading.bottom.equalToSuperview()
         }
     }
-    
-    // 뷰 아무 곳 터치시 키보드 내리기
-    private func setupForKeyBoard() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
-        tap.cancelsTouchesInView = false
-        self.addGestureRecognizer(tap)
-    }
-    
     
 }
 

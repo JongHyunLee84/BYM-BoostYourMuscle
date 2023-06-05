@@ -22,7 +22,7 @@ class SearchViewModel {
     }
     
     func changeExercise(_ target: String) {
-        let str = target.replacingOccurrences(of: " ", with: "%20")
+        let str = target.replacingOccurrences(of: " ", with: "%20").lowercased()
         workoutsRelay.accept([])
         let _ = apiService.fetchWorkouts(str)
             .take(1)

@@ -16,11 +16,11 @@ class AddProgramViewController: UIViewController {
     private lazy var customView: AddProgramUIView = {
         let view = AddProgramUIView()
         view.programVM = programVM
-        view.tableview.delegate = self
-        view.tableview.dataSource = self
+        view.tableView.delegate = self
+        view.tableView.dataSource = self
         view.addWorkoutButtonAction = addWorkoutButtonTapped
         view.searchWorkoutButtonAction = searchWorkoutButtonTapped
-        view.tableview.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
+        view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
         return view
     }()
     
@@ -43,7 +43,7 @@ class AddProgramViewController: UIViewController {
         }
         vc.addButtonTapped = { [weak self] exerciseVM in
             self?.programVM.addExercise(exerciseVM)
-            self?.customView.tableview.reloadData()
+            self?.customView.tableView.reloadData()
         }
         self.present(vc, animated: true)
     }
@@ -54,7 +54,7 @@ class AddProgramViewController: UIViewController {
             exerciseList.forEach { vm in
                 self?.programVM.addExercise(vm)
             }
-            self?.customView.tableview.reloadData()
+            self?.customView.tableView.reloadData()
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -66,12 +66,13 @@ class AddProgramViewController: UIViewController {
 
 extension AddProgramViewController {
     private func setupNavigation() {
+        self.navigationItem.largeTitleDisplayMode = .never // prefersLargeTitle은 딜레이 있어 보임.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(saveButtonDidTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .black
-//        navigationController?.navigationBar.prefersLargeTitles = false
+        
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {

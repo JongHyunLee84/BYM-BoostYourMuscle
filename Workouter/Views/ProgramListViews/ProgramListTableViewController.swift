@@ -11,10 +11,6 @@ final class ProgramListTableViewController: UITableViewController {
     
     let programListVM = ProgramListViewModel()
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -31,12 +27,14 @@ extension ProgramListTableViewController {
     }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "Programs"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(addButtonDidTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .black
+        
     }
     
     @objc private func addButtonDidTapped() {
@@ -45,6 +43,7 @@ extension ProgramListTableViewController {
             // AddProgramView에서 추가하고 나올 때 다시 fetch하고 reload
             self.programListVM.fetchProgramVMList()
             self.tableView.reloadData()
+            
         }
         navigationController?.pushViewController(vc,
                                                  animated: true)

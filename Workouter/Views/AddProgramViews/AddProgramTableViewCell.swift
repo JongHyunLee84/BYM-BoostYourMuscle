@@ -15,34 +15,20 @@ class AddProgramTableViewCell: UITableViewCell {
         }
     }
     
-    private func uiLabelWillReturned(_ title: String) -> UILabel {
-        let lb = UILabel()
-        lb.font = .systemFont(ofSize: 17)
-        lb.text = title
-        lb.textAlignment = .center
-        lb.textColor = .black
-        return lb
-    }
-
-    private lazy var workoutNameLabel: UILabel = uiLabelWillReturned("Name")
-    private lazy var targetLabel: UILabel = uiLabelWillReturned("Target")
-    private lazy var setsLabel: UILabel = uiLabelWillReturned("Sets")
+    let workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
+    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
+    let setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets", alignment: .center)
+    lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [workoutNameLabel,targetLabel,setsLabel])
     
-    private lazy var stackView: UIStackView = {
-        let stv = UIStackView(arrangedSubviews: [workoutNameLabel, targetLabel, setsLabel])
-        stv.axis = .horizontal
-        stv.distribution = .fillEqually
-        return stv
-    }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupConstraints()
-        }
-
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+    }
+    
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func passDataToUI() {
         guard let exerciseVM else { return }
         workoutNameLabel.text = exerciseVM.returnName()
@@ -52,14 +38,12 @@ class AddProgramTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         addSubview(stackView)
-        
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
-
     }
-
+    
 }
 
 import SwiftUI

@@ -28,19 +28,26 @@ final class CommonUI {
         return bt
     }
     
-    static func uiImageButtonWillReturned(_ name: String, size: CGFloat, weight: UIImage.SymbolWeight, scale: UIImage.SymbolScale) -> UIButton {
+    static func uiImageButtonWillReturned(_ name: String, size: CGFloat? = nil, weight: UIImage.SymbolWeight? = nil, scale: UIImage.SymbolScale? = nil, target: Any? = nil, action a: Selector? = nil) -> UIButton {
         let bt = UIButton()
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: size,
-                                                      weight: weight,
-                                                      scale: scale)
-        let ellipsis = UIImage(systemName: name, withConfiguration: largeConfig)
+        var customConfig: UIImage.SymbolConfiguration = .unspecified
+        if let size, let weight, let scale {
+            customConfig = UIImage.SymbolConfiguration(pointSize: size,
+                                                          weight: weight,
+                                                          scale: scale)
+        }
+        let ellipsis = UIImage(systemName: name, withConfiguration: customConfig)
         bt.setImage(ellipsis, for: .normal)
         bt.tintColor = .black
+        if let target, let a {
+            bt.addTarget(target, action: a, for: .touchUpInside)
+        }
         return bt
     }
 
     static func uiTextFieldWillReturned(placeholder p: String? = nil, text t: String? = nil, tag: Int = 0) -> UITextField {
         let tf = UITextField()
+        tf.autocapitalizationType = .none
         tf.placeholder = p
         tf.text = t
         tf.font = .systemFont(ofSize: 15, weight: .medium)
@@ -52,10 +59,11 @@ final class CommonUI {
         return tf
     }
 
-    static func uiLabelWillReturned(title t: String, size: CGFloat = 15, weight: UIFont.Weight = .black) -> UILabel {
+    static func uiLabelWillReturned(title t: String, size: CGFloat = 15, weight: UIFont.Weight = .regular, alignment: NSTextAlignment = .natural) -> UILabel {
         let lb = UILabel()
         lb.text = t
         lb.font = .systemFont(ofSize: size, weight: weight)
+        lb.textAlignment = alignment
         return lb
     }
     
@@ -67,6 +75,16 @@ final class CommonUI {
         stv.distribution = .fillEqually
         return stv
     }
+    
+    static func uiImageViewWillReturned() -> UIImageView {
+        let img = UIImageView()
+        
+        return img
+    }
+    
+//    static func setContentHuggingPriority(_ view: UIView, priority: UILayoutPriority, axis: NSLayoutConstraint.Axis) {
+//        view.setContentHuggingPriority(priority, for: axis)
+//    }
 }
     
 
