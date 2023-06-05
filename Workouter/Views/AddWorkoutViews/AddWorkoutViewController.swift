@@ -16,7 +16,7 @@ class AddWorkoutViewController: UIViewController {
     var viewDisappear: ((ExerciseViewModel) -> Void) = { _ in }
     var addedWorkout: ((ExerciseViewModel) -> Void) = { _ in }
  
-    private lazy var customView: AddWorkoutUIView = setupCustomView()
+    private lazy var customView: AddWorkoutUIView = AddWorkoutUIView()
     
     override func loadView() {
         view = customView
@@ -33,6 +33,7 @@ class AddWorkoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCustomView()
     }
     
     // MARK: - 해당 뷰 내리면서 workout 데이터 이전 뷰에 저장시키고 테이블 뷰에 보여줘야함 (데이터 추가 안된거 있으면 저장 x)
@@ -86,8 +87,8 @@ extension AddWorkoutViewController {
         customView.setsRepsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
     }
     
-    private func setupCustomView() -> AddWorkoutUIView {
-        let view = AddWorkoutUIView()
+    private func setupCustomView() {
+        let view = customView
         view.addWorkoutAction = addWorkoutTapped
         view.minusButtonAction = minusAndPlusButtonTapped(_:)
         view.plusButtonAction = minusAndPlusButtonTapped(_:)
@@ -101,7 +102,7 @@ extension AddWorkoutViewController {
         view.tableView.dataSource = self
         view.tableView.delegate = self
         view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
-        return view
+        
     }
     
 }

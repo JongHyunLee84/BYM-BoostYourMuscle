@@ -11,18 +11,21 @@ class SearchWorkoutUIView: UIView {
     
     let scrollView: UIScrollView = UIScrollView()
     let tableView: UITableView = UITableView()
-    let chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let lowerLegsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let shouldersButton: UIButton = CommonUI.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let upperArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let upperLegButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let lowerArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    let backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var lowerLegsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var shouldersButton: UIButton = CommonUI.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var upperArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var upperLegButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var lowerArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
     private lazy var buttons: [UIButton] = [chestButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton, backButton]
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
+        setupUI()
         KeyboardManager.setupKeyborad(self)
     }
     
@@ -31,11 +34,67 @@ class SearchWorkoutUIView: UIView {
     }
     
     private func setupConstraints() {
+        scrollView.addSubview(buttonsSTV)
+        [scrollView, tableView].forEach { addSubview($0) }
+        scrollView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(5)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(50)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
+        }
+        buttonsSTV.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
+            make.leading.equalTo(scrollView.snp.leading)
+            make.trailing.equalTo(scrollView.snp.trailing)
+        }
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(15)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
         
+    }
+    
+    private func setupUI() {
+        tableView.allowsSelection = false
+        tableView.rowHeight = 100
+        scrollView.showsHorizontalScrollIndicator = false
+        self.backgroundColor = .white
     }
     
     @objc func targetButtonTapped(_ sender: UIButton) {
         
     }
     
+}
+
+import SwiftUI
+
+#if canImport(SwiftUI) && DEBUG
+struct SearchWorkoutUIViewPreview<View: UIView>: UIViewRepresentable {
+    let view: View
+    
+    init(_ builder: @escaping () -> View) {
+        view = builder()
+    }
+    
+    // MARK: UIViewRepresentable
+    func makeUIView(context: Context) -> UIView {
+        return view
+    }
+    
+    func updateUIView(_ view: UIView, context: Context) {
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+}
+#endif
+struct SearchWorkoutUIViewPreviews_Previews: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            // Return whatever controller you want to preview
+            let vc = SearchWorkoutUIView()
+            return vc
+        }
+    }
 }

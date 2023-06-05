@@ -19,30 +19,24 @@ class SearchWorkoutViewController: UIViewController {
     // 해당 뷰가 사라질 때 Search하며 추가했던 운동들을 다시 AddProgramView로 보냄
     var addedWorkoutList: [ExerciseViewModel] = []
     var passWorkoutList: (([ExerciseViewModel]) -> Void) = { _ in }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        passWorkoutList(addedWorkoutList)
+    
+    private lazy var customView: SearchWorkoutUIView = SearchWorkoutUIView()
+    
+    override func loadView() {
+        view = customView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCustomView()
         setupSearchBar()
         setupUI()
-        setupTableView()
         setupBinding()
-        
     }
 
-    
-    @IBAction func targetButtonTapped(_ sender: UIButton) {
-                searchVM.changeExercise(sender.currentTitle ?? "chest")
-//        buttons.forEach { button in
-//            if button.currentTitle ==  sender.currentTitle {
-//                button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            } else {
-//                button.backgroundColor = .systemBackground
-//            }
-//        }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        passWorkoutList(addedWorkoutList)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,6 +78,22 @@ extension SearchWorkoutViewController {
 //            // 버튼 테두리
 //            button.layer.borderWidth = 2.0
 //            button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+//        }
+    }
+    
+    private func setupCustomView() {
+        let view = customView
+        view.tableView.register(SearchWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.searchWorkoutTableViewCell)
+    }
+    
+    private func targetButtonTapped(_ sender: UIButton) {
+                searchVM.changeExercise(sender.currentTitle ?? "chest")
+//        buttons.forEach { button in
+//            if button.currentTitle ==  sender.currentTitle {
+//                button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            } else {
+//                button.backgroundColor = .systemBackground
+//            }
 //        }
     }
     
@@ -154,18 +164,11 @@ extension SearchWorkoutViewController {
 }
 
 
-// MARK: - Table View
-extension SearchWorkoutViewController: UITableViewDelegate {
-    
-    func setupTableView() {
-//        tableView.delegate = self
-//        tableView.allowsSelection = false
-//        tableView.register(SearchWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.searchWorkoutTableViewCell)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
-    }
-}
+//// MARK: - Table View
+//extension SearchWorkoutViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        100
+//    }
+//}
 
 

@@ -13,7 +13,7 @@ class SearchWorkoutTableViewCell: UITableViewCell {
     let nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name")
     let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target")
     let equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment")
-    let plusButton: UIButton = CommonUI.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
+    lazy var plusButton: UIButton = CommonUI.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
     lazy var labelsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], alignment: .fill, axis: .vertical, spacing: 0)
     
     var plusButtonAction: (() -> Void) = {}

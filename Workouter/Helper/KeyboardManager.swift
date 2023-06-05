@@ -12,7 +12,7 @@ class KeyboardManager {
     private init() {}
     
     static func setupKeyborad(_ view: UIView) {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
