@@ -22,7 +22,7 @@ class AddProgramTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupConstraints()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +36,9 @@ class AddProgramTableViewCell: UITableViewCell {
         setsLabel.text = exerciseVM.returnSets()
     }
     
-    private func setupConstraints() {
+    private func setupUI() {
+        workoutNameLabel.adjustsFontSizeToFitWidth = true
+        workoutNameLabel.numberOfLines = 0
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

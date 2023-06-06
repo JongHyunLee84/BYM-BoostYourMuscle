@@ -66,13 +66,12 @@ class AddProgramViewController: UIViewController {
 
 extension AddProgramViewController {
     private func setupNavigation() {
-        self.navigationItem.largeTitleDisplayMode = .never // prefersLargeTitle은 딜레이 있어 보임.
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+        navigationItem.largeTitleDisplayMode = .never // prefersLargeTitle은 딜레이 있어 보임.
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(saveButtonDidTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
-        
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {

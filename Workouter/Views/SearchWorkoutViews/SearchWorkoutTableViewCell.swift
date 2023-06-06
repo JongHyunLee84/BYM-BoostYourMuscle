@@ -10,30 +10,36 @@ import UIKit
 class SearchWorkoutTableViewCell: UITableViewCell {
 
     let workoutImageView: UIImageView = CommonUI.uiImageViewWillReturned()
-    let nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name")
-    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target")
-    let equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment")
+    let nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
+    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
+    let equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment", size: 14)
     lazy var plusButton: UIButton = CommonUI.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
-    lazy var labelsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], alignment: .fill, axis: .vertical, spacing: 0)
+    lazy var labelsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], axis: .vertical, spacing: 0)
     
-    var plusButtonAction: (() -> Void) = {}
+    var plusButtonAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupConstraints()
+            setupUI()
         }
 
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
     
-    private func setupConstraints() {
+    private func setupUI() {
+        //ui
         nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        [workoutImageView, labelsSTV, plusButton].forEach { addSubview($0) }
+        nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.numberOfLines = 0
+        nameLabel.textAlignment = .center
+        
+        // constraints
+        [workoutImageView, labelsSTV, plusButton].forEach { contentView.addSubview($0) }
         
         [workoutImageView, labelsSTV].forEach { view in
             view.snp.makeConstraints { make in
-                make.top.bottom.equalToSuperview().offset(10)
+                make.top.bottom.equalToSuperview().inset(10)
                 make.width.equalToSuperview().multipliedBy(0.4)
             }
         }
@@ -49,7 +55,7 @@ class SearchWorkoutTableViewCell: UITableViewCell {
     }
 
     @objc func plusButtonTapped() {
-        plusButtonAction()
+        plusButtonAction?()
     }
     
 }

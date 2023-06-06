@@ -9,6 +9,8 @@ import UIKit
 
 class SearchWorkoutUIView: UIView {
     
+    var buttonTappedAction: ((UIButton)->Void)?
+    
     let scrollView: UIScrollView = UIScrollView()
     let tableView: UITableView = UITableView()
     lazy var chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
@@ -19,8 +21,8 @@ class SearchWorkoutUIView: UIView {
     lazy var lowerArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
-    private lazy var buttons: [UIButton] = [chestButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton, backButton]
-
+    lazy var buttons: [UIButton] = [chestButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton, backButton]
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,14 +58,23 @@ class SearchWorkoutUIView: UIView {
     }
     
     private func setupUI() {
+        self.backgroundColor = .white
         tableView.allowsSelection = false
         tableView.rowHeight = 100
         scrollView.showsHorizontalScrollIndicator = false
-        self.backgroundColor = .white
+        chestButton.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
+        buttons.forEach { button in
+            button.frame = CGRect(x: 160, y: 100, width: 30, height: 30)
+            button.layer.cornerRadius = 0.5 * button.bounds.size.width
+            button.clipsToBounds = true
+            // 버튼 테두리
+            button.layer.borderWidth = 2.0
+            button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        }
     }
     
     @objc func targetButtonTapped(_ sender: UIButton) {
-        
+        buttonTappedAction?(sender)
     }
     
 }
