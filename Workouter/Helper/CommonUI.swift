@@ -11,7 +11,7 @@ final class CommonUI {
     
     private init() {}
     
-    static func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil, target: Any? = nil, action a: Selector? = nil) -> UIButton {
+    static func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil, target: Any? = nil, action a: Selector? = nil, tag: Int? = nil) -> UIButton {
         let bt = UIButton(type: .system)
         bt.setTitle(t, for: .normal)
         if let s {
@@ -24,7 +24,9 @@ final class CommonUI {
         if let target, let a {
             bt.addTarget(target, action: a, for: .touchUpInside)
         }
-        
+        if let tag {
+            bt.tag = tag
+        }
         return bt
     }
     

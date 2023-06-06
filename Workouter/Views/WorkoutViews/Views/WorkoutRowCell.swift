@@ -10,7 +10,7 @@ import UIKit
 protocol WorkoutRowCellDelegate: AnyObject {
     func checkButtonTapped(cell: WorkoutRowCell)
     func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String)
-    func doneButtonTapped()
+    func keyboardDoneButtonTapped()
 }
 
 class WorkoutRowCell: UITableViewCell {
@@ -71,7 +71,7 @@ extension WorkoutRowCell: UITextFieldDelegate {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                         target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done,
-                                         target: self, action: #selector(doneButtonTapped))
+                                         target: self, action: #selector(keyboardDoneButtonTapped))
         
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()
@@ -80,8 +80,8 @@ extension WorkoutRowCell: UITextFieldDelegate {
         weightTF.inputAccessoryView = toolbar
     }
     
-    @objc func doneButtonTapped() {
-        delegate?.doneButtonTapped()
+    @objc func keyboardDoneButtonTapped() {
+        delegate?.keyboardDoneButtonTapped()
     }
     
     // 텍스트필드 수정 시작 시 모든 텍스트가 선택되어 한번에 지울 수 있게

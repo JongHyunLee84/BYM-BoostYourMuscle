@@ -89,12 +89,4 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .none
     }
-    
-    
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: Identifier.workoutSectionIdentifier, bundle: nil), forCellReuseIdentifier: Identifier.workoutSectionIdentifier)
-        tableView.register(UINib(nibName: Identifier.workoutRowIdentifier, bundle: nil), forCellReuseIdentifier: Identifier.workoutRowIdentifier)
-    }
 }
