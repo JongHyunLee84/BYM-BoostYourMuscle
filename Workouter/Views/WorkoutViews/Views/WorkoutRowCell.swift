@@ -15,20 +15,38 @@ protocol WorkoutRowCellDelegate: AnyObject {
 
 class WorkoutRowCell: UITableViewCell {
 
-    @IBOutlet weak var setLabel: UILabel!
-    @IBOutlet weak var weightTF: UITextField!
-    @IBOutlet weak var repsTF: UITextField!
-    @IBOutlet weak var checkButton: UIButton!
+    let setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
+    let weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
+    let weightTF: UITextField = CommonUI.uiTextFieldWillReturned()
+    let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps", size: 17)
+    let repsTF: UITextField = CommonUI.uiTextFieldWillReturned()
+    lazy var checkButton: UIButton = CommonUI.uiImageButtonWillReturned("square", target: self, action: #selector(checkButtonTapped))
+    lazy var weightSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [weightLabel,weightTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
+    lazy var repsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [repsLabel, repsTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
+    lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [setLabel, weightSTV, repsSTV, checkButton], alignment: .fill, spacing: 0, distribution: .equalSpacing)
+    
     // 체크 버튼 토글을 위한 델리게이트
     weak var delegate: WorkoutRowCellDelegate?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstrains()
         setupTF()
     }
-
-    @IBAction func checkButtonTapped(_ sender: Any) {
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupConstrains() {
+        contentView.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(15)
+        }
+    }
+    
+    @objc func checkButtonTapped() {
         delegate?.checkButtonTapped(cell: self)
     }
     
@@ -39,6 +57,7 @@ class WorkoutRowCell: UITableViewCell {
 extension WorkoutRowCell: UITextFieldDelegate {
     
     func setupTF() {
+        self.selectionStyle = .none
         repsTF.delegate = self
         weightTF.delegate = self
         repsTF.keyboardType = .decimalPad
@@ -71,7 +90,37 @@ extension WorkoutRowCell: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         delegate?.textFieldDidEndEditing(cell: self, tag: textField.tag, value: textField.text ?? "0")
+    }
+}
+
+import SwiftUI
+
+#if canImport(SwiftUI) && DEBUG
+struct WorkoutRowCellViewCellPreview<View: UIView>: UIViewRepresentable {
+    let view: View
+    
+    init(_ builder: @escaping () -> View) {
+        view = builder()
+    }
+    
+    // MARK: UIViewRepresentable
+    func makeUIView(context: Context) -> UIView {
+        return view
+    }
+    
+    func updateUIView(_ view: UIView, context: Context) {
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+}
+#endif
+struct WorkoutRowCellPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            // Return whatever controller you want to preview
+            let vc = WorkoutRowCell()
+            return vc
+        }
     }
 }

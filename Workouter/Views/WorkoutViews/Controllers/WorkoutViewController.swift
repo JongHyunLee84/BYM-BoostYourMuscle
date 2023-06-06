@@ -11,17 +11,7 @@ import AVFoundation
 class WorkoutViewController: UIViewController {
     
     var exerciseListVM: [ExerciseViewModel]?
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var mainTimerLabel: UILabel!
-    @IBOutlet weak var startStopButton: UIButton!
-    // Rest Views
-    @IBOutlet weak var restTimerLabel: UILabel!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var soundButton: UIButton!
+
     var isSoundOn: Bool {
         return UserDefaults.standard.bool(forKey: Identifier.soundButtonKey)
     }

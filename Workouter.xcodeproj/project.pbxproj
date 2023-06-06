@@ -42,7 +42,6 @@
 		F28CDBA529E669F10043E995 /* SearchWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CDBA429E669F10043E995 /* SearchWorkoutTableViewCell.swift */; };
 		F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */; };
 		F29173E729D7091E0021B39F /* WorkoutSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29173E529D7091E0021B39F /* WorkoutSectionCell.swift */; };
-		F29173E829D7091E0021B39F /* WorkoutSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F29173E629D7091E0021B39F /* WorkoutSectionCell.xib */; };
 		F29173EB29D709320021B39F /* WorkoutRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29173E929D709320021B39F /* WorkoutRowCell.swift */; };
 		F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D28FB29D4018900491123 /* AppDelegate.swift */; };
 		F29D28FE29D4018900491123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D28FD29D4018900491123 /* SceneDelegate.swift */; };
@@ -55,8 +54,8 @@
 		F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A5029B2A275BA5003C7107 /* CommonUI.swift */; };
 		F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A706962A1E31C800044A06 /* SearchViewModel.swift */; };
 		F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */; };
+		F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BB51E22A2F0B7300CFB956 /* WorkoutUIView.swift */; };
 		F2E5B0A829DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E5B0A729DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift */; };
-		F2FA05C329DB0E39003F6CED /* WorkoutRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FA05C229DB0E39003F6CED /* WorkoutRowCell.xib */; };
 		F2FA05C929DB160F003F6CED /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05C829DB160F003F6CED /* Program.swift */; };
 		F2FA05CB29DB161A003F6CED /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CA29DB161A003F6CED /* Exercise.swift */; };
 		F2FA05CD29DB1621003F6CED /* Pset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CC29DB1621003F6CED /* Pset.swift */; };
@@ -101,7 +100,6 @@
 		F28CDBA429E669F10043E995 /* SearchWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFLibrary.swift; sourceTree = "<group>"; };
 		F29173E529D7091E0021B39F /* WorkoutSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSectionCell.swift; sourceTree = "<group>"; };
-		F29173E629D7091E0021B39F /* WorkoutSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutSectionCell.xib; sourceTree = "<group>"; };
 		F29173E929D709320021B39F /* WorkoutRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRowCell.swift; sourceTree = "<group>"; };
 		F29D28F829D4018900491123 /* Workouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29D28FB29D4018900491123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,8 +113,8 @@
 		F2A5029B2A275BA5003C7107 /* CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUI.swift; sourceTree = "<group>"; };
 		F2A706962A1E31C800044A06 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramUIView.swift; sourceTree = "<group>"; };
+		F2BB51E22A2F0B7300CFB956 /* WorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutUIView.swift; sourceTree = "<group>"; };
 		F2E5B0A729DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgramList+TableV+Extension.swift"; sourceTree = "<group>"; };
-		F2FA05C229DB0E39003F6CED /* WorkoutRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutRowCell.xib; sourceTree = "<group>"; };
 		F2FA05C829DB160F003F6CED /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		F2FA05CA29DB161A003F6CED /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		F2FA05CC29DB1621003F6CED /* Pset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pset.swift; sourceTree = "<group>"; };
@@ -184,10 +182,9 @@
 		F2707B2629DB0DC700F35D22 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F2FA05C229DB0E39003F6CED /* WorkoutRowCell.xib */,
 				F29173E929D709320021B39F /* WorkoutRowCell.swift */,
-				F29173E629D7091E0021B39F /* WorkoutSectionCell.xib */,
 				F29173E529D7091E0021B39F /* WorkoutSectionCell.swift */,
+				F2BB51E22A2F0B7300CFB956 /* WorkoutUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -430,10 +427,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F29D290B29D4018B00491123 /* LaunchScreen.storyboard in Resources */,
-				F2FA05C329DB0E39003F6CED /* WorkoutRowCell.xib in Resources */,
 				F29D290829D4018B00491123 /* Assets.xcassets in Resources */,
 				F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */,
-				F29173E829D7091E0021B39F /* WorkoutSectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +511,7 @@
 				F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */,
 				F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */,
 				F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */,
+				F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */,
 				F22F2CD12A2DAEB900C33BEA /* KeyboardManager.swift in Sources */,
 				F26D707229DE793300EA2CBD /* PsetEntity+CoreDataClass.swift in Sources */,
 				F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */,

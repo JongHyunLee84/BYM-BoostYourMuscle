@@ -18,12 +18,6 @@ extension WorkoutViewController {
         restTimerLabel.text = "\(rest) sec"
     }
     func setupButtonsUI() {
-        minusButton.layer.cornerRadius = 10
-        minusButton.layer.masksToBounds = true
-        resetButton.layer.cornerRadius = 10
-        resetButton.layer.masksToBounds = true
-        plusButton.layer.cornerRadius = 10
-        plusButton.layer.masksToBounds = true
         if isSoundOn == true {
             soundButton.setImage(UIImage(systemName: "speaker.wave.2"), for: .normal)
         } else {

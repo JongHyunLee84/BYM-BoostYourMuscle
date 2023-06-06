@@ -36,8 +36,7 @@ extension ProgramListTableViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             if action.style == .default {
                 // 운동 시작 뷰로 넘어가기
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: Identifier.workoutVCIdentifier) as! WorkoutViewController
+                let nextViewController = WorkoutViewController()
                 nextViewController.exerciseListVM = self.programListVM.returnViewModelAt(indexPath.row).returnExercises()
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }

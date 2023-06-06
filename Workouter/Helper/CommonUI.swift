@@ -67,24 +67,15 @@ final class CommonUI {
         return lb
     }
     
-    static func uiStackViewWillReturned(views vs: [UIView], alignment ali: UIStackView.Alignment = .center, axis: NSLayoutConstraint.Axis = .horizontal, spacing: CGFloat = 20) -> UIStackView {
+    static func uiStackViewWillReturned(views vs: [UIView], alignment ali: UIStackView.Alignment = .center, axis: NSLayoutConstraint.Axis = .horizontal, spacing: CGFloat = 20, distribution: UIStackView.Distribution = .fillEqually) -> UIStackView {
         let stv = UIStackView(arrangedSubviews: vs)
         stv.axis = axis
         stv.alignment = ali
         stv.spacing = spacing 
-        stv.distribution = .fillEqually
+        stv.distribution = distribution
         return stv
     }
-    
-    static func uiImageViewWillReturned() -> UIImageView {
-        let img = UIImageView()
-        
-        return img
-    }
-    
-//    static func setContentHuggingPriority(_ view: UIView, priority: UILayoutPriority, axis: NSLayoutConstraint.Axis) {
-//        view.setContentHuggingPriority(priority, for: axis)
-//    }
+
 }
     
 

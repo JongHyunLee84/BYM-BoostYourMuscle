@@ -48,9 +48,9 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             cell.weightTF.text = pset.returnWeight()
             let checkButton = cell.checkButton
             pset.returnCheck()  ?
-                                checkButton?.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
                                 :
-                                checkButton?.setImage(UIImage(systemName: "square"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "square"), for: .normal)
             return cell
         }
     }

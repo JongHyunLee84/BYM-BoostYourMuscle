@@ -9,7 +9,7 @@ import UIKit
 
 class SearchWorkoutTableViewCell: UITableViewCell {
 
-    let workoutImageView: UIImageView = CommonUI.uiImageViewWillReturned()
+    let workoutImageView: UIImageView = UIImageView()
     let nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
     let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
     let equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment", size: 14)
