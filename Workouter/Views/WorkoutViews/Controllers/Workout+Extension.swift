@@ -86,11 +86,11 @@ extension WorkoutViewController {
         if isMainTimerCounting {
             isMainTimerCounting = false
             mainTimer.invalidate()
-            ssBT.setImage(UIImage(systemName: "play.circle"), for: .normal)
+            ssBT.setImage(UIImage(systemName: "play.circle", withConfiguration: ssBT.currentImage?.configuration), for: .normal)
         }
         else {
             isMainTimerCounting = true
-            ssBT.setImage(UIImage(systemName: "pause.circle"), for: .normal)
+            ssBT.setImage(UIImage(systemName: "pause.circle", withConfiguration: ssBT.currentImage?.configuration), for: .normal)
             mainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(mainTimerCounter), userInfo: nil, repeats: true)
             RunLoop.current.add(mainTimer, forMode: .common)
         }

@@ -24,7 +24,7 @@ class WorkoutViewController: UIViewController {
     
     // rest Timer 구현
      var restTimer: Timer = Timer()
-     var restTimerCount: Int = 0
+    var restTimerCount: Int = 0
     
     // 쉬는 시간 끝났을 때 사운드
     var player: AVAudioPlayer?

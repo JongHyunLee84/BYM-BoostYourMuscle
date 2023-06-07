@@ -16,8 +16,8 @@ final class ProgramListTableViewCell: UITableViewCell {
     
     weak var delegate: ProgramListViewDelegate?
     
-    let programTitleLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
-    let editButton: UIButton = CommonUI.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
+    lazy var programTitleLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
+    lazy var editButton: UIButton = CommonUI.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

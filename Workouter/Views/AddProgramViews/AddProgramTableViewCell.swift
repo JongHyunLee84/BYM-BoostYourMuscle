@@ -15,9 +15,9 @@ class AddProgramTableViewCell: UITableViewCell {
         }
     }
     
-    let workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
-    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
-    let setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets", alignment: .center)
+    lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
+    lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
+    lazy var setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets", alignment: .center)
     lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [workoutNameLabel,targetLabel,setsLabel])
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

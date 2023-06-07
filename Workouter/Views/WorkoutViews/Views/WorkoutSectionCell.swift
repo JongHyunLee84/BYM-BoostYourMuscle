@@ -9,8 +9,8 @@ import UIKit
 
 class WorkoutSectionCell: UITableViewCell {
 
-    let workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 17)
-    let triangleImageView: UIImageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill"))
+    lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 17)
+    lazy var triangleImageView: UIImageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill"))
     lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [workoutNameLabel, triangleImageView], alignment: .fill, spacing: 17, distribution: .fill)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -30,11 +30,13 @@ class WorkoutSectionCell: UITableViewCell {
     private func setupUI() {
         // ui
         triangleImageView.tintColor = .black
-        
         // constraints
         contentView.addSubview(stackView)
         workoutNameLabel.snp.makeConstraints { make in
             make.width.greaterThanOrEqualTo(250)
+        }
+        triangleImageView.snp.makeConstraints { make in
+            make.width.lessThanOrEqualTo(18)
         }
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(10)

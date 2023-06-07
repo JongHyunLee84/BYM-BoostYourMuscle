@@ -11,8 +11,8 @@ class SearchWorkoutUIView: UIView {
     
     var buttonTappedAction: ((UIButton)->Void)?
     
-    let scrollView: UIScrollView = UIScrollView()
-    let tableView: UITableView = UITableView()
+    lazy var scrollView: UIScrollView = UIScrollView()
+    lazy var tableView: UITableView = UITableView()
     lazy var chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var lowerLegsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var shouldersButton: UIButton = CommonUI.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))

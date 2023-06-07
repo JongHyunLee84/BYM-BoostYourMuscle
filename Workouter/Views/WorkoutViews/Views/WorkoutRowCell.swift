@@ -15,11 +15,11 @@ protocol WorkoutRowCellDelegate: AnyObject {
 
 class WorkoutRowCell: UITableViewCell {
 
-    let setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
-    let weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
-    let weightTF: UITextField = CommonUI.uiTextFieldWillReturned()
-    let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps", size: 17)
-    let repsTF: UITextField = CommonUI.uiTextFieldWillReturned()
+    lazy var setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
+    lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
+    lazy var weightTF: UITextField = CommonUI.uiTextFieldWillReturned()
+    lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps", size: 17)
+    lazy var repsTF: UITextField = CommonUI.uiTextFieldWillReturned(tag: 1)
     lazy var checkButton: UIButton = CommonUI.uiImageButtonWillReturned("square", target: self, action: #selector(checkButtonTapped))
     lazy var weightSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [weightLabel,weightTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
     lazy var repsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [repsLabel, repsTF], alignment: .fill, spacing: 5, distribution: .fillEqually)

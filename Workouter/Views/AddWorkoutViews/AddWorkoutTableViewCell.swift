@@ -9,9 +9,9 @@ import UIKit
 
 class AddWorkoutTableViewCell: UITableViewCell {
     
-    let numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
-    let weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
-    let repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "10 reps")
+    lazy var numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
+    lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
+    lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "10 reps")
     lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel])
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

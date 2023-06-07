@@ -11,14 +11,14 @@ final class CommonUI {
     
     private init() {}
     
-    static func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil, target: Any? = nil, action a: Selector? = nil, tag: Int? = nil) -> UIButton {
+    static func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil, target: Any? = nil, action a: Selector? = nil, tag: Int? = nil, backgroundColor background: UIColor = .opaqueSeparator) -> UIButton {
         let bt = UIButton(type: .system)
         bt.setTitle(t, for: .normal)
         if let s {
             bt.titleLabel?.font = .systemFont(ofSize: s)
         }
         bt.setTitleColor(.black, for: .normal)
-        bt.backgroundColor = .opaqueSeparator
+        bt.backgroundColor = background
         bt.layer.cornerRadius = 8
         bt.layer.masksToBounds = true
         if let target, let a {

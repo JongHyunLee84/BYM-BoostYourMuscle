@@ -12,11 +12,11 @@ final class AddProgramUIView: UIView {
     var searchWorkoutButtonAction: (() -> Void)?
     var programVM: ProgramViewModel?
     
-    let programNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
-    let programNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Push Day")
+    lazy var programNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
+    lazy var programNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Push Day")
     lazy var addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add Workout", target: self, action: #selector(addWorkoutButtonDidTapped))
     lazy var searchWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Search Workout", target: self, action: #selector(searchWorkoutButtonDidTapped))
-    let tableView: UITableView = UITableView()
+    lazy var tableView: UITableView = UITableView()
     lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [addWorkoutButton, searchWorkoutButton], alignment: .fill, spacing: 25)
     
     

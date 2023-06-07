@@ -15,8 +15,8 @@ class WorkoutUIView: UIView {
     var soundButtonAction: (()->Void)?
     var resetButtonAction: ((UIButton)->Void)?
     
-    lazy var editButton: UIButton = CommonUI.uiButtonWillReturned(title: "Edit", fontSize: 20, target: self, action: #selector(editButtonDidTapped))
-    lazy var doneButton: UIButton = CommonUI.uiButtonWillReturned(title: "Done", fontSize: 20, target: self, action: #selector(doneButtonDidTapped))
+    lazy var editButton: UIButton = CommonUI.uiButtonWillReturned(title: "Edit", fontSize: 20, target: self, action: #selector(editButtonDidTapped), backgroundColor: .clear)
+    lazy var doneButton: UIButton = CommonUI.uiButtonWillReturned(title: "Done", fontSize: 20, target: self, action: #selector(doneButtonDidTapped), backgroundColor: .clear)
     lazy var mainTimerLabel: UILabel = CommonUI.uiLabelWillReturned(title: "00 : 00 : 00", size: 35, weight: .semibold)
     lazy var startStopButton: UIButton = CommonUI.uiImageButtonWillReturned("pause.circle", size: 36, weight: .semibold, scale: .default, target: self, action: #selector(startStopButtonDidTapped))
     lazy var tableView: UITableView = UITableView()
@@ -28,7 +28,7 @@ class WorkoutUIView: UIView {
     lazy var resetButton: UIButton = CommonUI.uiButtonWillReturned(title: "Reset", target: self, action: #selector(restButtonDidTapped(_:)), tag: 2)
     lazy var plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 18, target: self, action: #selector(restButtonDidTapped(_:)), tag: 3)
     lazy var editDoneBtsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [editButton, doneButton], alignment: .fill, distribution: .equalSpacing)
-    lazy var mainTimerSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [mainTimerLabel, startStopButton], spacing: 40, distribution: .fill)
+    lazy var mainTimerSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [mainTimerLabel, startStopButton], distribution: .fill)
     lazy var restBackgroundView: UIView = UIView()
     lazy var restLabelAndSoundBTSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [restLabel, soundButton], distribution: .fill)
     lazy var restBTsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [minusButton, resetButton, plusButton], distribution: .fillEqually)
@@ -57,7 +57,7 @@ class WorkoutUIView: UIView {
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(15)
         }
         mainTimerSTV.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(50)
+            make.leading.trailing.equalToSuperview().inset(65)
             make.top.equalTo(editDoneBtsSTV.snp.bottom).offset(25)
         }
         tableView.snp.makeConstraints { make in

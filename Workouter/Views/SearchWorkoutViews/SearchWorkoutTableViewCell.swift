@@ -9,10 +9,10 @@ import UIKit
 
 class SearchWorkoutTableViewCell: UITableViewCell {
 
-    let workoutImageView: UIImageView = UIImageView()
-    let nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
-    let targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
-    let equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment", size: 14)
+    lazy var workoutImageView: UIImageView = UIImageView()
+    lazy var nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
+    lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
+    lazy var equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment", size: 14)
     lazy var plusButton: UIButton = CommonUI.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
     lazy var labelsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], axis: .vertical, spacing: 0)
     
