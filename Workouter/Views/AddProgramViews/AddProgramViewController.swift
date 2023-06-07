@@ -13,16 +13,7 @@ class AddProgramViewController: UIViewController {
     // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
     private var exerciseVM = ExerciseViewModel()
     
-    private lazy var customView: AddProgramUIView = {
-        let view = AddProgramUIView()
-        view.programVM = programVM
-        view.tableView.delegate = self
-        view.tableView.dataSource = self
-        view.addWorkoutButtonAction = addWorkoutButtonTapped
-        view.searchWorkoutButtonAction = searchWorkoutButtonTapped
-        view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
-        return view
-    }()
+    let customView = AddProgramUIView()
     
     var dataClosure: () -> Void = {}
     
@@ -33,6 +24,7 @@ class AddProgramViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
+        setupCustomView()
     }
     
     private func addWorkoutButtonTapped() {
@@ -58,7 +50,17 @@ class AddProgramViewController: UIViewController {
         }
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
+    private func setupCustomView() {
+        let view = customView
+        view.tableView.delegate = self
+        view.tableView.dataSource = self
+        view.programNameTF.delegate = self
+        view.addWorkoutButtonAction = addWorkoutButtonTapped
+        view.searchWorkoutButtonAction = searchWorkoutButtonTapped
+        view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
+    }
+    
     
 }
 
@@ -69,9 +71,9 @@ extension AddProgramViewController {
         navigationItem.largeTitleDisplayMode = .never // prefersLargeTitle은 딜레이 있어 보임.
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
-                                                                 style: .done,
-                                                                 target: self,
-                                                                 action: #selector(saveButtonDidTapped))
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(saveButtonDidTapped))
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {
@@ -134,5 +136,11 @@ extension AddProgramViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
+extension AddProgramViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let name = textField.text else { return }
+        programVM.setName(name)
+    }
+}
 

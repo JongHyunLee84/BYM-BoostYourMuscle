@@ -10,7 +10,6 @@ final class AddProgramUIView: UIView {
     
     var addWorkoutButtonAction: (() -> Void)?
     var searchWorkoutButtonAction: (() -> Void)?
-    var programVM: ProgramViewModel?
     
     lazy var programNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
     lazy var programNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Push Day")
@@ -70,14 +69,7 @@ final class AddProgramUIView: UIView {
     
 }
 
-extension AddProgramUIView: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let name = textField.text else { return }
-        programVM?.setName(name)
-    }
-    
-}
+
 
 import SwiftUI
 
