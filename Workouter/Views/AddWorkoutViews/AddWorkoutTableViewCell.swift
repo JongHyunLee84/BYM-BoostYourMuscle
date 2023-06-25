@@ -7,7 +7,8 @@
 
 import UIKit
 
-class AddWorkoutTableViewCell: UITableViewCell {
+class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
+    typealias T = (PSetViewModel, Int)
     
     lazy var numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
     lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
@@ -22,21 +23,25 @@ class AddWorkoutTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func passDataToUI(_ vm: PSetViewModel, index: Int) {
-        numberLabel.text = "\(index + 1) set"
-        weightLabel.text = vm.returnWeight()
-        repsLabel.text = vm.returnReps()
+
+    override func setupHierarchy() {
+        addSubview(stackView)
     }
     
-    private func setupConstraints() {
-        addSubview(stackView)
+    override func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(25)
         }
     }
-
+    
+    func passData(_ vm: (PSetViewModel, Int)) {
+        let (viewModel, index) = vm
+        numberLabel.text = "\(index) set"
+        weightLabel.text = viewModel.returnWeight()
+        repsLabel.text = viewModel.returnReps()
+    }
+    
 }
 
 import SwiftUI

@@ -169,8 +169,9 @@ extension WorkoutViewController: WorkoutRowCellDelegate {
         let tv = customView.tableView
         if let indexPath  = tv.indexPath(for: cell), let exerciseVM = exerciseListVM?[indexPath.section] {
             let pSetVM = exerciseVM.returnPsetAt(indexPath.row - 1)
-            tag.isZero ? pSetVM.changeWeight(value) : pSetVM.changeReps(value)
-            tv.reloadData()
+            // TODO: 바인딩 리팩토링 때 수정해야함.
+//            tag.isZero ? pSetVM.changeWeight(value) : pSetVM.changeReps(value)
+//            tv.reloadData()
         }
     }
     

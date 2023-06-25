@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkoutSectionCell: UITableViewCell {
+final class WorkoutSectionCell: BaseTableViewCell {
 
     lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 17)
     lazy var triangleImageView: UIImageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill"))
@@ -15,7 +15,6 @@ class WorkoutSectionCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -27,11 +26,11 @@ class WorkoutSectionCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    private func setupUI() {
-        // ui
-        triangleImageView.tintColor = .black
-        // constraints
+    override func setupHierarchy() {
         contentView.addSubview(stackView)
+    }
+    
+    override func setupConstraints() {
         workoutNameLabel.snp.makeConstraints { make in
             make.width.greaterThanOrEqualTo(250)
         }
@@ -42,7 +41,10 @@ class WorkoutSectionCell: UITableViewCell {
             make.leading.trailing.equalToSuperview().inset(10)
             make.center.equalToSuperview()
         }
-        
+    }
+    
+    override func setupUI() {
+        triangleImageView.tintColor = .black
     }
     
 }

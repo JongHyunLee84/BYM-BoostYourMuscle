@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddWorkoutViewController: UIViewController {
+class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
     
     // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴. 
     var exerciseVM = ExerciseViewModel()
@@ -34,6 +34,7 @@ class AddWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCustomView()
+        setupKeyborad(self.view)
     }
     
     // MARK: - 해당 뷰 내리면서 workout 데이터 이전 뷰에 저장시키고 테이블 뷰에 보여줘야함 (데이터 추가 안된거 있으면 저장 x)
@@ -149,7 +150,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.addWorkoutTableViewCell, for: indexPath) as! AddWorkoutTableViewCell
         let row = indexPath.row
-        cell.passDataToUI(exerciseVM.returnPsetAt(row), index: row)
+        cell.passData(exerciseVM.returnPsetAt(row))
         return cell
     }
     

@@ -7,13 +7,9 @@
 
 import UIKit
 
-class AddProgramTableViewCell: UITableViewCell {
+class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
-    var exerciseVM: ExerciseViewModel? {
-        didSet {
-            passDataToUI()
-        }
-    }
+    typealias T = ExerciseViewModel
     
     lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
     lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
@@ -29,21 +25,26 @@ class AddProgramTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func passDataToUI() {
-        guard let exerciseVM else { return }
-        workoutNameLabel.text = exerciseVM.returnName()
-        targetLabel.text = exerciseVM.returnTarget()
-        setsLabel.text = exerciseVM.returnSets()
+    override func setupHierarchy() {
+        addSubview(stackView)
     }
     
-    private func setupUI() {
-        workoutNameLabel.adjustsFontSizeToFitWidth = true
-        workoutNameLabel.numberOfLines = 0
-        addSubview(stackView)
+    override func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
+    }
+    
+    override func setupUI() {
+        workoutNameLabel.adjustsFontSizeToFitWidth = true
+        workoutNameLabel.numberOfLines = 0
+    }
+    
+    func passData(_ vm: ExerciseViewModel) {
+        workoutNameLabel.text = vm.returnName()
+        targetLabel.text = vm.returnTarget()
+        setsLabel.text = vm.returnSets()
     }
     
 }

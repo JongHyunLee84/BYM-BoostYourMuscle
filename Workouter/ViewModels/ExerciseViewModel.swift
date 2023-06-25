@@ -65,8 +65,8 @@ final class ExerciseViewModel {
         return exercise.rest
     }
     
-    func returnPsetAt(_ index: Int) -> PSetViewModel {
-        return setsVM[index]
+    func returnPsetAt(_ index: Int) -> (PSetViewModel, Int) {
+        return (setsVM[index], index+1)
     }
     
     func changeRestTime(_ tag: Int) -> String {

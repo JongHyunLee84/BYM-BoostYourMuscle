@@ -36,7 +36,6 @@ class AddWorkoutUIView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
-        KeyboardManager.setupKeyborad(self)
     }
     
     required init?(coder: NSCoder) {

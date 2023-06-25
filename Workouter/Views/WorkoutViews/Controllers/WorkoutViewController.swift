@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class WorkoutViewController: UIViewController {
+class WorkoutViewController: BaseViewController, KeyboardProtocol {
     
     var exerciseListVM: [ExerciseViewModel]?
 
@@ -51,7 +51,7 @@ class WorkoutViewController: UIViewController {
         setupNav()
         setupButtonsUI()
         setupTimer()
-        KeyboardManager.setupKeyborad(self.view)
+        setupKeyborad(self.view)
         setupRestcount()
     }
     

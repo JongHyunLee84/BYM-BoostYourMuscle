@@ -12,7 +12,10 @@ protocol ProgramListViewDelegate: AnyObject {
     func deleteProgram(_ cell: UITableViewCell?)
 }
 
-final class ProgramListTableViewCell: UITableViewCell {
+final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
+
+    
+    typealias T = ProgramViewModel
     
     weak var delegate: ProgramListViewDelegate?
     
@@ -21,18 +24,17 @@ final class ProgramListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
-        self.selectionStyle = .none
-        
+    override func setupHierarchy() {
         [programTitleLabel, editButton].forEach { contentView.addSubview($0) }
-        
+    }
+    
+    override func setupConstraints() {
         programTitleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
@@ -43,10 +45,14 @@ final class ProgramListTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCell(_ vm: ProgramViewModel) {
-        programTitleLabel.text = vm.title
+    override func setupUI() {
+        self.selectionStyle = .none
         editButton.showsMenuAsPrimaryAction = true
         editButton.menu = returnMenu()
+    }
+    
+    func passData(_ vm: ProgramViewModel) {
+        programTitleLabel.text = vm.title
     }
     
     func returnMenu() -> UIMenu {

@@ -13,7 +13,7 @@ protocol WorkoutRowCellDelegate: AnyObject {
     func keyboardDoneButtonTapped()
 }
 
-class WorkoutRowCell: UITableViewCell {
+final class WorkoutRowCell: BaseTableViewCell {
 
     lazy var setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
     lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
@@ -30,20 +30,28 @@ class WorkoutRowCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupConstrains()
-        setupTF()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupConstrains() {
+    override func setupHierarchy() {
         contentView.addSubview(stackView)
+    }
+    override func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(15)
         }
+    }
+    override func setupUI() {
+        self.selectionStyle = .none
+        repsTF.keyboardType = .decimalPad
+        weightTF.keyboardType = .decimalPad
+        setupDoneButtonItem()
+        repsTF.delegate = self
+        weightTF.delegate = self
     }
     
     @objc func checkButtonTapped() {
@@ -55,15 +63,6 @@ class WorkoutRowCell: UITableViewCell {
 // MARK: - cell안에 TF 관련 Delegate
 
 extension WorkoutRowCell: UITextFieldDelegate {
-    
-    func setupTF() {
-        self.selectionStyle = .none
-        repsTF.delegate = self
-        weightTF.delegate = self
-        repsTF.keyboardType = .decimalPad
-        weightTF.keyboardType = .decimalPad
-        setupDoneButtonItem()
-    }
     
     // 키보드 위에 Done 버튼 만들기
     func setupDoneButtonItem() {

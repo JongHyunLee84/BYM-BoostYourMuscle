@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class SearchWorkoutViewController: UIViewController {
+class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     var searchBar = UISearchBar()
 
     // VM 관련 property
@@ -31,6 +31,7 @@ class SearchWorkoutViewController: UIViewController {
         setupCustomView()
         setupSearchBar()
         setupBinding()
+        setupKeyborad(self.view)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

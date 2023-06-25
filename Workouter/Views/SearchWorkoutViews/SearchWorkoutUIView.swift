@@ -28,7 +28,6 @@ class SearchWorkoutUIView: UIView {
         super.init(frame: frame)
         setupConstraints()
         setupUI()
-        KeyboardManager.setupKeyborad(self)
     }
     
     required init?(coder: NSCoder) {

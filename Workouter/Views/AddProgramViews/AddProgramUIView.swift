@@ -22,13 +22,11 @@ final class AddProgramUIView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
-        KeyboardManager.setupKeyborad(self)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraints()
-        KeyboardManager.setupKeyborad(self)
     }
     
     @objc private func addWorkoutButtonDidTapped() {

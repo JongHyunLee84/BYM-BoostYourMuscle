@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddProgramViewController: UIViewController {
+class AddProgramViewController: BaseViewController, KeyboardProtocol {
     
     private var programVM = ProgramViewModel()
     // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
@@ -25,6 +25,7 @@ class AddProgramViewController: UIViewController {
         super.viewDidLoad()
         setupNavigation()
         setupCustomView()
+        setupKeyborad(self.view)
     }
     
     private func addWorkoutButtonTapped() {
@@ -115,7 +116,7 @@ extension AddProgramViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.addProgramTableViewCell, for: indexPath) as! AddProgramTableViewCell
-        cell.exerciseVM = programVM.exercisesVM[indexPath.row]
+        cell.passData(programVM.exercisesVM[indexPath.row]) 
         return cell
     }
     

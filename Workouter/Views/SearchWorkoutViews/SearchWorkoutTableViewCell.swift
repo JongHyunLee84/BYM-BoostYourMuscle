@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchWorkoutTableViewCell: UITableViewCell {
+class SearchWorkoutTableViewCell: BaseTableViewCell {
 
     lazy var workoutImageView: UIImageView = UIImageView()
     lazy var nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
@@ -20,23 +20,16 @@ class SearchWorkoutTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupUI()
         }
 
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-    
-    private func setupUI() {
-        //ui
-        nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        nameLabel.adjustsFontSizeToFitWidth = true
-        nameLabel.numberOfLines = 0
-        nameLabel.textAlignment = .center
-        
-        // constraints
+    override func setupHierarchy() {
         [workoutImageView, labelsSTV, plusButton].forEach { contentView.addSubview($0) }
-        
+    }
+    
+    override func setupConstraints() {
         [workoutImageView, labelsSTV].forEach { view in
             view.snp.makeConstraints { make in
                 make.top.bottom.equalToSuperview().inset(10)
@@ -52,6 +45,13 @@ class SearchWorkoutTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    override func setupUI() {
+        nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.numberOfLines = 0
+        nameLabel.textAlignment = .center
     }
 
     @objc func plusButtonTapped() {

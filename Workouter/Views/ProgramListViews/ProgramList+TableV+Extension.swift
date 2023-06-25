@@ -24,7 +24,7 @@ extension ProgramListTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.programListCell, for: indexPath) as!  ProgramListTableViewCell
         cell.delegate = self
-        cell.setupCell(programListVM.returnViewModelAt(indexPath.row))
+        cell.passData(programListVM.returnViewModelAt(indexPath.row))
         return cell
     }
 
