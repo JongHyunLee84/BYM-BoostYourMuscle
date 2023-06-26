@@ -9,13 +9,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
+final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     var searchBar = UISearchBar()
-
+    
     // VM 관련 property
     private let searchVM = SearchViewModel("chest")
-    private var disposeBag = DisposeBag()
-
+    
     // 해당 뷰가 사라질 때 Search하며 추가했던 운동들을 다시 AddProgramView로 보냄
     var addedWorkoutList: [ExerciseViewModel] = []
     var passWorkoutList: (([ExerciseViewModel]) -> Void) = { _ in }
@@ -26,23 +25,64 @@ class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
         view = customView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupCustomView()
-        setupSearchBar()
-        setupBinding()
-        setupKeyborad(self.view)
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         passWorkoutList(addedWorkoutList)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Identifier.toAddWorkoutViewController {
-
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func setupRxBind() {
+        searchVM.workoutsRelay
+            .asDriver(onErrorJustReturn: [])
+            .map({ $0.count })
+            .drive(onNext: { [weak self] count in
+                if count.isZero {
+                    self?.customView.tableView.setEmptyMessage("Loading...")
+                } else {
+                    self?.customView.tableView.restore()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.text.orEmpty
+            .flatMap { [weak self] query in
+                return self?.searchVM.workoutsRelay
+                    .map { $0.filter { exercise in
+                        self?.filterExercise(query: query, exercise: exercise) ?? false
+                    }} ?? Observable<[Exercise]>.just([])
+            }
+            .asDriver(onErrorJustReturn: [])
+            .drive(customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
+                                                 cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
+                UIImage.gifImageWithURL(item.gifUrl ?? "") { img in
+                    DispatchQueue.main.async {
+                        cell.workoutImageView.image = img
+                    }
+                }
+                cell.nameLabel.text = item.name.capitalized
+                cell.targetLabel.text = item.target.rawValue.capitalized
+                cell.equipmentLabel.text = item.equipment?.capitalized
+                cell.plusButtonAction = { [weak self] in
+                    self?.searchVM.exercise = item
+                    let vc = AddWorkoutViewController()
+                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
+                    vc.addedWorkout = { [weak self] addedWorkout in
+                        self?.addedWorkoutList.append(addedWorkout)
+                    }
+                    self?.present(vc, animated: true)
+                }
+            }
+                                                 .disposed(by: disposeBag)
+    }
+    
+    override func setupUI() {
+        customView.tableView.register(SearchWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.searchWorkoutTableViewCell)
+        customView.buttonTappedAction = targetButtonTapped(_:)
+        setupKeyborad(self.view)
+        setupSearchBar()
     }
     
 }
@@ -64,15 +104,9 @@ extension SearchWorkoutViewController: UISearchBarDelegate {
 // MARK: - UI
 extension SearchWorkoutViewController {
     
-    private func setupCustomView() {
-        let view = customView
-        view.tableView.register(SearchWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.searchWorkoutTableViewCell)
-        view.buttonTappedAction = targetButtonTapped(_:)
-    }
-    
     private func targetButtonTapped(_ sender: UIButton) {
-            searchVM.changeExercise(sender.currentTitle ?? "chest")
-            customView.buttons.forEach { button in
+        searchVM.changeExercise(sender.currentTitle ?? "chest")
+        customView.buttons.forEach { button in
             if button.currentTitle ==  sender.currentTitle {
                 button.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
             } else {
@@ -86,49 +120,6 @@ extension SearchWorkoutViewController {
 // MARK: - RX 관련
 
 extension SearchWorkoutViewController {
-    func setupBinding() {
-        searchVM.workoutsRelay
-            .asDriver(onErrorJustReturn: [])
-            .map({ $0.count })
-            .drive(onNext: { [weak self] count in
-                if count.isZero {
-                    self?.customView.tableView.setEmptyMessage("Loading...")
-                } else {
-                    self?.customView.tableView.restore()
-                }
-            })
-            .disposed(by: disposeBag)
-
-        searchBar.rx.text.orEmpty
-            .flatMap { [weak self] query in
-                return self?.searchVM.workoutsRelay
-                    .map { $0.filter { exercise in
-                        self?.filterExercise(query: query, exercise: exercise) ?? false
-                    }} ?? Observable<[Exercise]>.just([])
-            }
-            .asDriver(onErrorJustReturn: [])
-            .drive(customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
-                                      cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
-                UIImage.gifImageWithURL(item.gifUrl ?? "") { img in
-                    DispatchQueue.main.async {
-                        cell.workoutImageView.image = img
-                    }
-                }
-                cell.nameLabel.text = item.name.capitalized
-                cell.targetLabel.text = item.target.rawValue.capitalized
-                cell.equipmentLabel.text = item.equipment?.capitalized
-                cell.plusButtonAction = { [weak self] in
-                    self?.searchVM.exercise = item
-                    let vc = AddWorkoutViewController()
-                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
-                    vc.addedWorkout = { [weak self] addedWorkout in
-                        self?.addedWorkoutList.append(addedWorkout)
-                    }
-                    self?.present(vc, animated: true)
-                }
-            }
-            .disposed(by: disposeBag)
-    }
     
     func filterExercise(query: String, exercise: Exercise) -> Bool {
         let lowerQuery = query.lowercased()
@@ -138,7 +129,7 @@ extension SearchWorkoutViewController {
         } else {
             return false
         }
-
+        
     }
 }
 

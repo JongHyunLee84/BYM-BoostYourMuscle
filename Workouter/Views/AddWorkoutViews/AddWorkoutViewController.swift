@@ -7,16 +7,16 @@
 
 import UIKit
 
-class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
+final class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
     
-    // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴. 
+    // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴.
     var exerciseVM = ExerciseViewModel()
     // 이전 뷰에 데이터 passing
     var addButtonTapped: ((ExerciseViewModel) -> Void) = { _ in }
     var viewDisappear: ((ExerciseViewModel) -> Void) = { _ in }
     var addedWorkout: ((ExerciseViewModel) -> Void) = { _ in }
- 
-    private lazy var customView: AddWorkoutUIView = AddWorkoutUIView()
+    
+    private lazy var customView = AddWorkoutUIView()
     
     override func loadView() {
         view = customView
@@ -26,15 +26,39 @@ class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
         super.viewWillDisappear(animated)
         viewDisappear(exerciseVM)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
         passDataToUI()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCustomView()
+        
+    }
+    
+    override func setupUI() {
+        customView.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
         setupKeyborad(self.view)
+    }
+    
+    override func setupDelegate() {
+        customView.workoutNameTF.delegate = self
+        customView.targetPickerView.delegate = self
+        customView.targetPickerView.dataSource = self
+        customView.restTimeTF.delegate = self
+        customView.setsWeightTF.delegate = self
+        customView.setsRepsTF.delegate = self
+        customView.tableView.dataSource = self
+        customView.tableView.delegate = self
+    }
+    
+    override func setupRxBind() {
+        customView.addWorkoutAction = addWorkoutTapped
+        customView.minusButtonAction = minusAndPlusButtonTapped(_:)
+        customView.plusButtonAction = minusAndPlusButtonTapped(_:)
+        customView.setsAddButtonAction = setsAddButtonTapped
     }
     
     // MARK: - 해당 뷰 내리면서 workout 데이터 이전 뷰에 저장시키고 테이블 뷰에 보여줘야함 (데이터 추가 안된거 있으면 저장 x)
@@ -48,7 +72,7 @@ class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
                 message = "Please enter rest time"
             } else {
                 message = "Please add at least one set to your workout."
-
+                
             }
             let alert = UIAlertController(title: "Missing Information", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
@@ -73,8 +97,8 @@ class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
         // MARK: - 바인딩을 하는게 맞나?
         customView.tableView.reloadData()
     }
-
-
+    
+    
 }
 
 // MARK: - UI
@@ -88,30 +112,12 @@ extension AddWorkoutViewController {
         customView.setsRepsTF.text = String(exerciseVM.sets.last?.reps ?? 10)
     }
     
-    private func setupCustomView() {
-        let view = customView
-        view.addWorkoutAction = addWorkoutTapped
-        view.minusButtonAction = minusAndPlusButtonTapped(_:)
-        view.plusButtonAction = minusAndPlusButtonTapped(_:)
-        view.setsAddButtonAction = setsAddButtonTapped
-        view.workoutNameTF.delegate = self
-        view.targetPickerView.delegate = self
-        view.targetPickerView.dataSource = self
-        view.restTimeTF.delegate = self
-        view.setsWeightTF.delegate = self
-        view.setsRepsTF.delegate = self
-        view.tableView.dataSource = self
-        view.tableView.delegate = self
-        view.tableView.register(AddWorkoutTableViewCell.self, forCellReuseIdentifier: Identifier.addWorkoutTableViewCell)
-        
-    }
-    
 }
 
 // MARK: - PickerView Extension
 
 extension AddWorkoutViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     
     // pickerView에 담긴 아이템의 컴포넌트 갯수 (= 휠의 갯수)
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -155,7 +161,7 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // MARK: - 테이블 삭제
-
+    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -174,11 +180,11 @@ extension AddWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TextField Extension
 
 extension AddWorkoutViewController: UITextFieldDelegate {
-
+    
     // 텍스트필드 수정 시작 시 모든 텍스트가 선택되어 한번에 지울 수 있게
-        func textFieldDidBeginEditing(_ textField: UITextField) {
-            textField.selectAll(nil)
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectAll(nil)
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 {

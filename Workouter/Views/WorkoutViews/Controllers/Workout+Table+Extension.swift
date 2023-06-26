@@ -37,7 +37,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.triangleImageView.image = UIImage(systemName: "arrowtriangle.right.fill")
                 return cell
             }
-
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.workoutRowIdentifier) as! WorkoutRowCell
             // MARK: - 바뀐 셀로 데이터 넣어주기
@@ -49,7 +49,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             let checkButton = cell.checkButton
             pset.returnCheck()  ?
             checkButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-                                :
+            :
             checkButton.setImage(UIImage(systemName: "square"), for: .normal)
             return cell
         }

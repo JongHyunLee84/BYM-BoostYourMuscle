@@ -6,7 +6,7 @@
 //
 
 import UIKit
-final class AddProgramUIView: UIView {
+final class AddProgramUIView: BaseUIView {
     
     var addWorkoutButtonAction: (() -> Void)?
     var searchWorkoutButtonAction: (() -> Void)?
@@ -21,31 +21,17 @@ final class AddProgramUIView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupConstraints()
     }
     
-    @objc private func addWorkoutButtonDidTapped() {
-        if let closure = addWorkoutButtonAction {
-            closure()
-        }
-    }
-    
-    @objc private func searchWorkoutButtonDidTapped() {
-        if let closure = searchWorkoutButtonAction {
-            closure()
-        }
-    }
-    
-    private func setupConstraints() {
-        self.backgroundColor = .white
-        tableView.rowHeight = 70
+    override func setupHierarchy() {
         [programNameLabel, programNameTF, buttonsSTV, tableView].forEach { addSubview($0) }
-        
+    }
+    
+    override func setupConstraints() {
         programNameLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalToSuperview().inset(20)
@@ -62,6 +48,22 @@ final class AddProgramUIView: UIView {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(buttonsSTV.snp.bottom).offset(20)
             make.trailing.leading.bottom.equalToSuperview()
+        }
+    }
+    
+    override func setupUI() {
+        tableView.rowHeight = 70
+    }
+    
+    @objc private func addWorkoutButtonDidTapped() {
+        if let closure = addWorkoutButtonAction {
+            closure()
+        }
+    }
+    
+    @objc private func searchWorkoutButtonDidTapped() {
+        if let closure = searchWorkoutButtonAction {
+            closure()
         }
     }
     

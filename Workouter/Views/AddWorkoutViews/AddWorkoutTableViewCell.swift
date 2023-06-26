@@ -7,14 +7,14 @@
 
 import UIKit
 
-class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
+final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     typealias T = (PSetViewModel, Int)
     
     lazy var numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
     lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
     lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "10 reps")
     lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel])
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
@@ -23,7 +23,7 @@ class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func setupHierarchy() {
         addSubview(stackView)
     }

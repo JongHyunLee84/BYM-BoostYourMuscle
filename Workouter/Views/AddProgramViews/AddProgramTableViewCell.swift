@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
+final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     typealias T = ExerciseViewModel
     

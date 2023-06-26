@@ -8,7 +8,7 @@
 import UIKit
 
 final class WorkoutSectionCell: BaseTableViewCell {
-
+    
     lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 17)
     lazy var triangleImageView: UIImageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill"))
     lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [workoutNameLabel, triangleImageView], alignment: .fill, spacing: 17, distribution: .fill)

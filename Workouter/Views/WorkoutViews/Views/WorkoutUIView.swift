@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkoutUIView: UIView {
+final class WorkoutUIView: BaseUIView {
     
     var editButtonAction: (()->Void)?
     var doneButtonAction: (()->Void)?
@@ -34,24 +34,20 @@ class WorkoutUIView: UIView {
     lazy var restBTsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [minusButton, resetButton, plusButton], distribution: .fillEqually)
     lazy var restTimerAndResetBTsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [restTimerLabel, restBTsSTV], distribution: .fill)
     
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            setupUI()
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            setupUI()
-        }
+    }
     
-    private func setupUI() {
-        self.backgroundColor = .white
-        // UI
-        restBackgroundView.backgroundColor = .lightGray
-        
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func setupHierarchy() {
         [editDoneBtsSTV, mainTimerSTV, tableView, restBackgroundView].forEach { addSubview($0) }
         [restLabelAndSoundBTSTV, restTimerAndResetBTsSTV].forEach { restBackgroundView.addSubview($0) }
-        
+    }
+    override func setupConstraints() {
         editDoneBtsSTV.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(15)
@@ -82,12 +78,16 @@ class WorkoutUIView: UIView {
         }
     }
     
+    override func setupUI() {
+        restBackgroundView.backgroundColor = .lightGray
+    }
+    
     @objc private func editButtonDidTapped() { editButtonAction?() }
     @objc private func doneButtonDidTapped() { doneButtonAction?() }
     @objc private func startStopButtonDidTapped() { startStopButtonAction?() }
     @objc private func soundButtonDidTapped() { soundButtonAction?() }
     @objc private func restButtonDidTapped(_ sender: UIButton) { resetButtonAction?(sender) }
-
+    
 }
 
 import SwiftUI

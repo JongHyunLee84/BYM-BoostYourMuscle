@@ -27,7 +27,7 @@ extension ProgramListTableViewController {
         cell.passData(programListVM.returnViewModelAt(indexPath.row))
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell이 선택되면 alert 띄우기
         let workoutTitle = programListVM.returnViewModelAt(indexPath.row).title
@@ -40,7 +40,7 @@ extension ProgramListTableViewController {
                 nextViewController.exerciseListVM = self.programListVM.returnViewModelAt(indexPath.row).returnExercises()
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }
-            }))
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     

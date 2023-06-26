@@ -12,19 +12,7 @@ import AVFoundation
 // MARK: - CustomView Extension
 extension WorkoutViewController {
     
-    func setupCustomView() {
-        customView.editButtonAction = editButtonTapped
-        customView.doneButtonAction = checkButtonTapped
-        customView.startStopButtonAction = startAndStopButtonTapped
-        customView.soundButtonAction = soundButtonTapped
-        customView.resetButtonAction = restButtonTapped(_:)
-        customView.tableView.delegate = self
-        customView.tableView.dataSource = self
-        customView.tableView.register(WorkoutSectionCell.self, forCellReuseIdentifier: Identifier.workoutSectionIdentifier)
-        customView.tableView.register(WorkoutRowCell.self, forCellReuseIdentifier: Identifier.workoutRowIdentifier)
-    }
-    
-    private func editButtonTapped() {
+    func editButtonTapped() {
         let tv = customView.tableView
         if tv.isEditing {
             tv.isEditing = false
@@ -36,7 +24,7 @@ extension WorkoutViewController {
     }
     
     // Rest Buttons Tapped
-    private func restButtonTapped(_ sender: UIButton) {
+    func restButtonTapped(_ sender: UIButton) {
         guard let rest = exerciseListVM?[customView.tableView.indexPathForSelectedRow?.section ?? 0].returnRest() else { return }
         switch sender.tag {
         case 1:
@@ -53,7 +41,7 @@ extension WorkoutViewController {
     }
     
     // 사운드 음소거 -> 진동
-    private func soundButtonTapped() {
+    func soundButtonTapped() {
         let defaults = UserDefaults.standard
         let soundBT = customView.soundButton
         if isSoundOn == false {
@@ -67,7 +55,7 @@ extension WorkoutViewController {
     }
     
     // 운동 종료 버튼
-    private func checkButtonTapped() {
+    func checkButtonTapped() {
         let alert = UIAlertController(title: "Completion", message: "Have you completed \n your workout session?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -81,7 +69,7 @@ extension WorkoutViewController {
     }
     
     // 타이머 시작/정지 버튼
-    private func startAndStopButtonTapped() {
+    func startAndStopButtonTapped() {
         let ssBT = customView.startStopButton
         if isMainTimerCounting {
             isMainTimerCounting = false
@@ -146,9 +134,9 @@ extension WorkoutViewController {
     @objc func applicationDidEnterBackground() {
         // 타이머가 작동 중일 때만 백그라운드 대응을 하게 만든 guard
         guard isMainTimerCounting else { return }
-                self.appDidEnterBackgroundDate = Date()
+        self.appDidEnterBackgroundDate = Date()
     }
-
+    
     @objc func applicationWillEnterForeground() {
         // 타이머가 작동 중일 때만 백그라운드 대응을 하게 만든 guard
         guard isMainTimerCounting else { return }
@@ -170,8 +158,8 @@ extension WorkoutViewController: WorkoutRowCellDelegate {
         if let indexPath  = tv.indexPath(for: cell), let exerciseVM = exerciseListVM?[indexPath.section] {
             let pSetVM = exerciseVM.returnPsetAt(indexPath.row - 1)
             // TODO: 바인딩 리팩토링 때 수정해야함.
-//            tag.isZero ? pSetVM.changeWeight(value) : pSetVM.changeReps(value)
-//            tv.reloadData()
+            //            tag.isZero ? pSetVM.changeWeight(value) : pSetVM.changeReps(value)
+            //            tv.reloadData()
         }
     }
     

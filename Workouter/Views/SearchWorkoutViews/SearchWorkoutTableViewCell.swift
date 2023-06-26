@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SearchWorkoutTableViewCell: BaseTableViewCell {
-
+final class SearchWorkoutTableViewCell: BaseTableViewCell {
+    
     lazy var workoutImageView: UIImageView = UIImageView()
     lazy var nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
     lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
@@ -19,12 +19,12 @@ class SearchWorkoutTableViewCell: BaseTableViewCell {
     var plusButtonAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-        }
-
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+        fatalError("init(coder:) has not been implemented")
+    }
     override func setupHierarchy() {
         [workoutImageView, labelsSTV, plusButton].forEach { contentView.addSubview($0) }
     }
@@ -53,7 +53,7 @@ class SearchWorkoutTableViewCell: BaseTableViewCell {
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
     }
-
+    
     @objc func plusButtonTapped() {
         plusButtonAction?()
     }

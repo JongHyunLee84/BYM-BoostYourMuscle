@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddProgramViewController: BaseViewController, KeyboardProtocol {
+final class AddProgramViewController: BaseViewController, KeyboardProtocol {
     
     private var programVM = ProgramViewModel()
     // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
@@ -23,8 +23,24 @@ class AddProgramViewController: BaseViewController, KeyboardProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func setupDelegate() {
+        let view = customView
+        view.tableView.delegate = self
+        view.tableView.dataSource = self
+        view.programNameTF.delegate = self
+        view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
+    }
+    
+    override func setupRxBind() {
+        let view = customView
+        view.addWorkoutButtonAction = addWorkoutButtonTapped
+        view.searchWorkoutButtonAction = searchWorkoutButtonTapped
+    }
+    
+    override func setupUI() {
         setupNavigation()
-        setupCustomView()
         setupKeyborad(self.view)
     }
     
@@ -51,17 +67,6 @@ class AddProgramViewController: BaseViewController, KeyboardProtocol {
         }
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    private func setupCustomView() {
-        let view = customView
-        view.tableView.delegate = self
-        view.tableView.dataSource = self
-        view.programNameTF.delegate = self
-        view.addWorkoutButtonAction = addWorkoutButtonTapped
-        view.searchWorkoutButtonAction = searchWorkoutButtonTapped
-        view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
-    }
-    
     
 }
 

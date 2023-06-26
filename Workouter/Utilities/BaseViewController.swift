@@ -11,11 +11,9 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupUI()
         setupDelegate()
-        setupHierarchy()
-        setupConstraints()
         setupRxBind()
     }
     
@@ -26,11 +24,13 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     func setupUI() {}
 }
 
-protocol BaseViewControllerProtocol: AnyObject, BaseViewItemProtocol, DisposeBagProtocol {
+protocol BaseViewControllerProtocol: AnyObject, DisposeBagProtocol {
     // delegate 설정
     func setupDelegate()
     
     func setupRxBind()
+    
+    func setupUI()
 }
 
 

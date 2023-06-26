@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddWorkoutUIView: UIView {
+final class AddWorkoutUIView: BaseUIView {
     
     var addWorkoutAction: (() -> Void)?
     var minusButtonAction: ((Int) -> Void)?
@@ -42,17 +42,18 @@ class AddWorkoutUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupConstraints() {
-        self.backgroundColor = .white
+    override func setupHierarchy() {
         [workoutNameLabel, addWorkoutButton, workoutNameTF, targetLabel, targetPickerView, restLabel, restTimeTF, secLabel, minusAndPlusSTV, setsLabel, setsWeightTF, kgLabel, setsRepsTF, repsLabel, addSetButton, tableView].forEach { view in
             addSubview(view)
         }
+    }
+    
+    override func setupConstraints() {
         [workoutNameLabel, targetLabel, restLabel, setsLabel].forEach { view in
             view.snp.makeConstraints { make in
                 make.leading.equalToSuperview().inset(20)
             }
         }
-
         [workoutNameLabel, addWorkoutButton].forEach { view in
             view.snp.makeConstraints { make in
                 make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(30)
@@ -142,7 +143,7 @@ class AddWorkoutUIView: UIView {
     @objc private func minusButtonTapped() { minusButtonAction?(0) }
     @objc private func plusButtonTapped() { plusButtonAction?(1)}
     @objc private func setsAddButtonTapped() { setsAddButtonAction?() }
-   
+    
 }
 
 import SwiftUI

@@ -8,10 +8,10 @@
 import UIKit
 import AVFoundation
 
-class WorkoutViewController: BaseViewController, KeyboardProtocol {
+final class WorkoutViewController: BaseViewController, KeyboardProtocol {
     
     var exerciseListVM: [ExerciseViewModel]?
-
+    
     var isSoundOn: Bool {
         return UserDefaults.standard.bool(forKey: Identifier.soundButtonKey)
     }
@@ -23,13 +23,14 @@ class WorkoutViewController: BaseViewController, KeyboardProtocol {
     var appDidEnterBackgroundDate: Date?
     
     // rest Timer 구현
-     var restTimer: Timer = Timer()
+    var restTimer: Timer = Timer()
     var restTimerCount: Int = 0
     
     // 쉬는 시간 끝났을 때 사운드
     var player: AVAudioPlayer?
     
-    let customView = WorkoutUIView()
+    var customView = WorkoutUIView()
+    
     override func loadView() {
         view = customView
     }
@@ -47,16 +48,31 @@ class WorkoutViewController: BaseViewController, KeyboardProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCustomView()
-        setupNav()
+    }
+    
+    override func setupUI() {
+        customView.tableView.register(WorkoutSectionCell.self, forCellReuseIdentifier: Identifier.workoutSectionIdentifier)
+        customView.tableView.register(WorkoutRowCell.self, forCellReuseIdentifier: Identifier.workoutRowIdentifier)
         setupButtonsUI()
+        setupNav()
         setupTimer()
         setupKeyborad(self.view)
+    }
+    
+    override func setupDelegate() {
+        customView.tableView.delegate = self
+        customView.tableView.dataSource = self
+    }
+    
+    override func setupRxBind() {
+        customView.editButtonAction = editButtonTapped
+        customView.doneButtonAction = checkButtonTapped
+        customView.startStopButtonAction = startAndStopButtonTapped
+        customView.soundButtonAction = soundButtonTapped
+        customView.resetButtonAction = restButtonTapped(_:)
         setupRestcount()
     }
     
-
-
 }
 
 

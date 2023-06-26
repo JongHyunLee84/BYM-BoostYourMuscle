@@ -11,7 +11,7 @@ class BaseUIView: UIView, BaseViewItemProtocol {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupHierarchy()
         setupConstraints()
         setupUI()

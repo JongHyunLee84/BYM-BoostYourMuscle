@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchWorkoutUIView: UIView {
+final class SearchWorkoutUIView: BaseUIView {
     
     var buttonTappedAction: ((UIButton)->Void)?
     
@@ -34,9 +34,12 @@ class SearchWorkoutUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupConstraints() {
+    override func setupHierarchy() {
         scrollView.addSubview(buttonsSTV)
         [scrollView, tableView].forEach { addSubview($0) }
+    }
+    
+    override func setupConstraints() {
         scrollView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(5)
             make.trailing.equalToSuperview()
@@ -53,11 +56,9 @@ class SearchWorkoutUIView: UIView {
             make.top.equalTo(scrollView.snp.bottom).offset(15)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
     
-    private func setupUI() {
-        self.backgroundColor = .white
+    override func setupUI() {
         tableView.allowsSelection = false
         tableView.rowHeight = 100
         scrollView.showsHorizontalScrollIndicator = false

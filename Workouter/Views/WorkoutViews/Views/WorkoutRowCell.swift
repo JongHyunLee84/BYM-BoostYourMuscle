@@ -14,7 +14,7 @@ protocol WorkoutRowCellDelegate: AnyObject {
 }
 
 final class WorkoutRowCell: BaseTableViewCell {
-
+    
     lazy var setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
     lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
     lazy var weightTF: UITextField = CommonUI.uiTextFieldWillReturned()

@@ -13,7 +13,7 @@ protocol ProgramListViewDelegate: AnyObject {
 }
 
 final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
-
+    
     
     typealias T = ProgramViewModel
     
@@ -61,7 +61,7 @@ final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
         }
         return UIMenu(title: "Menu", options: .displayInline, children: [usersItem])
     }
-
+    
     
 }
 
