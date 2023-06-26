@@ -44,7 +44,7 @@ final class WorkoutSectionCell: BaseTableViewCell {
     }
     
     override func setupUI() {
-        triangleImageView.tintColor = .black
+        triangleImageView.tintColor = .dynamicColor
     }
     
 }

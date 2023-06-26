@@ -79,7 +79,7 @@ final class WorkoutUIView: BaseUIView {
     }
     
     override func setupUI() {
-        restBackgroundView.backgroundColor = .lightGray
+        restBackgroundView.backgroundColor = .dynamicBackground
     }
     
     @objc private func editButtonDidTapped() { editButtonAction?() }

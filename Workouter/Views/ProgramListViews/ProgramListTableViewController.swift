@@ -33,7 +33,7 @@ extension ProgramListTableViewController {
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(addButtonDidTapped))
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationItem.rightBarButtonItem?.tintColor = .dynamicColor
         
     }
     

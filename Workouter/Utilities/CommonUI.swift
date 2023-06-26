@@ -11,18 +11,18 @@ final class CommonUI {
     
     private init() {}
     
-    static func uiButtonWillReturned(title t: String, fontSize s: CGFloat? = nil, target: Any? = nil, action a: Selector? = nil, tag: Int? = nil, backgroundColor background: UIColor = .opaqueSeparator) -> UIButton {
+    static func uiButtonWillReturned(title: String, fontSize: CGFloat? = nil, target: Any? = nil, action: Selector? = nil, tag: Int? = nil, backgroundColor background: UIColor = .opaqueSeparator) -> UIButton {
         let bt = UIButton(type: .system)
-        bt.setTitle(t, for: .normal)
-        if let s {
-            bt.titleLabel?.font = .systemFont(ofSize: s)
+        bt.setTitle(title, for: .normal)
+        if let fontSize {
+            bt.titleLabel?.font = .systemFont(ofSize: fontSize)
         }
-        bt.setTitleColor(.black, for: .normal)
+        bt.setTitleColor(.dynamicColor, for: .normal)
         bt.backgroundColor = background
         bt.layer.cornerRadius = 8
         bt.layer.masksToBounds = true
-        if let target, let a {
-            bt.addTarget(target, action: a, for: .touchUpInside)
+        if let target, let action {
+            bt.addTarget(target, action: action, for: .touchUpInside)
         }
         if let tag {
             bt.tag = tag
@@ -40,7 +40,7 @@ final class CommonUI {
         }
         let ellipsis = UIImage(systemName: name, withConfiguration: customConfig)
         bt.setImage(ellipsis, for: .normal)
-        bt.tintColor = .black
+        bt.tintColor = .dynamicColor
         if let target, let a {
             bt.addTarget(target, action: a, for: .touchUpInside)
         }
