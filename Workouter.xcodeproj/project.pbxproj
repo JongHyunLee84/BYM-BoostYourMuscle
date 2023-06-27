@@ -10,6 +10,8 @@
 		EF5DA0490C82889892F69047 /* Pods_Workouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58D2F8960A7F520F6AC868 /* Pods_Workouter.framework */; };
 		F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */ = {isa = PBXBuildFile; fileRef = F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */; };
 		F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2168A852A20E07600F86BCD /* SwiftUIView.swift */; };
+		F22A58392A4AE230002C41F2 /* SearchDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A58382A4AE230002C41F2 /* SearchDataService.swift */; };
+		F22A583B2A4AE258002C41F2 /* SearchDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A583A2A4AE258002C41F2 /* SearchDataRepository.swift */; };
 		F22F2CD32A2DB90E00C33BEA /* SearchWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */; };
 		F23707BF2A221C9C00864663 /* AddWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */; };
 		F26CB67029DD8CF5009F9925 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */; };
@@ -71,6 +73,8 @@
 		B0CB19D6AF5B51153613C7D9 /* Pods-Workouter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouter.release.xcconfig"; path = "Target Support Files/Pods-Workouter/Pods-Workouter.release.xcconfig"; sourceTree = "<group>"; };
 		F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ES_Boxing Bell Ring 2 - SFX Producer.wav"; sourceTree = "<group>"; };
 		F2168A852A20E07600F86BCD /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		F22A58382A4AE230002C41F2 /* SearchDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataService.swift; sourceTree = "<group>"; };
+		F22A583A2A4AE258002C41F2 /* SearchDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataRepository.swift; sourceTree = "<group>"; };
 		F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutUIView.swift; sourceTree = "<group>"; };
 		F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutUIView.swift; sourceTree = "<group>"; };
 		F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 			children = (
 				F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */,
 				F27B775329E56B6200127AB9 /* APIRepository.swift */,
+				F22A583A2A4AE258002C41F2 /* SearchDataRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			children = (
 				F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */,
 				F27B775529E56E3F00127AB9 /* APIService.swift */,
+				F22A58382A4AE230002C41F2 /* SearchDataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */,
 				F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */,
 				F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */,
+				F22A583B2A4AE258002C41F2 /* SearchDataRepository.swift in Sources */,
 				F2FA05CD29DB1621003F6CED /* Pset.swift in Sources */,
 				F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */,
 				F27B775629E56E3F00127AB9 /* APIService.swift in Sources */,
@@ -524,6 +531,7 @@
 				F29173E729D7091E0021B39F /* WorkoutSectionCell.swift in Sources */,
 				F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */,
 				F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */,
+				F22A58392A4AE230002C41F2 /* SearchDataService.swift in Sources */,
 				F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */,
 				F2F7F88C2A4880B900898E5C /* BaseUIView.swift in Sources */,
 				F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */,

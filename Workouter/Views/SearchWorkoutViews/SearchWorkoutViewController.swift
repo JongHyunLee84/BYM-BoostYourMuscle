@@ -13,7 +13,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     var searchBar = UISearchBar()
     
     // VM 관련 property
-    private let searchVM = SearchViewModel("chest")
+    private let searchVM = SearchViewModel()
     
     // 해당 뷰가 사라질 때 Search하며 추가했던 운동들을 다시 AddProgramView로 보냄
     var addedWorkoutList: [ExerciseViewModel] = []
@@ -36,9 +36,8 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     
     override func setupRxBind() {
         searchVM.workoutsRelay
-            .asDriver(onErrorJustReturn: [])
             .map({ $0.count })
-            .drive(onNext: { [weak self] count in
+            .subscribe(onNext: { [weak self] count in
                 if count.isZero {
                     self?.customView.tableView.setEmptyMessage("Loading...")
                 } else {
@@ -47,13 +46,30 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
             })
             .disposed(by: disposeBag)
         
-        searchBar.rx.text.orEmpty
-            .flatMap { [weak self] query in
-                return self?.searchVM.workoutsRelay
-                    .map { $0.filter { exercise in
-                        self?.filterExercise(query: query, exercise: exercise) ?? false
-                    }} ?? Observable<[Exercise]>.just([])
-            }
+        searchVM.workoutErrorSubject
+            .subscribe(onNext: {
+                switch $0 as? NetworkError {
+                case .retryError:
+                    print("should retry")
+                case .maxRequest:
+                    print("should tell max request")
+                case .none:
+                    break;
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.text
+            .orEmpty
+            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .filter { !$0.isEmpty }
+            .subscribe(onNext: { [weak self] str in
+                self?.searchVM.bodyPartStr.onNext(str)
+            })
+            .disposed(by: disposeBag)
+        
+        searchVM.bodyPartRelay
             .asDriver(onErrorJustReturn: [])
             .drive(customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
                                                  cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
@@ -105,7 +121,8 @@ extension SearchWorkoutViewController: UISearchBarDelegate {
 extension SearchWorkoutViewController {
     
     private func targetButtonTapped(_ sender: UIButton) {
-        searchVM.changeExercise(sender.currentTitle ?? "chest")
+        // TODO: 원래 change 메서드 사용했던 것 바꿔야함.
+        searchVM.bodyPartStr.onNext(sender.currentTitle ?? "all")
         customView.buttons.forEach { button in
             if button.currentTitle ==  sender.currentTitle {
                 button.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)

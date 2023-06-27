@@ -10,24 +10,32 @@ import RxSwift
 
 // MARK: - 서버에서 데이터 Fetch 해오기
 
+enum NetworkError: Error {
+    case retryError
+    case maxRequest
+}
+
 class APIRepository {
     
-    static func fetchWorkoutDataByTargetRx(_ target: String) -> Observable<[ServerEntity]> {
+    static func fetchWorkoutDataByTargetRx() -> Observable<[ServerEntity]> {
         return Observable.create { emitter in
             let headers = [
                 "X-RapidAPI-Key": "ebc2b996f3msh33acb2f28ee906fp1fe0a9jsn766591dae788",
                 "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
             ]
-            var request = URLRequest(url: URL(string: "https://exercisedb.p.rapidapi.com/exercises/bodyPart/\(target)")!)
+            var request = URLRequest(url: URL(string: "https://exercisedb.p.rapidapi.com/exercises")!)
             request.httpMethod = "GET"
             request.allHTTPHeaderFields = headers
             let session = URLSession.shared
             let task = session.dataTask(with: request) { data, _, error in
-                if let error {
-                    emitter.onError(error)
+                if error != nil {
+                    emitter.onError(NetworkError.retryError)
                 }
                 if let data {
-                    guard let entities = try? JSONDecoder().decode([ServerEntity].self, from: data) else { print("Decoding error"); return }
+                    guard let entities = try? JSONDecoder().decode([ServerEntity].self, from: data) else {
+
+                        emitter.onError(NetworkError.maxRequest)
+                        return }
                     emitter.onNext(entities)
                     emitter.onCompleted()
                 }

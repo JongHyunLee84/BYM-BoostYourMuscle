@@ -13,21 +13,21 @@ final class SearchWorkoutUIView: BaseUIView {
     
     lazy var scrollView: UIScrollView = UIScrollView()
     lazy var tableView: UITableView = UITableView()
+    lazy var allButton: UIButton = CommonUI.uiButtonWillReturned(title: "All", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var lowerLegsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var shouldersButton: UIButton = CommonUI.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var upperArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var upperLegButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
     lazy var lowerArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+
     lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
-    lazy var buttons: [UIButton] = [chestButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton, backButton]
+    lazy var buttons: [UIButton] = [allButton, chestButton, backButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton]
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraints()
-        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -62,7 +62,7 @@ final class SearchWorkoutUIView: BaseUIView {
         tableView.allowsSelection = false
         tableView.rowHeight = 100
         scrollView.showsHorizontalScrollIndicator = false
-        chestButton.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
+        allButton.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
         buttons.forEach { button in
             button.frame = CGRect(x: 160, y: 100, width: 30, height: 30)
             button.layer.cornerRadius = 0.5 * button.bounds.size.width

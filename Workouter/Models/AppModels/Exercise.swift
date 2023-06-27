@@ -56,16 +56,10 @@ struct Exercise {
         self.init(target: .back, name: "", rest: 60, sets: [])
     }
     
-    init(target: Target, name: String, gifUrl: String, equipment: String) {
-        self.init(target: target, name: name, rest: 60, sets: [])
+    init?(target: String?, name: String?, gifUrl: String?, equipment: String?) {
+        guard let target, let name, let gifUrl, let equipment else { return nil }
+        self.init(target: Target(rawValue: target) ?? .chest, name: name, rest: 60, sets: [])
         self.gifUrl = gifUrl
-        self.equipment = equipment
-    }
-    
-    // MARK: - 일단 모두 다 UIImage로 변환시키는 방식
-    init(target: Target, name: String, gif: UIImage?, equipment: String) {
-        self.init(target: target, name: name, rest: 60, sets: [])
-        self.gif = gif
         self.equipment = equipment
     }
     

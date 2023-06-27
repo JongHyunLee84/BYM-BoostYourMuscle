@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxSwift
 
 protocol BaseViewItemProtocol: AnyObject {
     // 뷰 계층 구조 설정 - ex ) view.addSubview()
@@ -20,16 +19,16 @@ protocol BaseViewItemProtocol: AnyObject {
     
 }
 
-// MARK: - DisposeBag
-protocol DisposeBagProtocol: AnyObject {
-    var disposeBag: DisposeBag { get }
-}
+//// MARK: - DisposeBag
+//protocol DisposeBagProtocol: AnyObject {
+//    var disposeBag: DisposeBag { get }
+//}
 
-extension DisposeBagProtocol {
-    var disposeBag: DisposeBag {
-        return DisposeBag()
-    }
-}
+//extension DisposeBagProtocol {
+//    var disposeBag: DisposeBag {
+//        return DisposeBag()
+//    }
+//}
 
 // MARK: - Passing Data to view
 protocol PassingDataProtocol: AnyObject {
