@@ -35,8 +35,9 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     }
     
     override func setupRxBind() {
-        searchVM.workoutsRelay
+        searchVM.totalExercises
             .map({ $0.count })
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] count in
                 if count.isZero {
                     self?.customView.tableView.setEmptyMessage("Loading...")
@@ -47,12 +48,20 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
             .disposed(by: disposeBag)
         
         searchVM.workoutErrorSubject
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: {
                 switch $0 as? NetworkError {
                 case .retryError:
                     print("should retry")
                 case .maxRequest:
-                    print("should tell max request")
+                    let alert = UIAlertController(title: "Data Upgrade in Progress", message: "We apologize for the inconvenience,\n but we are currently upgrading the exercise data.\n We are unable to provide the data at the moment.\n We will update it as soon as possible.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                        // Pop the current view controller
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                    
                 case .none:
                     break;
                 }
@@ -63,13 +72,10 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
             .orEmpty
             .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .filter { !$0.isEmpty }
-            .subscribe(onNext: { [weak self] str in
-                self?.searchVM.bodyPartStr.onNext(str)
-            })
+            .bind(to: searchVM.searchBarStr)
             .disposed(by: disposeBag)
         
-        searchVM.bodyPartRelay
+        searchVM.filteredExercises
             .asDriver(onErrorJustReturn: [])
             .drive(customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
                                                  cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
@@ -91,7 +97,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
                     self?.present(vc, animated: true)
                 }
             }
-                                                 .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     override func setupUI() {
@@ -122,7 +128,8 @@ extension SearchWorkoutViewController {
     
     private func targetButtonTapped(_ sender: UIButton) {
         // TODO: 원래 change 메서드 사용했던 것 바꿔야함.
-        searchVM.bodyPartStr.onNext(sender.currentTitle ?? "all")
+        searchVM.bodyPartStr.accept(sender.currentTitle ?? "all")
+        searchBar.text = "" // 부위 카테코리가 변하면 searchBar는 자동으로 비어진다.
         customView.buttons.forEach { button in
             if button.currentTitle ==  sender.currentTitle {
                 button.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
@@ -149,15 +156,3 @@ extension SearchWorkoutViewController {
         
     }
 }
-
-
-// Rx 버전으로 만들어봄
-//                if let gifUrl = item.gifUrl {
-//                    UIImage.gifImageWithURL(gifUrl)
-//                        .asDriver(onErrorJustReturn: nil)
-//                        .drive(cell.workoutImageView.rx.image)
-//                        .disposed(by: self.disposeBag)
-//                }
-//                이미 다 UIImage로 변환됐다면 아래 코드
-//                cell.workoutImageView.image = item.gif
-//                 gif 변환하는 과정이 너무 느려서 일단 다른 것들 업로드 하고 마지막에 변환시켜줌.

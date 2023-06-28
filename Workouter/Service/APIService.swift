@@ -15,7 +15,6 @@ class APIService {
         return Observable.create { emitter in
             APIRepository.fetchWorkoutDataByTargetRx()
                 .map { entities in
-                    
                     return entities.compactMap { Exercise(target: $0.bodyPart,
                                                           name: $0.name.capitalized,
                                                           gifUrl: $0.gifURL,
