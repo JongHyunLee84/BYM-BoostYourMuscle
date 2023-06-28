@@ -35,21 +35,23 @@ final class SearchDataRepository {
     }
     
     func saveExercises(_ exercises: [Exercise]) {
-        if let context,
-           let entity = NSEntityDescription.entity(forEntityName: self.searchEntityStr, in: context),
-           let programData = NSManagedObject(entity: entity, insertInto: context) as? SearchEntity {
+        guard let context = SearchDataRepository.shared.context else { return }
+        
+        context.perform {
             exercises.forEach { exercise in
-                programData.bodyPart = exercise.target.rawValue
-                programData.equipment = exercise.equipment
-                programData.gifURL = exercise.gifUrl
-                programData.name = exercise.name
-                if context.hasChanges {
-                    do {
-                        try context.save()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
+                let entity = NSEntityDescription.entity(forEntityName: self.searchEntityStr, in: context)
+                let programData = NSManagedObject(entity: entity!, insertInto: context) as? SearchEntity
+                
+                programData?.bodyPart = exercise.target.rawValue
+                programData?.equipment = exercise.equipment
+                programData?.gifURL = exercise.gifUrl
+                programData?.name = exercise.name
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }

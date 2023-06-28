@@ -27,7 +27,6 @@ class SearchViewModel {
         let exercise = searchDataService.fetchExercise()
         if exercise.isEmpty {
             apiService.fetchWorkouts() // TODO: mock 바꿔야함
-                .subscribe(on: MainScheduler.instance) // coredata 메서드 실행할 때 스레드 조심해야함.
                 .subscribe { [weak self] exerciseList in
                     self?.totalExercises.accept(exerciseList)
                     self?.searchDataService.saveExercises(exerciseList)
