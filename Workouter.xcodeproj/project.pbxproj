@@ -18,10 +18,7 @@
 		F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */; };
 		F26CB67429DD8D06009F9925 /* PsetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67329DD8D06009F9925 /* PsetViewModel.swift */; };
 		F26D706C29DE71E200EA2CBD /* ExerciseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D706A29DE71E200EA2CBD /* ExerciseEntity+CoreDataClass.swift */; };
-		F26D706D29DE71E200EA2CBD /* ExerciseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D706B29DE71E200EA2CBD /* ExerciseEntity+CoreDataProperties.swift */; };
-		F26D706F29DE790400EA2CBD /* ProgramEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D706E29DE790400EA2CBD /* ProgramEntity+CoreDataProperties.swift */; };
 		F26D707229DE793300EA2CBD /* PsetEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707029DE793300EA2CBD /* PsetEntity+CoreDataClass.swift */; };
-		F26D707329DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707129DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift */; };
 		F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */; };
 		F26D707729DEEB9500EA2CBD /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707629DEEB9500EA2CBD /* Int+Extension.swift */; };
 		F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1429DAA3AD00F35D22 /* WorkoutViewController.swift */; };
@@ -81,10 +78,7 @@
 		F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		F26CB67329DD8D06009F9925 /* PsetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsetViewModel.swift; sourceTree = "<group>"; };
 		F26D706A29DE71E200EA2CBD /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F26D706B29DE71E200EA2CBD /* ExerciseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		F26D706E29DE790400EA2CBD /* ProgramEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgramEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F26D707029DE793300EA2CBD /* PsetEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PsetEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		F26D707129DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PsetEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		F26D707629DEEB9500EA2CBD /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		F26D707C29DEFEFA00EA2CBD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -215,11 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				F26D707029DE793300EA2CBD /* PsetEntity+CoreDataClass.swift */,
-				F26D707129DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift */,
 				F26D706A29DE71E200EA2CBD /* ExerciseEntity+CoreDataClass.swift */,
-				F26D706B29DE71E200EA2CBD /* ExerciseEntity+CoreDataProperties.swift */,
 				F2881C7D29DBE196006CB7EE /* ProgramEntity+CoreDataClass.swift */,
-				F26D706E29DE790400EA2CBD /* ProgramEntity+CoreDataProperties.swift */,
 				F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */,
 			);
 			path = CoreDataEntities;
@@ -518,12 +509,10 @@
 				F26D707729DEEB9500EA2CBD /* Int+Extension.swift in Sources */,
 				F26CB67429DD8D06009F9925 /* PsetViewModel.swift in Sources */,
 				F29D292529D45FF300491123 /* Constant.swift in Sources */,
-				F26D706D29DE71E200EA2CBD /* ExerciseEntity+CoreDataProperties.swift in Sources */,
 				F26D706C29DE71E200EA2CBD /* ExerciseEntity+CoreDataClass.swift in Sources */,
 				F29173EB29D709320021B39F /* WorkoutRowCell.swift in Sources */,
 				F2FA05CF29DB163E003F6CED /* Target.swift in Sources */,
 				F2B99C3F2A4950A60067DB4C /* UIColor+Extension.swift in Sources */,
-				F26D706F29DE790400EA2CBD /* ProgramEntity+CoreDataProperties.swift in Sources */,
 				F28CDBA329E65AE70043E995 /* SearchWorkoutViewController.swift in Sources */,
 				F29D291F29D417B500491123 /* ProgramListTableViewCell.swift in Sources */,
 				F28CDBA529E669F10043E995 /* SearchWorkoutTableViewCell.swift in Sources */,
@@ -539,7 +528,6 @@
 				F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */,
 				F2881C8A29DC2CC3006CB7EE /* CoreDataService.swift in Sources */,
 				F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */,
-				F26D707329DE793300EA2CBD /* PsetEntity+CoreDataProperties.swift in Sources */,
 				F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */,
 				F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */,
 				F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */,
