@@ -17,27 +17,21 @@ class SearchViewModel {
     let workoutErrorSubject = PublishSubject<Error>()
     
     let apiService = APIService()
-    let searchDataService = SearchDataService()
     
     // AddWorkoutView에 보낼 exercise
     var exercise: Exercise?
     private let disposeBag = DisposeBag()
     
     init() {
-        let exercise = searchDataService.fetchExercise()
-        if exercise.isEmpty {
-            apiService.fetchWorkouts() // TODO: mock 바꿔야함
+            apiService.fetchWorkouts()
                 .subscribe { [weak self] exerciseList in
                     self?.totalExercises.accept(exerciseList)
-                    self?.searchDataService.saveExercises(exerciseList)
                 } onError: { [weak self] error in
                     guard let self else { return }
                     self.workoutErrorSubject.onNext(error)
                 }
                 .disposed(by: disposeBag)
-        } else {
-            totalExercises.accept(exercise)
-        }
+
 
         bodyPartStr
             .flatMap { [weak self] query -> Observable<[Exercise]> in
