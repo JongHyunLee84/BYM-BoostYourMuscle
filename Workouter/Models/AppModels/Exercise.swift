@@ -17,7 +17,7 @@ struct Exercise {
     var sets: [PSet]
     // 세트 당 쉬는 시간
     var rest: Int
-    // 운동 순서를 위한 id...
+    // 운동 순서를 위한 id
     var id: Int = 0
     // 해당 운동 총 볼륨
     var totalVolume: Double {
