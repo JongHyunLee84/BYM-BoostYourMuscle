@@ -14,7 +14,7 @@ struct Exercise {
     // 운동 이름
     var name: String
     // 세트 Set 키워드로 인해 Per Set의 줄임을 사용
-    var sets: [PSet]
+    var sets: [SetVolume]
     // 세트 당 쉬는 시간
     var rest: Int
     // 운동 순서를 위한 id
@@ -31,7 +31,7 @@ struct Exercise {
     var gif: UIImage?
     var equipment: String?
     
-    init(target: Target, name: String, rest: Int, id: Int, sets: [PSet]) {
+    init(target: Target, name: String, rest: Int, id: Int, sets: [SetVolume]) {
         self.target = target
         self.name = name
         self.sets = sets
@@ -39,7 +39,7 @@ struct Exercise {
         self.id = id
     }
     // 지정생성자
-    init(target: Target, name: String, rest: Int, sets: [PSet]) {
+    init(target: Target, name: String, rest: Int, sets: [SetVolume]) {
         self.target = target
         self.name = name
         self.sets = sets
@@ -47,7 +47,7 @@ struct Exercise {
     }
     
     // reset가 60으로 기본 설정된 init
-    init(target: Target, name: String, sets: [PSet]) {
+    init(target: Target, name: String, sets: [SetVolume]) {
         self.init(target: target, name: name, rest: 60, sets: sets)
     }
     

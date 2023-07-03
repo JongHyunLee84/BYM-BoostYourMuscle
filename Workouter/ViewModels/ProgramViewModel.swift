@@ -17,7 +17,7 @@ final class ProgramViewModel {
                                         name: $0.name,
                                         rest: $0.rest,
                                         sets: $0.sets.map {
-                    let pset = PSet(reps: $0.reps,
+                    let pset = SetVolume(reps: $0.reps,
                                     weight: $0.weight)
                     return pset
                 })

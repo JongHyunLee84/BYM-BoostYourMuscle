@@ -40,21 +40,3 @@ class APIService {
 //    }
 }
 
-// MARK: - 모든 element를 gif로 매핑하고 셀 로딩하는 방식
-//    func fetchWorkouts(_ target: String) -> Observable<[Exercise]> {
-//        let scheduler = ConcurrentDispatchQueueScheduler(qos: .userInteractive)
-//        return APIRepository.fetchWorkoutDataByTargetRx(target)
-//            .flatMap { entities in
-//                return Observable.just(entities)
-//                    .observe(on: scheduler)
-//                    .map { entity in
-//                        print(Thread.current)
-//                        return Exercise(target: Target(rawValue: entity.bodyPart)!,
-//                                        name: entity.name,
-//                                        gif: UIImage.gifImageWithURL(entity.gifURL),
-//                                        equipment: entity.equipment)
-//                    }
-//                    .toArray()
-//                    .asObservable()
-//            }
-//    }

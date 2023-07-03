@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ServerEntity: Codable {
+struct ExercisesResponseDTO: Codable {
     let bodyPart: String
     let equipment: String
     let gifURL: String

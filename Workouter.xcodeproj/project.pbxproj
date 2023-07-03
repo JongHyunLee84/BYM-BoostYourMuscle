@@ -30,7 +30,7 @@
 		F2707B2329DAFC2C00F35D22 /* AddWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */; };
 		F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775329E56B6200127AB9 /* APIRepository.swift */; };
 		F27B775629E56E3F00127AB9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775529E56E3F00127AB9 /* APIService.swift */; };
-		F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775729E56EFA00127AB9 /* ServerEntity.swift */; };
+		F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */; };
 		F2881C7529DBDC77006CB7EE /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */; };
 		F2881C7C29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */; };
 		F2881C8A29DC2CC3006CB7EE /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */; };
@@ -59,7 +59,7 @@
 		F2F7F88C2A4880B900898E5C /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7F88B2A4880B900898E5C /* BaseUIView.swift */; };
 		F2FA05C929DB160F003F6CED /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05C829DB160F003F6CED /* Program.swift */; };
 		F2FA05CB29DB161A003F6CED /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CA29DB161A003F6CED /* Exercise.swift */; };
-		F2FA05CD29DB1621003F6CED /* Pset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CC29DB1621003F6CED /* Pset.swift */; };
+		F2FA05CD29DB1621003F6CED /* SetVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CC29DB1621003F6CED /* SetVolume.swift */; };
 		F2FA05CF29DB163E003F6CED /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA05CE29DB163E003F6CED /* Target.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,7 +89,7 @@
 		F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		F27B775329E56B6200127AB9 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
 		F27B775529E56E3F00127AB9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		F27B775729E56EFA00127AB9 /* ServerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerEntity.swift; sourceTree = "<group>"; };
+		F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesResponseDTO.swift; sourceTree = "<group>"; };
 		F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		F2881C7B29DBDF61006CB7EE /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		F2F7F88B2A4880B900898E5C /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
 		F2FA05C829DB160F003F6CED /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		F2FA05CA29DB161A003F6CED /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		F2FA05CC29DB1621003F6CED /* Pset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pset.swift; sourceTree = "<group>"; };
+		F2FA05CC29DB1621003F6CED /* SetVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVolume.swift; sourceTree = "<group>"; };
 		F2FA05CE29DB163E003F6CED /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		FF58D2F8960A7F520F6AC868 /* Pods_Workouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -153,13 +153,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F213C30729D9B4AC008CEF1A /* Assets */ = {
+		F213C30729D9B4AC008CEF1A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F26D707C29DEFEFA00EA2CBD /* Info.plist */,
+				F29D290929D4018B00491123 /* LaunchScreen.storyboard */,
 				F29D290729D4018B00491123 /* Assets.xcassets */,
 				F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */,
 			);
-			path = Assets;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F2707B2429DB0D7900F35D22 /* WorkoutViews */ = {
@@ -191,6 +193,34 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F2761A002A52F51B00B62E8F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F2761A022A52F72700B62E8F /* PersistentStorages */,
+				F2761A012A52F71F00B62E8F /* Network */,
+				F2E5B0A429DC36AE00E9C2F3 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F2761A012A52F71F00B62E8F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F27B775329E56B6200127AB9 /* APIRepository.swift */,
+				F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F2761A022A52F72700B62E8F /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				F2881C6F29DBD53D006CB7EE /* CoreDataEntities */,
+				F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */,
+			);
+			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
 		F27B775B29E5895E00127AB9 /* SearchWorkoutViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,7 +245,6 @@
 		F28D6FD429D952670003596B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F29D290929D4018B00491123 /* LaunchScreen.storyboard */,
 				F2FA05C429DB0E65003F6CED /* ProgramListViews */,
 				F2707B2429DB0D7900F35D22 /* WorkoutViews */,
 				F2FA05C529DB0EC5003F6CED /* AddProgramViews */,
@@ -246,15 +275,13 @@
 		F29D28FA29D4018900491123 /* Workouter */ = {
 			isa = PBXGroup;
 			children = (
-				F26D707C29DEFEFA00EA2CBD /* Info.plist */,
-				F2FA05C729DB0FC9003F6CED /* System */,
-				F2E5B0A529DC36E800E9C2F3 /* Service */,
-				F2E5B0A429DC36AE00E9C2F3 /* Repository */,
+				F2FA05C729DB0FC9003F6CED /* Application */,
+				F2761A002A52F51B00B62E8F /* Data */,
 				F29D291429D402D600491123 /* Models */,
 				F28D6FD429D952670003596B /* Views */,
 				F29D291D29D4138E00491123 /* ViewModels */,
 				F29D292629D460C800491123 /* Utilities */,
-				F213C30729D9B4AC008CEF1A /* Assets */,
+				F213C30729D9B4AC008CEF1A /* Resources */,
 			);
 			path = Workouter;
 			sourceTree = "<group>";
@@ -262,9 +289,11 @@
 		F29D291429D402D600491123 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F2E5B0A629DC371000E9C2F3 /* AppModels */,
-				F2881C6F29DBD53D006CB7EE /* CoreDataEntities */,
-				F27B775729E56EFA00127AB9 /* ServerEntity.swift */,
+				F29D291529D4030E00491123 /* DailyWorkout.swift */,
+				F2FA05C829DB160F003F6CED /* Program.swift */,
+				F2FA05CA29DB161A003F6CED /* Exercise.swift */,
+				F2FA05CE29DB163E003F6CED /* Target.swift */,
+				F2FA05CC29DB1621003F6CED /* SetVolume.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,31 +331,10 @@
 		F2E5B0A429DC36AE00E9C2F3 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */,
-				F27B775329E56B6200127AB9 /* APIRepository.swift */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		F2E5B0A529DC36E800E9C2F3 /* Service */ = {
-			isa = PBXGroup;
-			children = (
 				F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */,
 				F27B775529E56E3F00127AB9 /* APIService.swift */,
 			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		F2E5B0A629DC371000E9C2F3 /* AppModels */ = {
-			isa = PBXGroup;
-			children = (
-				F29D291529D4030E00491123 /* DailyWorkout.swift */,
-				F2FA05C829DB160F003F6CED /* Program.swift */,
-				F2FA05CA29DB161A003F6CED /* Exercise.swift */,
-				F2FA05CE29DB163E003F6CED /* Target.swift */,
-				F2FA05CC29DB1621003F6CED /* Pset.swift */,
-			);
-			path = AppModels;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		F2FA05C429DB0E65003F6CED /* ProgramListViews */ = {
@@ -359,13 +367,13 @@
 			path = AddWorkoutViews;
 			sourceTree = "<group>";
 		};
-		F2FA05C729DB0FC9003F6CED /* System */ = {
+		F2FA05C729DB0FC9003F6CED /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				F29D28FD29D4018900491123 /* SceneDelegate.swift */,
 				F29D28FB29D4018900491123 /* AppDelegate.swift */,
 			);
-			path = System;
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,7 +503,7 @@
 				F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */,
 				F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */,
 				F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */,
-				F2FA05CD29DB1621003F6CED /* Pset.swift in Sources */,
+				F2FA05CD29DB1621003F6CED /* SetVolume.swift in Sources */,
 				F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */,
 				F27B775629E56E3F00127AB9 /* APIService.swift in Sources */,
 				F2F7F8882A487E0A00898E5C /* CommonProtocols.swift in Sources */,
@@ -522,7 +530,7 @@
 				F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */,
 				F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */,
 				F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */,
-				F27B775829E56EFA00127AB9 /* ServerEntity.swift in Sources */,
+				F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */,
 				F29D28FE29D4018900491123 /* SceneDelegate.swift in Sources */,
 				F23707BF2A221C9C00864663 /* AddWorkoutUIView.swift in Sources */,
 				F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */,
@@ -676,7 +684,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Workouter/Info.plist;
+				INFOPLIST_FILE = Workouter/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -712,7 +720,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 699L8LQSR7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Workouter/Info.plist;
+				INFOPLIST_FILE = Workouter/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Workouter;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

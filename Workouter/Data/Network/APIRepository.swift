@@ -17,7 +17,7 @@ enum NetworkError: Error {
 
 class APIRepository {
     
-    static func fetchWorkoutDataByTargetRx() -> Observable<[ServerEntity]> {
+    static func fetchWorkoutDataByTargetRx() -> Observable<[ExercisesResponseDTO]> {
         return Observable.create { emitter in
             let headers = [
                 "X-RapidAPI-Key": "ebc2b996f3msh33acb2f28ee906fp1fe0a9jsn766591dae788",
@@ -32,7 +32,7 @@ class APIRepository {
                     emitter.onError(NetworkError.retryError)
                 }
                 if let data {
-                    guard let entities = try? JSONDecoder().decode([ServerEntity].self, from: data) else {
+                    guard let entities = try? JSONDecoder().decode([ExercisesResponseDTO].self, from: data) else {
 
                         emitter.onError(NetworkError.maxRequest)
                         return }

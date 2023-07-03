@@ -12,7 +12,7 @@ final class ExerciseViewModel {
     private var setsVM: [PSetViewModel] {
         didSet {
             exercise.sets = setsVM.map {
-                PSet(reps: $0.reps,
+                SetVolume(reps: $0.reps,
                      weight: $0.weight)
                 
             }

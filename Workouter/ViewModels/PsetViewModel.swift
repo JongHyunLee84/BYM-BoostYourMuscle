@@ -9,7 +9,7 @@ import Foundation
 
 final class PSetViewModel {
     
-    private var pset: PSet
+    private var pset: SetVolume
     var weight: Double {
         return pset.weight
     }
@@ -17,13 +17,13 @@ final class PSetViewModel {
         return pset.reps
     }
 
-    init(pset: PSet) {
+    init(pset: SetVolume) {
         self.pset = pset
     }
     
     convenience init?(weight: String, reps: String) {
         guard let weight = Double(weight), let reps = Int(reps) else { print("fail to init psetvm"); return nil }
-        self.init(pset: PSet(reps: reps, weight: weight))
+        self.init(pset: SetVolume(reps: reps, weight: weight))
     }
     
     func returnWeight() -> String {

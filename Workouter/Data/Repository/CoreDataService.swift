@@ -24,7 +24,7 @@ final class CoreDataService {
                                         rest: Int($0.rest),
                                         id: Int($0.id),
                                         sets: $0.psetArray.compactMap { psetEntity in
-                        let pset = PSet(reps: Int(psetEntity.reps),
+                        let pset = SetVolume(reps: Int(psetEntity.reps),
                                         weight: psetEntity.weight,
                                         id: Int(psetEntity.id))
                         
