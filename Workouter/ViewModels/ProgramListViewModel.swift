@@ -31,43 +31,35 @@ final class ProgramListViewModel {
     }
     
     func addProgram(_ program: Program) {
-        programsRelay.accept(changeProgramsRelay(cases: .create, index: nil, program: program))
+        Observable<Program>
+            .just(program)
+            .withLatestFrom(programsRelay) { (new, programs) -> [Program] in
+                let willBeReturned = programs + [new]
+                return willBeReturned
+            }
+            .bind(to: programsRelay)
+            .disposed(by: disposeBag)
+        
         programsRepository.saveProgram(program)
     }
     
     func returnViewModelAt(_ index: Int) -> Program {
-        return programsRelay.value[index]
+        let program = programsRelay.value[index]
+        return Program(exercises: program.exercises, title: program.title)
     }
     
     func deleteProgram(_ index: Int) {
-        // 순서 중요함. 먼저 데이터 지우고 programList 지워야함.
-        programsRepository.deleteProgram(programsRelay.value[index])
-        programsRelay.accept(changeProgramsRelay(cases: .delete, index: index, program: nil))
-    }
-    
-    func tempFetchPrograms() {
-        programsRepository.fetchPrograms()
-            .subscribe(onNext: { [weak self] in
-                dump($0)
-                self?.programsRelay.accept($0)
-            })
+        let willBeDeleted = programsRelay.value[index]
+        programsRepository.deleteProgram(willBeDeleted)
+        Observable<Program>
+            .just(willBeDeleted)
+            .withLatestFrom(programsRelay) { (new, programs) -> [Program] in
+                programs.filter { new.title != $0.title }
+            }
+            .bind(to: programsRelay)
             .disposed(by: disposeBag)
     }
     
-    private func changeProgramsRelay(cases: CRUD, index: Int?, program: Program?) -> [Program]{
-        var values = programsRelay.value
-        switch cases {
-        case .delete:
-            guard let index else { return values }
-            values.remove(at: index)
-        case .create:
-            guard let program else { return values }
-            values.append(program)
-        case .update:
-            break
-        }
-        return values
-    }
 }
 
 

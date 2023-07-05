@@ -14,7 +14,6 @@
 		F20FEA822A53EC9E00C53C1C /* ProgramsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA812A53EC9E00C53C1C /* ProgramsRepository.swift */; };
 		F20FEA842A53ECAD00C53C1C /* ExercisesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA832A53ECAD00C53C1C /* ExercisesRepository.swift */; };
 		F20FEA872A53F21300C53C1C /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA862A53F21300C53C1C /* CoreDataStorage.swift */; };
-		F20FEA892A544E0000C53C1C /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA882A544E0000C53C1C /* CRUD.swift */; };
 		F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */ = {isa = PBXBuildFile; fileRef = F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */; };
 		F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2168A852A20E07600F86BCD /* SwiftUIView.swift */; };
 		F22F2CD32A2DB90E00C33BEA /* SearchWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */; };
@@ -76,7 +75,6 @@
 		F20FEA812A53EC9E00C53C1C /* ProgramsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsRepository.swift; sourceTree = "<group>"; };
 		F20FEA832A53ECAD00C53C1C /* ExercisesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRepository.swift; sourceTree = "<group>"; };
 		F20FEA862A53F21300C53C1C /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
-		F20FEA882A544E0000C53C1C /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ES_Boxing Bell Ring 2 - SFX Producer.wav"; sourceTree = "<group>"; };
 		F2168A852A20E07600F86BCD /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutUIView.swift; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 				F2F7F8892A4880AF00898E5C /* BaseTableViewCell.swift */,
 				F2F7F88B2A4880B900898E5C /* BaseUIView.swift */,
 				F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */,
-				F20FEA882A544E0000C53C1C /* CRUD.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -559,7 +556,6 @@
 				F20FEA842A53ECAD00C53C1C /* ExercisesRepository.swift in Sources */,
 				F2881C8A29DC2CC3006CB7EE /* DefaultProgramsRepository.swift in Sources */,
 				F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */,
-				F20FEA892A544E0000C53C1C /* CRUD.swift in Sources */,
 				F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */,
 				F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */,
 				F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */,
