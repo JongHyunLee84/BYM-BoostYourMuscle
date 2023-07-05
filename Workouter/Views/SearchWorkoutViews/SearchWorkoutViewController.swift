@@ -127,7 +127,7 @@ extension SearchWorkoutViewController: UISearchBarDelegate {
 extension SearchWorkoutViewController {
     
     private func targetButtonTapped(_ sender: UIButton) {
-        // TODO: 원래 change 메서드 사용했던 것 바꿔야함.
+        // TODO: customview에서부터 binding시켜서 vm으로 넘겨야함.
         searchVM.bodyPartStr.accept(sender.currentTitle ?? "all")
         searchBar.text = "" // 부위 카테코리가 변하면 searchBar는 자동으로 비어진다.
         customView.buttons.forEach { button in

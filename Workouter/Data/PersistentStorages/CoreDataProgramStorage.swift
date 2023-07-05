@@ -13,9 +13,7 @@ final class CoreDataProgramStorage {
     private let coreDataStorage: CoreDataStorage
     
     private let programEntityStr = "ProgramEntity"
-    //TODO: 에러 안나면 삭제
-//    private let exerciseEntityStr = "ExerciseEntity"
-//    private let psetEntityStr = "PsetEntity"
+
     
     init(coreDataStorage: CoreDataStorage = CoreDataStorage.shared) {
         self.coreDataStorage = coreDataStorage
@@ -42,8 +40,6 @@ final class CoreDataProgramStorage {
     func saveProgramEntity(_ program: Program) {
         coreDataStorage.performBackgroundTask { context in
             do {
-//                guard let entity = NSEntityDescription.entity(forEntityName: self.programEntityStr, in: context) else { return }
-//                let entityData = NSManagedObject(entity: entity, insertInto: context) as? ProgramEntity
                 let entityData = ProgramEntity(context: context)
                 entityData.title = program.title
                 // id 숫자를 저장해서 fetch해 올때 save된 순서대로 갖고 올 거임
