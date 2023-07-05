@@ -5,14 +5,15 @@
 //  Created by 이종현 on 2023/04/05.
 //
 
-import Foundation
+import RxSwift
+import RxRelay
 
 final class ProgramViewModel {
-    private let cdService = CoreDataService()
+    private let cdService: ProgramsRepository = DefaultProgramsRepository(storage: CoreDataProgramStorage())
     var program: Program
-    var exercisesVM: [ExerciseViewModel] {
+    var exercises: [ExerciseViewModel] {
         didSet {
-            program.exercises = exercisesVM.map {
+            program.exercises = exercises.map {
                 let exercise = Exercise(target: $0.target,
                                         name: $0.name,
                                         rest: $0.rest,
@@ -27,12 +28,12 @@ final class ProgramViewModel {
     }
     
     var numberOfExercise: Int {
-        exercisesVM.count
+        exercises.count
     }
     
     init(program: Program) {
         self.program = program
-        exercisesVM = program.exercises.map { ExerciseViewModel(exercise: $0) }
+        exercises = program.exercises.map { ExerciseViewModel(exercise: $0) }
     }
 
     convenience init() {
@@ -50,7 +51,7 @@ final class ProgramViewModel {
     }
     
     func addExercise(_ vm: ExerciseViewModel) {
-        exercisesVM.append(vm)
+        exercises.append(vm)
     }
     
     func setName(_ name: String) {
@@ -62,7 +63,7 @@ final class ProgramViewModel {
     }
     
     func removeExerciseAt(_ index: Int) {
-        exercisesVM.remove(at: index)
+        exercises.remove(at: index)
     }
     
     

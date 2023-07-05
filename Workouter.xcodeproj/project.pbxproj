@@ -11,6 +11,10 @@
 		F20A28632A51390400E70EF9 /* ExerciseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A28602A51390400E70EF9 /* ExerciseEntity+CoreDataClass.swift */; };
 		F20A28642A51390400E70EF9 /* PsetEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A28612A51390400E70EF9 /* PsetEntity+CoreDataClass.swift */; };
 		F20A28652A51390400E70EF9 /* ProgramEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A28622A51390400E70EF9 /* ProgramEntity+CoreDataClass.swift */; };
+		F20FEA822A53EC9E00C53C1C /* ProgramsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA812A53EC9E00C53C1C /* ProgramsRepository.swift */; };
+		F20FEA842A53ECAD00C53C1C /* ExercisesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA832A53ECAD00C53C1C /* ExercisesRepository.swift */; };
+		F20FEA872A53F21300C53C1C /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA862A53F21300C53C1C /* CoreDataStorage.swift */; };
+		F20FEA892A544E0000C53C1C /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20FEA882A544E0000C53C1C /* CRUD.swift */; };
 		F213C30929D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav in Resources */ = {isa = PBXBuildFile; fileRef = F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */; };
 		F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2168A852A20E07600F86BCD /* SwiftUIView.swift */; };
 		F22F2CD32A2DB90E00C33BEA /* SearchWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */; };
@@ -28,12 +32,12 @@
 		F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1E29DAD7A000F35D22 /* AddProgramTableViewCell.swift */; };
 		F2707B2129DAE5DC00F35D22 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */; };
 		F2707B2329DAFC2C00F35D22 /* AddWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */; };
-		F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775329E56B6200127AB9 /* APIRepository.swift */; };
+		F27B775429E56B6200127AB9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775329E56B6200127AB9 /* NetworkService.swift */; };
 		F27B775629E56E3F00127AB9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775529E56E3F00127AB9 /* APIService.swift */; };
 		F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */; };
-		F2881C7529DBDC77006CB7EE /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */; };
+		F2881C7529DBDC77006CB7EE /* CoreDataProgramStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7429DBDC77006CB7EE /* CoreDataProgramStorage.swift */; };
 		F2881C7C29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */; };
-		F2881C8A29DC2CC3006CB7EE /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */; };
+		F2881C8A29DC2CC3006CB7EE /* DefaultProgramsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C8929DC2CC3006CB7EE /* DefaultProgramsRepository.swift */; };
 		F28CDBA329E65AE70043E995 /* SearchWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CDBA229E65AE70043E995 /* SearchWorkoutViewController.swift */; };
 		F28CDBA529E669F10043E995 /* SearchWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CDBA429E669F10043E995 /* SearchWorkoutTableViewCell.swift */; };
 		F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */; };
@@ -69,6 +73,10 @@
 		F20A28602A51390400E70EF9 /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F20A28612A51390400E70EF9 /* PsetEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PsetEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F20A28622A51390400E70EF9 /* ProgramEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgramEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F20FEA812A53EC9E00C53C1C /* ProgramsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsRepository.swift; sourceTree = "<group>"; };
+		F20FEA832A53ECAD00C53C1C /* ExercisesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRepository.swift; sourceTree = "<group>"; };
+		F20FEA862A53F21300C53C1C /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		F20FEA882A544E0000C53C1C /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		F213C30829D9B4CD008CEF1A /* ES_Boxing Bell Ring 2 - SFX Producer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ES_Boxing Bell Ring 2 - SFX Producer.wav"; sourceTree = "<group>"; };
 		F2168A852A20E07600F86BCD /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutUIView.swift; sourceTree = "<group>"; };
@@ -87,12 +95,12 @@
 		F2707B1E29DAD7A000F35D22 /* AddProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramTableViewCell.swift; sourceTree = "<group>"; };
 		F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
 		F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewCell.swift; sourceTree = "<group>"; };
-		F27B775329E56B6200127AB9 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
+		F27B775329E56B6200127AB9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F27B775529E56E3F00127AB9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesResponseDTO.swift; sourceTree = "<group>"; };
-		F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		F2881C7429DBDC77006CB7EE /* CoreDataProgramStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProgramStorage.swift; sourceTree = "<group>"; };
 		F2881C7B29DBDF61006CB7EE /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		F2881C8929DC2CC3006CB7EE /* DefaultProgramsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProgramsRepository.swift; sourceTree = "<group>"; };
 		F28CDBA229E65AE70043E995 /* SearchWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutViewController.swift; sourceTree = "<group>"; };
 		F28CDBA429E669F10043E995 /* SearchWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFLibrary.swift; sourceTree = "<group>"; };
@@ -153,6 +161,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F20FEA802A53EC3300C53C1C /* Repository Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				F20FEA812A53EC9E00C53C1C /* ProgramsRepository.swift */,
+				F20FEA832A53ECAD00C53C1C /* ExercisesRepository.swift */,
+			);
+			path = "Repository Interfaces";
+			sourceTree = "<group>";
+		};
+		F20FEA852A53F1FA00C53C1C /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */,
+				F20FEA862A53F21300C53C1C /* CoreDataStorage.swift */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
 		F213C30729D9B4AC008CEF1A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +232,7 @@
 		F2761A012A52F71F00B62E8F /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				F27B775329E56B6200127AB9 /* APIRepository.swift */,
+				F27B775329E56B6200127AB9 /* NetworkService.swift */,
 				F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */,
 			);
 			path = Network;
@@ -215,8 +241,9 @@
 		F2761A022A52F72700B62E8F /* PersistentStorages */ = {
 			isa = PBXGroup;
 			children = (
+				F20FEA852A53F1FA00C53C1C /* CoreDataStorage */,
 				F2881C6F29DBD53D006CB7EE /* CoreDataEntities */,
-				F2881C7429DBDC77006CB7EE /* CoreDataRepository.swift */,
+				F2881C7429DBDC77006CB7EE /* CoreDataProgramStorage.swift */,
 			);
 			path = PersistentStorages;
 			sourceTree = "<group>";
@@ -237,7 +264,6 @@
 				F20A28602A51390400E70EF9 /* ExerciseEntity+CoreDataClass.swift */,
 				F20A28622A51390400E70EF9 /* ProgramEntity+CoreDataClass.swift */,
 				F20A28612A51390400E70EF9 /* PsetEntity+CoreDataClass.swift */,
-				F2881C7A29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld */,
 			);
 			path = CoreDataEntities;
 			sourceTree = "<group>";
@@ -301,6 +327,7 @@
 		F29D291D29D4138E00491123 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F20FEA802A53EC3300C53C1C /* Repository Interfaces */,
 				F29D292029D43A0800491123 /* ProgramListViewModel.swift */,
 				F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */,
 				F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */,
@@ -324,6 +351,7 @@
 				F2F7F8892A4880AF00898E5C /* BaseTableViewCell.swift */,
 				F2F7F88B2A4880B900898E5C /* BaseUIView.swift */,
 				F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */,
+				F20FEA882A544E0000C53C1C /* CRUD.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -331,7 +359,7 @@
 		F2E5B0A429DC36AE00E9C2F3 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				F2881C8929DC2CC3006CB7EE /* CoreDataService.swift */,
+				F2881C8929DC2CC3006CB7EE /* DefaultProgramsRepository.swift */,
 				F27B775529E56E3F00127AB9 /* APIService.swift */,
 			);
 			path = Repository;
@@ -495,13 +523,14 @@
 				F2E5B0A829DC37ED00E9C2F3 /* ProgramList+TableV+Extension.swift in Sources */,
 				F2707B1D29DAA3AD00F35D22 /* AddProgramViewController.swift in Sources */,
 				F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */,
-				F2881C7529DBDC77006CB7EE /* CoreDataRepository.swift in Sources */,
+				F2881C7529DBDC77006CB7EE /* CoreDataProgramStorage.swift in Sources */,
 				F26CB67029DD8CF5009F9925 /* ProgramViewModel.swift in Sources */,
 				F2881C7C29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld in Sources */,
 				F2707B2129DAE5DC00F35D22 /* AddWorkoutViewController.swift in Sources */,
 				F2707B2329DAFC2C00F35D22 /* AddWorkoutTableViewCell.swift in Sources */,
 				F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */,
-				F27B775429E56B6200127AB9 /* APIRepository.swift in Sources */,
+				F27B775429E56B6200127AB9 /* NetworkService.swift in Sources */,
+				F20FEA872A53F21300C53C1C /* CoreDataStorage.swift in Sources */,
 				F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */,
 				F2FA05CD29DB1621003F6CED /* SetVolume.swift in Sources */,
 				F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */,
@@ -524,10 +553,13 @@
 				F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */,
 				F2F7F88C2A4880B900898E5C /* BaseUIView.swift in Sources */,
 				F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */,
+				F20FEA822A53EC9E00C53C1C /* ProgramsRepository.swift in Sources */,
 				F28CDBA929E68B5B0043E995 /* GIFLibrary.swift in Sources */,
 				F20A28652A51390400E70EF9 /* ProgramEntity+CoreDataClass.swift in Sources */,
-				F2881C8A29DC2CC3006CB7EE /* CoreDataService.swift in Sources */,
+				F20FEA842A53ECAD00C53C1C /* ExercisesRepository.swift in Sources */,
+				F2881C8A29DC2CC3006CB7EE /* DefaultProgramsRepository.swift in Sources */,
 				F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */,
+				F20FEA892A544E0000C53C1C /* CRUD.swift in Sources */,
 				F29D28FC29D4018900491123 /* AppDelegate.swift in Sources */,
 				F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */,
 				F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */,

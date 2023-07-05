@@ -83,7 +83,7 @@ extension AddProgramViewController {
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {
-        if customView.programNameTF.text == "" || programVM.exercisesVM.count.isZero {
+        if customView.programNameTF.text == "" || programVM.exercises.count.isZero {
             let alert = UIAlertController(title: "Missing Information", message: "Program should have name \n and at least one workout", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
             self.present(alert, animated: true, completion: nil)
@@ -121,7 +121,7 @@ extension AddProgramViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.addProgramTableViewCell, for: indexPath) as! AddProgramTableViewCell
-        cell.passData(programVM.exercisesVM[indexPath.row]) 
+        cell.passData(programVM.exercises[indexPath.row]) 
         return cell
     }
     

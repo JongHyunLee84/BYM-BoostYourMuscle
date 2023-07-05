@@ -15,7 +15,7 @@ protocol ProgramListViewDelegate: AnyObject {
 final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     
-    typealias T = ProgramViewModel
+    typealias T = Program
     
     weak var delegate: ProgramListViewDelegate?
     
@@ -51,7 +51,7 @@ final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
         editButton.menu = returnMenu()
     }
     
-    func passData(_ vm: ProgramViewModel) {
+    func passData(_ vm: Program) {
         programTitleLabel.text = vm.title
     }
     

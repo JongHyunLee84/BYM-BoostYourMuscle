@@ -13,12 +13,12 @@ extension ProgramListTableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if programListVM.numberOfRows.isZero {
+        if programListVM.numberOfRows.value.isZero {
             tableView.setEmptyMessage("You don't have any program yet. \n please tap add button to save program 💪")
         } else {
             tableView.restore()
         }
-        return programListVM.numberOfRows
+        return programListVM.numberOfRows.value
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,7 +37,8 @@ extension ProgramListTableViewController {
             if action.style == .default {
                 // 운동 시작 뷰로 넘어가기
                 let nextViewController = WorkoutViewController()
-                nextViewController.exerciseListVM = self.programListVM.returnViewModelAt(indexPath.row).returnExercises()
+                let exerciseVM = self.programListVM.returnViewModelAt(indexPath.row).exercises.map { ExerciseViewModel(exercise: $0) }
+                nextViewController.exerciseListVM = exerciseVM
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }
         }))
