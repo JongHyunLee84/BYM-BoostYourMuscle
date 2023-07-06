@@ -9,61 +9,46 @@ import RxSwift
 import RxRelay
 
 final class ProgramViewModel {
-    private let cdService: ProgramsRepository = DefaultProgramsRepository(storage: CoreDataProgramStorage())
-    var program: Program
-    var exercises: [ExerciseViewModel] {
-        didSet {
-            program.exercises = exercises.map {
-                let exercise = Exercise(target: $0.target,
-                                        name: $0.name,
-                                        rest: $0.rest,
-                                        sets: $0.sets.map {
-                    let pset = SetVolume(reps: $0.reps,
-                                    weight: $0.weight)
-                    return pset
-                })
-                return exercise
-            }
-        }
-    }
     
-    var numberOfExercise: Int {
-        exercises.count
-    }
+    private let programsRepository: ProgramsRepository = DefaultProgramsRepository(storage: CoreDataProgramStorage())
     
-    init(program: Program) {
-        self.program = program
-        exercises = program.exercises.map { ExerciseViewModel(exercise: $0) }
-    }
-
-    convenience init() {
-        let program = Program(exercises: [], title: "")
-        self.init(program: program)
-    }
+    let disposeBag = DisposeBag()
     
-    var title: String {
-        return program.title
-    }
+    let programRelay = BehaviorRelay(value: Program())
+    let numberOfExercise = BehaviorRelay(value: 0)
+    var exercise = Exercise()
+    
+   
     
     // 참조 x 새로운 값으로 넘김
-    func returnExercises() -> [ExerciseViewModel] {
-        return program.exercises.map { ExerciseViewModel(exercise: $0) }
-    }
-    
-    func addExercise(_ vm: ExerciseViewModel) {
-        exercises.append(vm)
+//    func returnExercises() -> [ExerciseViewModel] {
+//        return programRelay.exercises.map { ExerciseViewModel(exercise: $0) }
+//    }
+
+    func addExercise(_ exercise: Exercise) {
+        Observable<Exercise>
+            .just(exercise)
+            .withLatestFrom(programRelay) { (new, program) -> Program in
+                var willBeReturned = program
+                willBeReturned.exercises.append(new)
+                return willBeReturned
+            }
+            .take(1)
+            .bind(to: programRelay)
+            .disposed(by: disposeBag)
     }
     
     func setName(_ name: String) {
-        program.title = name
+//        programRelay.title = name
+        
     }
     
     func saveProgram() {
-        cdService.saveProgram(self.program)
+//        programsRepository.saveProgram(self.programRelay)
     }
     
     func removeExerciseAt(_ index: Int) {
-        exercises.remove(at: index)
+//        programRelay.exercises.remove(at: index)
     }
     
     

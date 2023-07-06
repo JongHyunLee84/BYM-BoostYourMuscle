@@ -41,6 +41,7 @@ final class ProgramListViewModel {
                 let willBeReturned = programs + [new]
                 return willBeReturned
             }
+            .take(1)
             .bind(to: programsRelay)
             .disposed(by: disposeBag)
         
@@ -60,6 +61,7 @@ final class ProgramListViewModel {
             .withLatestFrom(programsRelay) { (new, programs) -> [Program] in
                 programs.filter { new.title != $0.title }
             }
+            .take(1)
             .bind(to: programsRelay)
             .disposed(by: disposeBag)
     }

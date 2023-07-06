@@ -14,4 +14,14 @@ struct Program {
     
     // 프로그램 제목
     var title: String
+    
+    init(exercises: [Exercise], title: String) {
+        self.exercises = exercises
+        self.title = title
+    }
+    
+    init() {
+        self.init(exercises: [], title: "")
+    }
+    
 }

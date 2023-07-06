@@ -5,16 +5,15 @@
 //  Created by 이종현 on 2023/04/03.
 //
 
+import RxCocoa
 import UIKit
 
 final class AddProgramViewController: BaseViewController, KeyboardProtocol {
     
-    private var programVM = ProgramViewModel()
-    // 실수로 모달 내렸을 때 작성 중이던 뷰로 올리기 위해
-    private var exerciseVM = ExerciseViewModel()
+    private var viewModel = ProgramViewModel()
     
     let customView = AddProgramUIView()
-    var addProgram: (Program) -> Void = { program in }
+    var addProgram: (Program) -> Void = { program in } // 이전 뷰와 바인딩을 위한 클로저
     
     override func loadView() {
         view = customView
@@ -45,12 +44,11 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol {
     
     private func addWorkoutButtonTapped() {
         let vc = AddWorkoutViewController()
-        vc.exerciseVM = exerciseVM
         vc.viewDisappear = { [weak self] exerciseVM in
-            self?.exerciseVM = exerciseVM
+            self?.viewModel.exercise = exerciseVM
         }
-        vc.addButtonTapped = { [weak self] exerciseVM in
-            self?.programVM.addExercise(exerciseVM)
+        vc.addButtonTapped = { [weak self] exercise in
+            self?.viewModel.addExercise(exercise)
             self?.customView.tableView.reloadData()
         }
         self.present(vc, animated: true)
@@ -60,7 +58,8 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol {
         let vc = SearchWorkoutViewController()
         vc.passWorkoutList = { [weak self] exerciseList in
             exerciseList.forEach { vm in
-                self?.programVM.addExercise(vm)
+                //TODO: searchview 리팩토링할때 수정해야할듯
+//                self?.viewModel.addExercise(vm)
             }
             self?.customView.tableView.reloadData()
         }
@@ -82,24 +81,23 @@ extension AddProgramViewController {
     }
     
     @objc private func saveButtonDidTapped(_ sender: Any) {
-        if customView.programNameTF.text == "" || programVM.exercises.count.isZero {
-            let alert = UIAlertController(title: "Missing Information", message: "Program should have name \n and at least one workout", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            self.present(alert, animated: true, completion: nil)
-        }else {
-            let alert = UIAlertController(title: "SAVE", message: "Would you like to save this program?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "No", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self] action in
-                if action.style == .default {
-                    // MARK: - 프로그램 저장 코드 와야함
-                    self?.programVM.saveProgram()
-                    // 이전 뷰에서 reload Data하기 위해서
-                    if let program = self?.programVM.program { self?.addProgram(program) }
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
+//        if customView.programNameTF.text == "" || viewModel.programRelay.exercises.count.isZero {
+//            let alert = UIAlertController(title: "Missing Information", message: "Program should have name \n and at least one workout", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+//            self.present(alert, animated: true, completion: nil)
+//        }else {
+//            let alert = UIAlertController(title: "SAVE", message: "Would you like to save this program?", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "No", style: .cancel))
+//            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self] action in
+//                if action.style == .default {
+//                    // MARK: - 프로그램 저장 코드 와야함
+//                    self?.viewModel.saveProgram() // coredata 저장
+//                    if let program = self?.viewModel.programRelay { self?.addProgram(program) } // 이전 뷰와 바인딩하기 위한 클로저
+//                    self?.navigationController?.popViewController(animated: true)
+//                }
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//        }
     }
     
 }
@@ -109,17 +107,19 @@ extension AddProgramViewController {
 extension AddProgramViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if programVM.numberOfExercise.isZero {
-            tableView.setEmptyMessage("Please add workouts of your program! 🏋️")
-        } else {
-            tableView.restore()
-        }
-        return programVM.numberOfExercise
+//        if viewModel.numberOfExercise.isZero {
+//            tableView.setEmptyMessage("Please add workouts of your program! 🏋️")
+//        } else {
+//            tableView.restore()
+//        }
+//        return viewModel.numberOfExercise
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.addProgramTableViewCell, for: indexPath) as! AddProgramTableViewCell
-        cell.passData(programVM.exercises[indexPath.row]) 
+        //TODO: rxcocoa로 리팩토링 필요
+//        cell.passData(viewModel.program.exercises[indexPath.row])
         return cell
     }
     
@@ -132,7 +132,7 @@ extension AddProgramViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            programVM.removeExerciseAt(indexPath.row)
+            viewModel.removeExerciseAt(indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         }
@@ -144,7 +144,7 @@ extension AddProgramViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let name = textField.text else { return }
-        programVM.setName(name)
+        viewModel.setName(name)
     }
 }
 

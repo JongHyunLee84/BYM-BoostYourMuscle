@@ -90,7 +90,8 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
                 cell.plusButtonAction = { [weak self] in
                     self?.searchVM.exercise = item
                     let vc = AddWorkoutViewController()
-                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
+                    // TODO: 리팩토링 필요함.
+//                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
                     vc.addedWorkout = { [weak self] addedWorkout in
                         self?.addedWorkoutList.append(addedWorkout)
                     }
