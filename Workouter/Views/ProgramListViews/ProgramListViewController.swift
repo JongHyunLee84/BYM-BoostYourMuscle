@@ -1,15 +1,15 @@
 //
-//  ProgramListTableViewController.swift
-//  BYM
+//  ProgramListViewController.swift
+//  Workouter
 //
 //  Created by 이종현 on 2023/03/29.
 //
 
-import UIKit
 import RxCocoa
 import RxSwift
+import UIKit
 
-final class ProgramListTableViewController: BaseViewController {
+final class ProgramListViewController: BaseViewController {
     
     let viewModel = ProgramListViewModel(programsRepository: DefaultProgramsRepository(storage: CoreDataProgramStorage()))
     
@@ -68,7 +68,7 @@ final class ProgramListTableViewController: BaseViewController {
 }
 
 // UI
-extension ProgramListTableViewController {
+extension ProgramListViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true

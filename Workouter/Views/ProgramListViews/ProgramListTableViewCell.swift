@@ -5,12 +5,8 @@
 //  Created by 이종현 on 2023/03/29.
 //
 
-import UIKit
 import SnapKit
-//// edit 버튼이 눌렸을 때 프로그램 편집 뷰로 넘어가야함.
-//protocol ProgramListViewDelegate: AnyObject {
-//
-//}
+import UIKit
 
 final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
     

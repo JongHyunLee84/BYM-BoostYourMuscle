@@ -26,7 +26,7 @@
 		F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1429DAA3AD00F35D22 /* WorkoutViewController.swift */; };
 		F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1529DAA3AD00F35D22 /* Workout+Extension.swift */; };
 		F2707B1B29DAA3AD00F35D22 /* Workout+Table+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1629DAA3AD00F35D22 /* Workout+Table+Extension.swift */; };
-		F2707B1C29DAA3AD00F35D22 /* ProgramListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1729DAA3AD00F35D22 /* ProgramListTableViewController.swift */; };
+		F2707B1C29DAA3AD00F35D22 /* ProgramListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1729DAA3AD00F35D22 /* ProgramListViewController.swift */; };
 		F2707B1D29DAA3AD00F35D22 /* AddProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1829DAA3AD00F35D22 /* AddProgramViewController.swift */; };
 		F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B1E29DAD7A000F35D22 /* AddProgramTableViewCell.swift */; };
 		F2707B2129DAE5DC00F35D22 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */; };
@@ -87,7 +87,7 @@
 		F2707B1429DAA3AD00F35D22 /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		F2707B1529DAA3AD00F35D22 /* Workout+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Workout+Extension.swift"; sourceTree = "<group>"; };
 		F2707B1629DAA3AD00F35D22 /* Workout+Table+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Workout+Table+Extension.swift"; sourceTree = "<group>"; };
-		F2707B1729DAA3AD00F35D22 /* ProgramListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramListTableViewController.swift; sourceTree = "<group>"; };
+		F2707B1729DAA3AD00F35D22 /* ProgramListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramListViewController.swift; sourceTree = "<group>"; };
 		F2707B1829DAA3AD00F35D22 /* AddProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProgramViewController.swift; sourceTree = "<group>"; };
 		F2707B1E29DAD7A000F35D22 /* AddProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramTableViewCell.swift; sourceTree = "<group>"; };
 		F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		F2FA05C429DB0E65003F6CED /* ProgramListViews */ = {
 			isa = PBXGroup;
 			children = (
-				F2707B1729DAA3AD00F35D22 /* ProgramListTableViewController.swift */,
+				F2707B1729DAA3AD00F35D22 /* ProgramListViewController.swift */,
 				F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */,
 			);
 			path = ProgramListViews;
@@ -565,7 +565,7 @@
 				F29D292129D43A0800491123 /* ProgramListViewModel.swift in Sources */,
 				F29D291629D4030E00491123 /* DailyWorkout.swift in Sources */,
 				F22F2CD32A2DB90E00C33BEA /* SearchWorkoutUIView.swift in Sources */,
-				F2707B1C29DAA3AD00F35D22 /* ProgramListTableViewController.swift in Sources */,
+				F2707B1C29DAA3AD00F35D22 /* ProgramListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
