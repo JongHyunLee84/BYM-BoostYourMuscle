@@ -25,8 +25,7 @@ final class ProgramListViewController: BaseViewController {
     
     override func setupRxBind() {
         viewModel.programsRelay
-            .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: Identifier.programListCell, cellType: ProgramListTableViewCell.self)) {
+            .bind(to: tableView.rx.items(cellIdentifier: Identifier.programListCell, cellType: ProgramListTableViewCell.self)) {
                 row, element, cell in
                 cell.deleteProgram = { self.viewModel.deleteProgram(row) }
                 cell.passData(element)
@@ -34,8 +33,7 @@ final class ProgramListViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         viewModel.numberOfRows
-            .asDriver(onErrorJustReturn: 0)
-            .drive { count in
+            .bind { count in
                 count.isZero ? self.tableView.setEmptyMessage(self.viewModel.emptyMessage) : self.tableView.restore()
             }
             .disposed(by: disposeBag)
