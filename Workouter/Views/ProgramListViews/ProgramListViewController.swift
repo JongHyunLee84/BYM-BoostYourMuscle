@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class ProgramListViewController: BaseViewController {
+final class ProgramListViewController: BaseViewController, Alertable {
     
     let viewModel = ProgramListViewModel(programsRepository: DefaultProgramsRepository(storage: CoreDataProgramStorage()))
     
@@ -40,19 +40,16 @@ final class ProgramListViewController: BaseViewController {
         
         tableView.rx.itemSelected
             .bind { indexPath in
-                let workoutTitle = self.viewModel.returnViewModelAt(indexPath.row).title
-                let alert = UIAlertController(title: workoutTitle, message: "Would you like to start exercising \n with this program?", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "No", style: .cancel))
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                    if action.style == .default {
-                        // 운동 시작 뷰로 넘어가기
-                        let nextViewController = WorkoutViewController()
-                        let exerciseVM = self.viewModel.returnViewModelAt(indexPath.row).exercises.map { ExerciseViewModel(exercise: $0) }
-                        nextViewController.exerciseListVM = exerciseVM
-                        self.navigationController?.pushViewController(nextViewController, animated: true)
-                    }
-                }))
-                self.present(alert, animated: true, completion: nil)
+                let program = self.viewModel.returnViewModelAt(indexPath.row)
+                let action1 = UIAlertAction(title: "No", style: .cancel)
+                let action2 = UIAlertAction(title: "Yes", style: .default) { _ in
+                    // 운동 시작 뷰로 넘어가기
+                    let nextViewController = WorkoutViewController()
+                    let exerciseVM = program.exercises.map { ExerciseViewModel(exercise: $0) }
+                    nextViewController.exerciseListVM = exerciseVM
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+                self.showAlert(title: program.title, message: self.viewModel.alertMessage, actions: [action1, action2])
             }
             .disposed(by: disposeBag)
         
@@ -81,7 +78,7 @@ extension ProgramListViewController {
     
     @objc private func addButtonDidTapped() {
         let vc = AddProgramViewController()
-        vc.addProgram = {[weak self] in self?.viewModel.addProgram($0) }
+        vc.addProgram = { [weak self] in self?.viewModel.addProgram($0) }
         navigationController?.pushViewController(vc, animated: true)
     }
 }

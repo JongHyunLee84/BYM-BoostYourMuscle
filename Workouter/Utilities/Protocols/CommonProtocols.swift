@@ -19,17 +19,6 @@ protocol BaseViewItemProtocol: AnyObject {
     
 }
 
-//// MARK: - DisposeBag
-//protocol DisposeBagProtocol: AnyObject {
-//    var disposeBag: DisposeBag { get }
-//}
-
-//extension DisposeBagProtocol {
-//    var disposeBag: DisposeBag {
-//        return DisposeBag()
-//    }
-//}
-
 // MARK: - Passing Data to view
 protocol PassingDataProtocol: AnyObject {
     associatedtype T

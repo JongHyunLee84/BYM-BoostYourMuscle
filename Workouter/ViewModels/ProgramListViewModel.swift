@@ -17,6 +17,7 @@ final class ProgramListViewModel {
     let programsRelay = BehaviorRelay<[Program]>(value: [])
     let numberOfRows = BehaviorRelay(value: 0)
     let emptyMessage = "You don't have any program yet. \n please tap add button to save program 💪"
+    let alertMessage = "Would you like to start exercising \n with this program?"
     
     init(programsRepository: ProgramsRepository) {
         self.programsRepository = programsRepository
