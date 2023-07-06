@@ -11,9 +11,12 @@ import RxSwift
 final class ProgramListViewModel {
     
     private let programsRepository: ProgramsRepository
+    
     private let disposeBag = DisposeBag()
+    
     let programsRelay = BehaviorRelay<[Program]>(value: [])
     let numberOfRows = BehaviorRelay(value: 0)
+    let emptyMessage = "You don't have any program yet. \n please tap add button to save program 💪"
     
     init(programsRepository: ProgramsRepository) {
         self.programsRepository = programsRepository
@@ -45,7 +48,7 @@ final class ProgramListViewModel {
     
     func returnViewModelAt(_ index: Int) -> Program {
         let program = programsRelay.value[index]
-        return Program(exercises: program.exercises, title: program.title)
+        return .init(exercises: program.exercises, title: program.title)
     }
     
     func deleteProgram(_ index: Int) {

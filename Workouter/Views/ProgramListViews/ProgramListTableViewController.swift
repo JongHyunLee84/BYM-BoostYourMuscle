@@ -6,25 +6,69 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
-final class ProgramListTableViewController: UITableViewController {
+final class ProgramListTableViewController: BaseViewController {
     
-    let programListVM = ProgramListViewModel(programsRepository: DefaultProgramsRepository(storage: CoreDataProgramStorage()))
+    let viewModel = ProgramListViewModel(programsRepository: DefaultProgramsRepository(storage: CoreDataProgramStorage()))
+    
+    let tableView = UITableView()
+    
+    override func loadView() {
+        view = tableView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func setupRxBind() {
+        viewModel.programsRelay
+            .asDriver(onErrorJustReturn: [])
+            .drive(tableView.rx.items(cellIdentifier: Identifier.programListCell, cellType: ProgramListTableViewCell.self)) {
+                row, element, cell in
+                cell.deleteProgram = { self.viewModel.deleteProgram(row) }
+                cell.passData(element)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.numberOfRows
+            .asDriver(onErrorJustReturn: 0)
+            .drive { count in
+                count.isZero ? self.tableView.setEmptyMessage(self.viewModel.emptyMessage) : self.tableView.restore()
+            }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected
+            .bind { indexPath in
+                let workoutTitle = self.viewModel.returnViewModelAt(indexPath.row).title
+                let alert = UIAlertController(title: workoutTitle, message: "Would you like to start exercising \n with this program?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel))
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    if action.style == .default {
+                        // 운동 시작 뷰로 넘어가기
+                        let nextViewController = WorkoutViewController()
+                        let exerciseVM = self.viewModel.returnViewModelAt(indexPath.row).exercises.map { ExerciseViewModel(exercise: $0) }
+                        nextViewController.exerciseListVM = exerciseVM
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    override func setupUI() {
         setupNavigationBar()
-        setupTableView()
+        tableView.rowHeight = 80
+        tableView.register(ProgramListTableViewCell.self, forCellReuseIdentifier: Identifier.programListCell)
     }
     
 }
 
 // UI
 extension ProgramListTableViewController {
-    private func setupTableView() {
-        tableView.rowHeight = 80
-        tableView.register(ProgramListTableViewCell.self, forCellReuseIdentifier: Identifier.programListCell)
-    }
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -39,22 +83,7 @@ extension ProgramListTableViewController {
     
     @objc private func addButtonDidTapped() {
         let vc = AddProgramViewController()
-        vc.dataClosure = {
-            // AddProgramView에서 추가하고 나올 때 다시 fetch하고 reload
-            // TODO: 다음 VC에서 현재 dataClosure로 실행시키는 것들 reactive하게 바꾸기 (아마 다음 뷰컨에 현재 VC의 programlistVM 넘겨줘야할 듯)
-            self.tableView.reloadData()
-            
-        }
-        navigationController?.pushViewController(vc,
-                                                 animated: true)
+        vc.addProgram = {[weak self] in self?.viewModel.addProgram($0) }
+        navigationController?.pushViewController(vc, animated: true)
     }
-}
-
-extension ProgramListTableViewController: ProgramListViewDelegate {
-    func deleteProgram(_ cell: UITableViewCell?) {
-        guard let cell, let index = tableView.indexPath(for: cell)?.row else { return }
-        programListVM.deleteProgram(index)
-        tableView.reloadData()
-    }
-    
 }

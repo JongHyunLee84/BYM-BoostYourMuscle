@@ -7,17 +7,16 @@
 
 import UIKit
 import SnapKit
-// edit 버튼이 눌렸을 때 프로그램 편집 뷰로 넘어가야함.
-protocol ProgramListViewDelegate: AnyObject {
-    func deleteProgram(_ cell: UITableViewCell?)
-}
+//// edit 버튼이 눌렸을 때 프로그램 편집 뷰로 넘어가야함.
+//protocol ProgramListViewDelegate: AnyObject {
+//
+//}
 
 final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
-    
     typealias T = Program
     
-    weak var delegate: ProgramListViewDelegate?
+    var deleteProgram: () -> Void = {}
     
     lazy var programTitleLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
     lazy var editButton: UIButton = CommonUI.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
@@ -57,7 +56,7 @@ final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     func returnMenu() -> UIMenu {
         let usersItem = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { [weak self] _ in
-            self?.delegate?.deleteProgram(self)
+            self?.deleteProgram()
         }
         return UIMenu(title: "Menu", options: .displayInline, children: [usersItem])
     }

@@ -14,8 +14,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol {
     private var exerciseVM = ExerciseViewModel()
     
     let customView = AddProgramUIView()
-    
-    var dataClosure: () -> Void = {}
+    var addProgram: (Program) -> Void = { program in }
     
     override func loadView() {
         view = customView
@@ -90,14 +89,13 @@ extension AddProgramViewController {
         }else {
             let alert = UIAlertController(title: "SAVE", message: "Would you like to save this program?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "No", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {[weak self] action in
                 if action.style == .default {
                     // MARK: - 프로그램 저장 코드 와야함
-                    self.programVM.saveProgram()
+                    self?.programVM.saveProgram()
                     // 이전 뷰에서 reload Data하기 위해서
-                    self.dataClosure()
-                    self.navigationController?.popViewController(animated: true)
-                    
+                    if let program = self?.programVM.program { self?.addProgram(program) }
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }))
             self.present(alert, animated: true, completion: nil)
