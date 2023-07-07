@@ -9,7 +9,7 @@ import UIKit
 
 final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
-    typealias T = ExerciseViewModel
+    typealias T = Exercise
     
     lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
     lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
@@ -41,10 +41,10 @@ final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
         workoutNameLabel.numberOfLines = 0
     }
     
-    func passData(_ vm: ExerciseViewModel) {
-        workoutNameLabel.text = vm.returnName()
-        targetLabel.text = vm.returnTarget()
-        setsLabel.text = vm.returnSets()
+    func passData(_ data: Exercise) {
+        workoutNameLabel.text = data.name
+        targetLabel.text = data.target.rawValue
+        setsLabel.text = "\(data.sets.count)"
     }
     
 }

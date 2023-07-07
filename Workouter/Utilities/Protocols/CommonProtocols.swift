@@ -22,7 +22,7 @@ protocol BaseViewItemProtocol: AnyObject {
 // MARK: - Passing Data to view
 protocol PassingDataProtocol: AnyObject {
     associatedtype T
-    func passData(_ vm: T)
+    func passData(_ data: T)
 }
 
 // MARK: - Keyboard
