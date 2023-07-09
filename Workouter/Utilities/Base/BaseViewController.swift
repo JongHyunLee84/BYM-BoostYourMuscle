@@ -11,6 +11,14 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
 
     let disposeBag: DisposeBag = DisposeBag()
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground

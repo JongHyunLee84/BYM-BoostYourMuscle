@@ -5,9 +5,13 @@
 //  Created by 이종현 on 2023/04/05.
 //
 
-import Foundation
+import RxSwift
+import RxRelay
 
 final class ExerciseViewModel {
+    
+    let disposeBag = DisposeBag()
+    
     var exercise: Exercise
     private var setsVM: [PSetViewModel] {
         didSet {

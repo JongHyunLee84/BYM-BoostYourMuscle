@@ -14,7 +14,7 @@ final class ProgramViewModel {
     
     let disposeBag = DisposeBag()
     
-    let programRelay = PublishRelay<Program>()
+    let programRelay = BehaviorRelay<Program>(value: Program())
     let titleRelay = BehaviorRelay<String>(value: "")
     let exercisesRelay = BehaviorRelay<[Exercise]>(value: [])
     let numberOfExercises = BehaviorRelay<Int>(value: 0)
@@ -63,15 +63,14 @@ final class ProgramViewModel {
             .disposed(by: disposeBag)
     }
     
-    func saveProgram() {
-        programRelay
-            .asObservable()
-            .take(1)
-            .bind {
-                self.programsRepository.saveProgram($0)
-            }
-            .disposed(by: disposeBag)
-    }
+//    func saveProgram() {
+//        programRelay
+//            .take(1)
+//            .bind {
+//                self.programsRepository.saveProgram($0)
+//            }
+//            .disposed(by: disposeBag)
+//    }
     
     func removeExerciseAt(_ index: Int) {
         Observable<Int>

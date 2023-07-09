@@ -89,7 +89,8 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
                 cell.equipmentLabel.text = item.equipment?.capitalized
                 cell.plusButtonAction = { [weak self] in
                     self?.searchVM.exercise = item
-                    let vc = AddWorkoutViewController()
+                    // TODO: 밑에 vc 초기화 하는 방식 변경해야함.
+                    let vc = AddWorkoutViewController(exercise: Exercise())
                     // TODO: 리팩토링 필요함.
 //                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
                     vc.addedWorkout = { [weak self] addedWorkout in

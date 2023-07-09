@@ -10,7 +10,7 @@ import UIKit
 final class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
     
     // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴.
-    var viewModel = ExerciseViewModel()
+    var viewModel: ExerciseViewModel
     // 이전 뷰에 데이터 passing
     var addButtonTapped: ((Exercise) -> Void) = { _ in }
     var viewDisappear: ((Exercise) -> Void) = { _ in }
@@ -18,24 +18,34 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol {
     
     private lazy var customView = AddWorkoutUIView()
     
+    
+    // MARK: - Life cyle
+    init(exercise: Exercise) {
+        self.viewModel = ExerciseViewModel(exercise: exercise)
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = customView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
+        passDataToUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewDisappear(viewModel.exercise)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
-        passDataToUI()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
     
     override func setupUI() {
