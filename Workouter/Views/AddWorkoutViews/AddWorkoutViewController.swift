@@ -23,8 +23,8 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     
     // MARK: - Life cyle
     init(exercise: Exercise) {
-        self.viewModel = AddWorkoutViewModel(exercise: exercise)
-        super.init()
+        self.viewModel = AddWorkoutViewModel()
+        super.init() // VC의 custom init을 위해서 -> BaseVC Protocol에 코드 있음.
     }
     
     required init?(coder: NSCoder) {

@@ -56,6 +56,7 @@
 		F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */; };
 		F2B99C3F2A4950A60067DB4C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */; };
 		F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BB51E22A2F0B7300CFB956 /* WorkoutUIView.swift */; };
+		F2F660082A5D781C00580C2D /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F660072A5D781C00580C2D /* Double+Extension.swift */; };
 		F2F7F8862A4869ED00898E5C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7F8852A4869ED00898E5C /* BaseViewController.swift */; };
 		F2F7F8882A487E0A00898E5C /* CommonProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7F8872A487E0A00898E5C /* CommonProtocols.swift */; };
 		F2F7F88A2A4880AF00898E5C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7F8892A4880AF00898E5C /* BaseTableViewCell.swift */; };
@@ -119,6 +120,7 @@
 		F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramUIView.swift; sourceTree = "<group>"; };
 		F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2BB51E22A2F0B7300CFB956 /* WorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutUIView.swift; sourceTree = "<group>"; };
+		F2F660072A5D781C00580C2D /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		F2F7F8852A4869ED00898E5C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F2F7F8872A487E0A00898E5C /* CommonProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProtocols.swift; sourceTree = "<group>"; };
 		F2F7F8892A4880AF00898E5C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				F2A5029B2A275BA5003C7107 /* CommonUI.swift */,
 				F29D292429D45FF300491123 /* Constant.swift */,
 				F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */,
+				F2F660072A5D781C00580C2D /* Double+Extension.swift */,
 				F26D707629DEEB9500EA2CBD /* Int+Extension.swift */,
 				F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */,
 				F2168A852A20E07600F86BCD /* SwiftUIView.swift */,
@@ -553,6 +556,7 @@
 				F29D292529D45FF300491123 /* Constant.swift in Sources */,
 				F29173EB29D709320021B39F /* WorkoutRowCell.swift in Sources */,
 				F27B7B192A5695A400142F64 /* Alertable.swift in Sources */,
+				F2F660082A5D781C00580C2D /* Double+Extension.swift in Sources */,
 				F2FA05CF29DB163E003F6CED /* Target.swift in Sources */,
 				F2B99C3F2A4950A60067DB4C /* UIColor+Extension.swift in Sources */,
 				F28CDBA329E65AE70043E995 /* SearchWorkoutViewController.swift in Sources */,

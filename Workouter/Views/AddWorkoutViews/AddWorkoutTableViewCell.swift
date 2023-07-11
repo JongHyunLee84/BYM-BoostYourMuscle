@@ -36,10 +36,10 @@ final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     }
     
     func passData(_ data: (SetVolume, Int)) {
-        let (viewModel, index) = data
-        numberLabel.text = "\(index) set"
-        weightLabel.text = "\(data.0.weight)"
-        repsLabel.text = "\(data.0.reps)"
+        let (volume, index) = data
+        numberLabel.text = "\(index + 1) set"
+        weightLabel.text = volume.weight.toString
+        repsLabel.text = "\(volume.reps)"
     }
     
 }

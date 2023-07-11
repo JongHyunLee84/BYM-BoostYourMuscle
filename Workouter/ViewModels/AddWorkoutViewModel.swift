@@ -36,6 +36,8 @@ final class AddWorkoutViewModel {
     let addExerciseMessage = "Please enter name and add at lease one set of this workout"
     let addSetVolumeMessage = "Please provide the weight and reps for this set."
     let emptyMessage = "How many sets are you going to do? 🤔"
+    
+    // MARK: - 아래 기본 생성자 말고 다른 생성자로 초기화 하면 Rx 코드를 함수로 빼야함.
     init() {
         exerciseRelay
             .map { $0.sets.count }

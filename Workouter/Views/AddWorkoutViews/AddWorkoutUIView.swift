@@ -25,7 +25,7 @@ final class AddWorkoutUIView: BaseUIView {
     lazy var minusButton: UIButton = CommonUI.uiButtonWillReturned(title: "-10", fontSize: 15, target: self, action: #selector(minusButtonTapped))
     lazy var plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 15, target: self, action: #selector(plusButtonTapped))
     lazy var setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets:")
-    lazy var setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", type: .numberPad)
+    lazy var setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", type: .decimalPad)
     lazy var kgLabel: UILabel = CommonUI.uiLabelWillReturned(title: "kg")
     lazy var setsRepsTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "10", type: .numberPad)
     lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps")
