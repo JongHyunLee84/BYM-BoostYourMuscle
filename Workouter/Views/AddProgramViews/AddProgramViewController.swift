@@ -10,7 +10,7 @@ import UIKit
 
 final class AddProgramViewController: BaseViewController, KeyboardProtocol, Alertable {
     
-    private var viewModel = ProgramViewModel()
+    private var viewModel = AddProgramViewModel()
     
     let customView = AddProgramUIView()
     var addProgram: (Program) -> Void = { program in } // 이전 뷰와 바인딩을 위한 클로저
@@ -25,7 +25,6 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
     
     override func setupDelegate() {
         let view = customView
-//        view.tableView.delegate = self
         view.tableView.register(AddProgramTableViewCell.self, forCellReuseIdentifier: Identifier.addProgramTableViewCell)
     }
     
@@ -75,7 +74,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
                 guard let self = self else { return Observable.empty().take(1) }
                 return Observable.combineLatest(self.viewModel.isSavable, self.viewModel.programRelay).take(1)
             }
-            .bind(onNext: { (isTrue, program) in
+            .bind { (isTrue, program) in
                 if isTrue {
                     let noAction = UIAlertAction(title: "No", style: .cancel)
                     let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
@@ -87,13 +86,13 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
                 }else {
                     self.showAlert(title: self.viewModel.rejectAlert.title, message: self.viewModel.rejectAlert.message, actions: nil)
                 }
-            })
+            }
             .disposed(by: disposeBag)
         
         viewModel.exercisesRelay
             .bind(to: view.tableView.rx.items(cellIdentifier: Identifier.addProgramTableViewCell, cellType: AddProgramTableViewCell.self)) {
                 row, item, cell in
-                cell.passData(self.viewModel.exercisesRelay.value[row])
+                cell.passData(item)
             }
             .disposed(by: disposeBag)
         

@@ -16,8 +16,8 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
     private let searchVM = SearchViewModel()
     
     // 해당 뷰가 사라질 때 Search하며 추가했던 운동들을 다시 AddProgramView로 보냄
-    var addedWorkoutList: [ExerciseViewModel] = []
-    var passWorkoutList: (([ExerciseViewModel]) -> Void) = { _ in }
+    var addedWorkoutList: [AddWorkoutViewModel] = []
+    var passWorkoutList: (([AddWorkoutViewModel]) -> Void) = { _ in }
     
     private lazy var customView: SearchWorkoutUIView = SearchWorkoutUIView()
     
@@ -70,7 +70,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
         
         searchBar.rx.text
             .orEmpty
-            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+            .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: searchVM.searchBarStr)
             .disposed(by: disposeBag)
@@ -92,7 +92,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol {
                     // TODO: 밑에 vc 초기화 하는 방식 변경해야함.
                     let vc = AddWorkoutViewController(exercise: Exercise())
                     // TODO: 리팩토링 필요함.
-//                    vc.exerciseVM = ExerciseViewModel(exercise: self?.searchVM.exercise ?? Exercise())
+//                    vc.exerciseVM = AddWorkoutViewModel(exercise: self?.searchVM.exercise ?? Exercise())
                     vc.addedWorkout = { [weak self] addedWorkout in
                         self?.addedWorkoutList.append(addedWorkout)
                     }

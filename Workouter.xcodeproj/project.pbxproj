@@ -18,8 +18,8 @@
 		F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2168A852A20E07600F86BCD /* SwiftUIView.swift */; };
 		F22F2CD32A2DB90E00C33BEA /* SearchWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */; };
 		F23707BF2A221C9C00864663 /* AddWorkoutUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */; };
-		F26CB67029DD8CF5009F9925 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */; };
-		F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */; };
+		F26CB67029DD8CF5009F9925 /* AddProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB66F29DD8CF5009F9925 /* AddProgramViewModel.swift */; };
+		F26CB67229DD8CFD009F9925 /* AddWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67129DD8CFD009F9925 /* AddWorkoutViewModel.swift */; };
 		F26CB67429DD8D06009F9925 /* SetVolumeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26CB67329DD8D06009F9925 /* SetVolumeViewModel.swift */; };
 		F26D707529DEE1F100EA2CBD /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */; };
 		F26D707729DEEB9500EA2CBD /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D707629DEEB9500EA2CBD /* Int+Extension.swift */; };
@@ -79,8 +79,8 @@
 		F2168A852A20E07600F86BCD /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		F22F2CD22A2DB90E00C33BEA /* SearchWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkoutUIView.swift; sourceTree = "<group>"; };
 		F23707BE2A221C9C00864663 /* AddWorkoutUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutUIView.swift; sourceTree = "<group>"; };
-		F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
-		F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		F26CB66F29DD8CF5009F9925 /* AddProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramViewModel.swift; sourceTree = "<group>"; };
+		F26CB67129DD8CFD009F9925 /* AddWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewModel.swift; sourceTree = "<group>"; };
 		F26CB67329DD8D06009F9925 /* SetVolumeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVolumeViewModel.swift; sourceTree = "<group>"; };
 		F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		F26D707629DEEB9500EA2CBD /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
@@ -346,8 +346,8 @@
 			children = (
 				F20FEA802A53EC3300C53C1C /* Repository Interfaces */,
 				F29D292029D43A0800491123 /* ProgramListViewModel.swift */,
-				F26CB66F29DD8CF5009F9925 /* ProgramViewModel.swift */,
-				F26CB67129DD8CFD009F9925 /* ExerciseViewModel.swift */,
+				F26CB66F29DD8CF5009F9925 /* AddProgramViewModel.swift */,
+				F26CB67129DD8CFD009F9925 /* AddWorkoutViewModel.swift */,
 				F26CB67329DD8D06009F9925 /* SetVolumeViewModel.swift */,
 				F2A706962A1E31C800044A06 /* SearchViewModel.swift */,
 			);
@@ -536,7 +536,7 @@
 				F2707B1D29DAA3AD00F35D22 /* AddProgramViewController.swift in Sources */,
 				F2168A862A20E07600F86BCD /* SwiftUIView.swift in Sources */,
 				F2881C7529DBDC77006CB7EE /* CoreDataProgramStorage.swift in Sources */,
-				F26CB67029DD8CF5009F9925 /* ProgramViewModel.swift in Sources */,
+				F26CB67029DD8CF5009F9925 /* AddProgramViewModel.swift in Sources */,
 				F2881C7C29DBDF61006CB7EE /* CoreDataModel.xcdatamodeld in Sources */,
 				F2707B2129DAE5DC00F35D22 /* AddWorkoutViewController.swift in Sources */,
 				F2707B2329DAFC2C00F35D22 /* AddWorkoutTableViewCell.swift in Sources */,
@@ -562,7 +562,7 @@
 				F20A28632A51390400E70EF9 /* ExerciseEntity+CoreDataClass.swift in Sources */,
 				F29173E729D7091E0021B39F /* WorkoutSectionCell.swift in Sources */,
 				F2707B1929DAA3AD00F35D22 /* WorkoutViewController.swift in Sources */,
-				F26CB67229DD8CFD009F9925 /* ExerciseViewModel.swift in Sources */,
+				F26CB67229DD8CFD009F9925 /* AddWorkoutViewModel.swift in Sources */,
 				F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */,
 				F2F7F88C2A4880B900898E5C /* BaseUIView.swift in Sources */,
 				F2BB51E32A2F0B7300CFB956 /* WorkoutUIView.swift in Sources */,

@@ -47,7 +47,7 @@ final class CommonUI {
         return bt
     }
 
-    static func uiTextFieldWillReturned(placeholder p: String? = nil, text t: String? = nil, tag: Int = 0) -> UITextField {
+    static func uiTextFieldWillReturned(placeholder p: String? = nil, text t: String? = nil, tag: Int = 0, type: UIKeyboardType = .default) -> UITextField {
         let tf = UITextField()
         tf.autocapitalizationType = .none
         tf.placeholder = p
@@ -58,6 +58,7 @@ final class CommonUI {
         tf.layer.cornerRadius = 8
         tf.layer.masksToBounds = true
         tf.tag = tag
+        tf.keyboardType = type
         return tf
     }
 

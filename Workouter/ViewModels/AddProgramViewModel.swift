@@ -8,7 +8,7 @@
 import RxSwift
 import RxRelay
 
-final class ProgramViewModel {
+final class AddProgramViewModel {
     
     private let programsRepository: ProgramsRepository = DefaultProgramsRepository(storage: CoreDataProgramStorage())
     
@@ -58,7 +58,6 @@ final class ProgramViewModel {
                 willBeReturned.append(new)
                 return willBeReturned
             }
-            .take(1)
             .bind(to: exercisesRelay)
             .disposed(by: disposeBag)
     }
@@ -80,7 +79,6 @@ final class ProgramViewModel {
                 willBeReturned.remove(at: idx)
                 return willBeReturned
             }
-            .take(1)
             .bind(to: exercisesRelay)
             .disposed(by: disposeBag)
     }

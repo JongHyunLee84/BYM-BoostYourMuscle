@@ -16,23 +16,26 @@ final class AddWorkoutUIView: BaseUIView {
     
     lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Workout Name:")
     lazy var addWorkoutButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", target: self, action: #selector(addWorkoutTapped))
-    lazy var workoutNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Bench Press", tag: 1)
+    lazy var workoutNameTF: UITextField = CommonUI.uiTextFieldWillReturned(placeholder: "ex. Bench Press")
     lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target:")
     lazy var targetPickerView: UIPickerView = UIPickerView()
     lazy var restLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Rest Time:")
-    lazy var restTimeTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", tag: 2)
+    lazy var restTimeTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", type: .numberPad)
     lazy var secLabel: UILabel = CommonUI.uiLabelWillReturned(title: "sec")
     lazy var minusButton: UIButton = CommonUI.uiButtonWillReturned(title: "-10", fontSize: 15, target: self, action: #selector(minusButtonTapped))
     lazy var plusButton: UIButton = CommonUI.uiButtonWillReturned(title: "+10", fontSize: 15, target: self, action: #selector(plusButtonTapped))
     lazy var setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets:")
-    lazy var setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60")
+    lazy var setsWeightTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "60", type: .numberPad)
     lazy var kgLabel: UILabel = CommonUI.uiLabelWillReturned(title: "kg")
-    lazy var setsRepsTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "10")
+    lazy var setsRepsTF: UITextField = CommonUI.uiTextFieldWillReturned(text: "10", type: .numberPad)
     lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps")
     lazy var addSetButton: UIButton = CommonUI.uiButtonWillReturned(title: "Add", fontSize: 15, target: self, action: #selector(setsAddButtonTapped))
     lazy var tableView: UITableView = UITableView()
     lazy var minusAndPlusSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [minusButton, plusButton])
     
+    // MARK: - Rx로 TFDelegate 대체 위해서 모아놓음
+    lazy var textFieldList = [workoutNameTF, restTimeTF, setsWeightTF, setsRepsTF]
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()

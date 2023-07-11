@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PSetViewModel {
+final class SetVolumeViewModel {
     
     private var pset: SetVolume
     var weight: Double {

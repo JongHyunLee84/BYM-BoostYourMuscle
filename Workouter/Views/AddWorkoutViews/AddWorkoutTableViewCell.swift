@@ -8,7 +8,7 @@
 import UIKit
 
 final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
-    typealias T = (PSetViewModel, Int)
+    typealias T = (SetVolume, Int)
     
     lazy var numberLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1")
     lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "60 kg")
@@ -35,11 +35,11 @@ final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
         }
     }
     
-    func passData(_ vm: (PSetViewModel, Int)) {
-        let (viewModel, index) = vm
+    func passData(_ data: (SetVolume, Int)) {
+        let (viewModel, index) = data
         numberLabel.text = "\(index) set"
-        weightLabel.text = viewModel.returnWeight()
-        repsLabel.text = viewModel.returnReps()
+        weightLabel.text = "\(data.0.weight)"
+        repsLabel.text = "\(data.0.reps)"
     }
     
 }
