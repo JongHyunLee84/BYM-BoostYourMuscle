@@ -10,11 +10,11 @@ import UIKit
 final class SearchWorkoutTableViewCell: BaseTableViewCell {
     
     lazy var workoutImageView: UIImageView = UIImageView()
-    lazy var nameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "name", size: 17)
-    lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "target", size: 14)
-    lazy var equipmentLabel: UILabel = CommonUI.uiLabelWillReturned(title: "equipment", size: 14)
-    lazy var plusButton: UIButton = CommonUI.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
-    lazy var labelsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], axis: .vertical, spacing: 0)
+    lazy var nameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "name", size: 17)
+    lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "target", size: 14)
+    lazy var equipmentLabel: UILabel = UIFactory.uiLabelWillReturned(title: "equipment", size: 14)
+    lazy var plusButton: UIButton = UIFactory.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
+    lazy var labelsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], axis: .vertical, spacing: 0)
     
     var plusButtonAction: (() -> Void)?
     

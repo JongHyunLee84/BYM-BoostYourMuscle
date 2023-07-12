@@ -15,15 +15,15 @@ protocol WorkoutRowCellDelegate: AnyObject {
 
 final class WorkoutRowCell: BaseTableViewCell {
     
-    lazy var setLabel: UILabel = CommonUI.uiLabelWillReturned(title: "1", size: 17)
-    lazy var weightLabel: UILabel = CommonUI.uiLabelWillReturned(title: "weight", size: 17)
-    lazy var weightTF: UITextField = CommonUI.uiTextFieldWillReturned()
-    lazy var repsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "reps", size: 17)
-    lazy var repsTF: UITextField = CommonUI.uiTextFieldWillReturned(tag: 1)
-    lazy var checkButton: UIButton = CommonUI.uiImageButtonWillReturned("square", target: self, action: #selector(checkButtonTapped))
-    lazy var weightSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [weightLabel,weightTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
-    lazy var repsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: [repsLabel, repsTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
-    lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [setLabel, weightSTV, repsSTV, checkButton], alignment: .fill, spacing: 0, distribution: .equalSpacing)
+    lazy var setLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1", size: 17)
+    lazy var weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "weight", size: 17)
+    lazy var weightTF: UITextField = UIFactory.uiTextFieldWillReturned()
+    lazy var repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "reps", size: 17)
+    lazy var repsTF: UITextField = UIFactory.uiTextFieldWillReturned(tag: 1)
+    lazy var checkButton: UIButton = UIFactory.uiImageButtonWillReturned("square", target: self, action: #selector(checkButtonTapped))
+    lazy var weightSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [weightLabel,weightTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
+    lazy var repsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [repsLabel, repsTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
+    lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [setLabel, weightSTV, repsSTV, checkButton], alignment: .fill, spacing: 0, distribution: .equalSpacing)
     
     // 체크 버튼 토글을 위한 델리게이트
     weak var delegate: WorkoutRowCellDelegate?

@@ -11,10 +11,10 @@ final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     typealias T = Exercise
     
-    lazy var workoutNameLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Name", alignment: .center)
-    lazy var targetLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Target", alignment: .center)
-    lazy var setsLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Sets", alignment: .center)
-    lazy var stackView: UIStackView = CommonUI.uiStackViewWillReturned(views: [workoutNameLabel,targetLabel,setsLabel])
+    lazy var workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Name", alignment: .center)
+    lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target", alignment: .center)
+    lazy var setsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Sets", alignment: .center)
+    lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [workoutNameLabel,targetLabel,setsLabel])
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

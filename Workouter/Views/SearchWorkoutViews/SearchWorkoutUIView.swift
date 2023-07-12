@@ -13,16 +13,16 @@ final class SearchWorkoutUIView: BaseUIView {
     
     lazy var scrollView: UIScrollView = UIScrollView()
     lazy var tableView: UITableView = UITableView()
-    lazy var allButton: UIButton = CommonUI.uiButtonWillReturned(title: "All", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var chestButton: UIButton = CommonUI.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var backButton: UIButton = CommonUI.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var lowerLegsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var shouldersButton: UIButton = CommonUI.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var upperArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var upperLegButton: UIButton = CommonUI.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var lowerArmsButton: UIButton = CommonUI.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var allButton: UIButton = UIFactory.uiButtonWillReturned(title: "All", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var chestButton: UIButton = UIFactory.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var backButton: UIButton = UIFactory.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var lowerLegsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var shouldersButton: UIButton = UIFactory.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var upperArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var upperLegButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
+    lazy var lowerArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
 
-    lazy var buttonsSTV: UIStackView = CommonUI.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
+    lazy var buttonsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
     lazy var buttons: [UIButton] = [allButton, chestButton, backButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton]
     
     

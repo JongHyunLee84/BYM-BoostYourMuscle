@@ -51,7 +51,7 @@
 		F29D291F29D417B500491123 /* ProgramListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */; };
 		F29D292129D43A0800491123 /* ProgramListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D292029D43A0800491123 /* ProgramListViewModel.swift */; };
 		F29D292529D45FF300491123 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D292429D45FF300491123 /* Constant.swift */; };
-		F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A5029B2A275BA5003C7107 /* CommonUI.swift */; };
+		F2A5029C2A275BA5003C7107 /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A5029B2A275BA5003C7107 /* UIFactory.swift */; };
 		F2A706972A1E31C800044A06 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A706962A1E31C800044A06 /* SearchViewModel.swift */; };
 		F2A7069E2A1E5CB600044A06 /* AddProgramUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */; };
 		F2B99C3F2A4950A60067DB4C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */; };
@@ -115,7 +115,7 @@
 		F29D291E29D417B500491123 /* ProgramListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListTableViewCell.swift; sourceTree = "<group>"; };
 		F29D292029D43A0800491123 /* ProgramListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListViewModel.swift; sourceTree = "<group>"; };
 		F29D292429D45FF300491123 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		F2A5029B2A275BA5003C7107 /* CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUI.swift; sourceTree = "<group>"; };
+		F2A5029B2A275BA5003C7107 /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
 		F2A706962A1E31C800044A06 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		F2A7069D2A1E5CB600044A06 /* AddProgramUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgramUIView.swift; sourceTree = "<group>"; };
 		F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				F2168A852A20E07600F86BCD /* SwiftUIView.swift */,
 				F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */,
 				F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */,
-				F2A5029B2A275BA5003C7107 /* CommonUI.swift */,
+				F2A5029B2A275BA5003C7107 /* UIFactory.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -562,7 +562,7 @@
 				F2707B1F29DAD7A000F35D22 /* AddProgramTableViewCell.swift in Sources */,
 				F27B775429E56B6200127AB9 /* NetworkService.swift in Sources */,
 				F20FEA872A53F21300C53C1C /* CoreDataStorage.swift in Sources */,
-				F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */,
+				F2A5029C2A275BA5003C7107 /* UIFactory.swift in Sources */,
 				F2FA05CD29DB1621003F6CED /* SetVolume.swift in Sources */,
 				F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */,
 				F27B775629E56E3F00127AB9 /* DefaultExercisesRepository.swift in Sources */,

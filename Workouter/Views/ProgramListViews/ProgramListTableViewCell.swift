@@ -14,8 +14,8 @@ final class ProgramListTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     var deleteProgram: () -> Void = {}
     
-    lazy var programTitleLabel: UILabel = CommonUI.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
-    lazy var editButton: UIButton = CommonUI.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
+    lazy var programTitleLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Label", size: 25, weight: .medium)
+    lazy var editButton: UIButton = UIFactory.uiImageButtonWillReturned("ellipsis", size: 25, weight: .medium, scale: .medium)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

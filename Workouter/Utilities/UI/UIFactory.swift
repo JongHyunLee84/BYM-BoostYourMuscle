@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-final class CommonUI {
+
+final class UIFactory {
     
     private init() {}
     
