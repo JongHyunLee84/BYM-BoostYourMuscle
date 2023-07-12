@@ -11,4 +11,7 @@ extension Int {
     var isZero: Bool {
         return self == 0 ? true : false
     }
+    var toString: String {
+        return String(self)
+    }
 }

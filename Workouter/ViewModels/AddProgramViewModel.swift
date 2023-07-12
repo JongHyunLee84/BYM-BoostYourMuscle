@@ -16,21 +16,21 @@ final class AddProgramViewModel {
     
     let programRelay = BehaviorRelay<Program>(value: Program())
     let titleRelay = BehaviorRelay<String>(value: "")
-    let exercisesRelay = BehaviorRelay<[Exercise]>(value: [])
+    let exerciseListRelay = BehaviorRelay<[Exercise]>(value: [])
     let numberOfExercises = BehaviorRelay<Int>(value: 0)
     let isSavable = BehaviorRelay(value: false)
     let emptyMessage = "Please add workouts of your program! 🏋️"
     let saveAlert = (title: "SAVE", message: "Would you like to save this program?")
     let rejectAlert = (title: "Missing Information", message: "Program should have name \n and at least one workout")
-    var exercise = Exercise()
+    let exerciseRelay = BehaviorRelay(value: Exercise())
     init() {
         
-        exercisesRelay
+        exerciseListRelay
             .map { $0.count }
             .bind(to: numberOfExercises)
             .disposed(by: disposeBag)
         
-        Observable.combineLatest(titleRelay, exercisesRelay)
+        Observable.combineLatest(titleRelay, exerciseListRelay)
             .map { (title, exercises) -> Program in
                 Program(exercises: exercises, title: title)
             }
@@ -50,15 +50,15 @@ final class AddProgramViewModel {
 //        return programRelay.exercises.map { ExerciseViewModel(exercise: $0) }
 //    }
 
-    func addExercise(_ exercise: Exercise) {
-        Observable<Exercise>
+    func addExercise(_ exercise: [Exercise]) {
+        Observable<[Exercise]>
             .just(exercise)
-            .withLatestFrom(exercisesRelay) { (new, array) -> [Exercise] in
+            .withLatestFrom(exerciseListRelay) { (new, array) -> [Exercise] in
                 var willBeReturned = array
-                willBeReturned.append(new)
+                willBeReturned += new
                 return willBeReturned
             }
-            .bind(to: exercisesRelay)
+            .bind(to: exerciseListRelay)
             .disposed(by: disposeBag)
     }
     
@@ -74,12 +74,12 @@ final class AddProgramViewModel {
     func removeExerciseAt(_ index: Int) {
         Observable<Int>
             .just(index)
-            .withLatestFrom(exercisesRelay) { (idx, array) -> [Exercise] in
+            .withLatestFrom(exerciseListRelay) { (idx, array) -> [Exercise] in
                 var willBeReturned = array
                 willBeReturned.remove(at: idx)
                 return willBeReturned
             }
-            .bind(to: exercisesRelay)
+            .bind(to: exerciseListRelay)
             .disposed(by: disposeBag)
     }
     

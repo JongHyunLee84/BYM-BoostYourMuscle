@@ -13,7 +13,7 @@ final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     lazy var numberLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1")
     lazy var weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "60 kg")
     lazy var repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "10 reps")
-    lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel])
+    lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel], distribution: .equalSpacing )
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,8 +38,8 @@ final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     func passData(_ data: (SetVolume, Int)) {
         let (volume, index) = data
         numberLabel.text = "\(index + 1) set"
-        weightLabel.text = volume.weight.toString
-        repsLabel.text = "\(volume.reps)"
+        weightLabel.text = "\(volume.weight.toString) kg"
+        repsLabel.text = "\(volume.reps) reps"
     }
     
 }

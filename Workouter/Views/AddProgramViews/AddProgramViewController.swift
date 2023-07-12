@@ -33,12 +33,13 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         
         view.addWorkoutButton.rx.tap
             .bind {
-                let vc = AddWorkoutViewController(exercise: self.viewModel.exercise)
-                vc.viewDisappear = { [weak self] exerciseVM in
-                    self?.viewModel.exercise = exerciseVM
+                let vc = AddWorkoutViewController(exercise: self.viewModel.exerciseRelay.value)
+                vc.viewDisappear = { [weak self] exercise in
+                    self?.viewModel.exerciseRelay.accept(exercise)
                 }
                 vc.addButtonTapped = { [weak self] exercise in
-                    self?.viewModel.addExercise(exercise)
+                    self?.viewModel.addExercise([exercise])
+                    self?.viewModel.exerciseRelay.accept(Exercise()) // Add 되었으니 다시 AddWorkoutVC를 present할 때는 아무것도 안 채운 exercise를 보내야함.
                 }
                 self.present(vc, animated: true)
             }
@@ -47,11 +48,8 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         view.searchWorkoutButton.rx.tap
             .bind {
                 let vc = SearchWorkoutViewController()
-                vc.passWorkoutList = { exerciseList in
-                    exerciseList.forEach { vm in
-                        // TODO: vm말고 exercise 객체로 올 때 다시 풀기
-//                        self.viewModel.addExercise(vm)
-                    }
+                vc.passWorkoutList = { [weak self] exerciseList in
+                        self?.viewModel.addExercise(exerciseList)
                 }
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -89,7 +87,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
             }
             .disposed(by: disposeBag)
         
-        viewModel.exercisesRelay
+        viewModel.exerciseListRelay
             .bind(to: view.tableView.rx.items(cellIdentifier: Identifier.addProgramTableViewCell, cellType: AddProgramTableViewCell.self)) {
                 row, item, cell in
                 cell.passData(item)

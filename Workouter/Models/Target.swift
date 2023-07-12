@@ -20,4 +20,29 @@ enum Target: String, CaseIterable {
     case waist = "waist" // 허리
 }
 
-
+extension Target {
+    static subscript(_ target: Target) -> Int{
+        switch target {
+        case .back:
+            return 0
+        case .cardio:
+            return 1
+        case .chest:
+            return 2
+        case .lowerArms:
+            return 3
+        case .lowerLegs:
+            return 4
+        case .neck:
+            return 5
+        case .shoulders:
+            return 6
+        case .upperArms:
+            return 7
+        case .upperLegs:
+            return 8
+        case .waist:
+            return 9
+        }
+    }
+}

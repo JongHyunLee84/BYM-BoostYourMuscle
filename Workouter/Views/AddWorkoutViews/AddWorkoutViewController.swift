@@ -16,15 +16,18 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     // 이전 뷰에 데이터 passing
     var addButtonTapped: ((Exercise) -> Void) = { _ in }
     var viewDisappear: ((Exercise) -> Void) = { _ in }
-    var addedWorkout: ((AddWorkoutViewModel) -> Void) = { _ in }
     
     private lazy var customView = AddWorkoutUIView()
     
     
     // MARK: - Life cyle
-    init(exercise: Exercise) {
-        self.viewModel = AddWorkoutViewModel()
+    init(exercise: Exercise = Exercise()) {
+        viewModel = AddWorkoutViewModel(exercise: exercise)
         super.init() // VC의 custom init을 위해서 -> BaseVC Protocol에 코드 있음.
+        
+        // 초기 값 세팅
+        customView.workoutNameTF.text = exercise.name
+        customView.restTimeTF.text = exercise.rest.toString
     }
     
     required init?(coder: NSCoder) {
@@ -41,8 +44,13 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // pickerview data는 viewDidLoad 이후에 로드된다. 즉, viewDidLoad에서 피커뷰 데이터 관련 코드 넣어도 안 먹는다.
-//        passDataToUI()
+        // MARK: - 최초 한번만 이전 뷰에서 넘어온 workout data가 있다면 뷰에 바인딩 (피커뷰라서 viewWillAppear에)
+        viewModel.exerciseRelay
+            .take(1)
+            .bind {
+                self.customView.targetPickerView.selectRow(Target[$0.target], inComponent: 0, animated: false)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,9 +73,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
             }
             .bind { (isTrue, exercise) in
                 if isTrue {
-                    self.addButtonTapped(self.viewModel.exerciseRelay.value) // addProgramView에게 보냄
-                    self.addedWorkout(self.viewModel) // searchWorkoutView에게 보냄
-                    self.viewModel = AddWorkoutViewModel() // add가 눌려서 뷰가 사라질 때는 빈 VM을 이전뷰로 보내기 위해
+                    self.addButtonTapped(self.viewModel.exerciseRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
                     self.dismiss(animated: true)
                 } else {
                     self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addExerciseMessage, actions: nil)
@@ -141,6 +147,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
                 .disposed(by: disposeBag)
         }
 
+        // MARK: - Picker View
         Observable.just(Target.allCases.map { $0.rawValue })
             .bind(to: view.targetPickerView.rx.itemTitles) { (_, element) in
                 return element
@@ -155,7 +162,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
         
         viewModel.restTimeRelay
             .distinctUntilChanged()
-            .map { String($0) }
+            .map { $0.toString }
             .bind(to: view.restTimeTF.rx.text)
             .disposed(by: disposeBag)
         

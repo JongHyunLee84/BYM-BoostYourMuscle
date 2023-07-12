@@ -17,16 +17,16 @@ final class AddWorkoutViewModel {
     let exerciseRelay = BehaviorRelay<Exercise>(value: Exercise())
     
     // MARK: - Exercise properties
-    let exerciseNameRelay = BehaviorRelay(value: "")
-    let restTimeRelay = BehaviorRelay(value: 60)
-    let targetRelay = BehaviorRelay(value: 0)
+    let exerciseNameRelay: BehaviorRelay<String>
+    let restTimeRelay: BehaviorRelay<Int>
+    let targetRelay: BehaviorRelay<Int>
     
     // MARK: - isSavable
     let isExerciseSavable = BehaviorRelay(value: false)
     let isSetSavable = BehaviorRelay(value: false)
     
     // MARK: - SetVloume Properties
-    let setsRelay = BehaviorRelay<[SetVolume]>(value: [])
+    let setsRelay: BehaviorRelay<[SetVolume]>
     let numberOfSetsRelay = BehaviorRelay(value: 0)
     let setsWeightRelay = BehaviorRelay(value: 0.0)
     let setsRepsRelay = BehaviorRelay(value: 0)
@@ -37,36 +37,38 @@ final class AddWorkoutViewModel {
     let addSetVolumeMessage = "Please provide the weight and reps for this set."
     let emptyMessage = "How many sets are you going to do? 🤔"
     
-    // MARK: - 아래 기본 생성자 말고 다른 생성자로 초기화 하면 Rx 코드를 함수로 빼야함.
-    init() {
-        exerciseRelay
-            .map { $0.sets.count }
-            .bind(to: numberOfSetsRelay)
+        init(exercise: Exercise = Exercise()) {
+            // MARK: - init
+            exerciseNameRelay = BehaviorRelay<String>(value: exercise.name)
+            restTimeRelay = BehaviorRelay(value: exercise.rest)
+            targetRelay = BehaviorRelay(value: Target[exercise.target])
+            setsRelay = BehaviorRelay(value: exercise.sets)
+            
+            // MARK: - Binding
+            Observable.combineLatest(targetRelay, exerciseNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Exercise in
+                Exercise(target: Target.allCases[targetRow], name: name, rest: restTime, sets: sets)
+            }
+            .bind(to: exerciseRelay)
             .disposed(by: disposeBag)
-        
-        exerciseRelay
-            .map { !$0.name.isEmpty && !$0.sets.count.isZero }
-            .bind(to: isExerciseSavable)
+            
+            Observable.combineLatest(setsWeightRelay, setsRepsRelay) {
+                (weight, reps) -> Bool in
+                return !weight.isZero && !reps.isZero
+            }
+            .bind(to: isSetSavable)
             .disposed(by: disposeBag)
-        
-        Observable.combineLatest(targetRelay, exerciseNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Exercise in
-            Exercise(target: Target.allCases[targetRow], name: name, rest: restTime, sets: sets)
-        }
-        .bind(to: exerciseRelay)
-        .disposed(by: disposeBag)
-        
-        Observable.combineLatest(setsWeightRelay, setsRepsRelay) {
-            (weight, reps) -> Bool in
-            return !weight.isZero && !reps.isZero
-        }
-        .bind(to: isSetSavable)
-        .disposed(by: disposeBag)
-        
-    }
+            
+            exerciseRelay
+                .map { $0.sets.count }
+                .bind(to: numberOfSetsRelay)
+                .disposed(by: disposeBag)
+            
+            exerciseRelay
+                .map { !$0.name.isEmpty && !$0.sets.count.isZero }
+                .bind(to: isExerciseSavable)
+                .disposed(by: disposeBag)
     
-    //expadable View를 위한 bool 타입 속성
-    var isOpened: Bool = false
-    
+        }
     
     func changeRestTime(_ tag: Int) {
         let value = (tag == 0) ? -10 : 10
@@ -93,18 +95,21 @@ final class AddWorkoutViewModel {
         .disposed(by: disposeBag)
     }
     
-        func removeSetVolumeAt(_ index: Int) {
-            Observable.just(index)
-                .withLatestFrom(setsRelay) { idx, array in
-                    var willBeReturned = array
-                    willBeReturned.remove(at: idx)
-                    return willBeReturned
-                }
-                .bind(to: setsRelay)
-                .disposed(by: disposeBag)
-        }
+    func removeSetVolumeAt(_ index: Int) {
+        Observable.just(index)
+            .withLatestFrom(setsRelay) { idx, array in
+                var willBeReturned = array
+                willBeReturned.remove(at: idx)
+                return willBeReturned
+            }
+            .bind(to: setsRelay)
+            .disposed(by: disposeBag)
+    }
+}
     
-    
+
+//expadable View를 위한 bool 타입 속성
+//var isOpened: Bool = false
 //    var target: Target {
 //        return exerciseRelay.target
 //    }
@@ -119,10 +124,7 @@ final class AddWorkoutViewModel {
 //    }
 //
 //
-    init(exercise: Exercise) {
-//        self.exerciseRelay = exercise
-//        setsVM = exercise.sets.compactMap{ SetVolumeViewModel(pset: $0) }
-    }
+
     
     //    convenience init() {
     //        self.init(exercise: Exercise())
@@ -166,7 +168,7 @@ final class AddWorkoutViewModel {
 //    }
 //
 
-}
+//}
 
 
 //func saveTarget(_ row: Int) {

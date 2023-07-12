@@ -10,16 +10,19 @@ import RxSwift
 import RxRelay
 class SearchViewModel {
     
+    // MARK: - Rx
     let totalExercises = BehaviorRelay<[Exercise]>(value: [])
     let filteredExercises = BehaviorRelay<[Exercise]>(value: [])
     let searchBarStr = PublishRelay<String>()
     let bodyPartStr = BehaviorRelay(value: "all")
     let workoutErrorSubject = PublishSubject<Error>()
+    let addedExercisesList = BehaviorRelay<[Exercise]>(value: [])
     
     var exercisesRepository: ExercisesRepository
     
-    // AddWorkoutView에 보낼 exercise
-    var exercise: Exercise?
+    let errorTitle = "Data Upgrade in Progress"
+    let errorMessage = "We apologize for the inconvenience,\n but we are currently upgrading the exercise data.\n We are unable to provide the data at the moment.\n We will update it as soon as possible."
+    
     private let disposeBag = DisposeBag()
     
     init(repository: ExercisesRepository = DefaultExercisesRepository()) {
@@ -82,6 +85,21 @@ class SearchViewModel {
                 }
                 filteredExercises.accept(filtered)
             })
+            .disposed(by: disposeBag)
+    }
+    
+    func targetButtonTapped(title: String?) {
+        bodyPartStr.accept(title ?? "all")
+    }
+    
+    func exerciseAdded(_ exercise: Exercise) {
+        Observable.just(exercise)
+            .withLatestFrom(addedExercisesList) { exercise, list in
+                var willReturned = list
+                willReturned.append(exercise)
+                return list
+            }
+            .bind(to: addedExercisesList)
             .disposed(by: disposeBag)
     }
     
