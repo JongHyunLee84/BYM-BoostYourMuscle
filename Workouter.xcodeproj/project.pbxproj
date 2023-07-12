@@ -190,14 +190,36 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		F26231A72A5A9FE5002BE0E8 /* Base */ = {
+		F24FC5562A5E5263007FEF55 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F26231A72A5A9FE5002BE0E8 /* BaseUI */,
+				F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */,
+				F2168A852A20E07600F86BCD /* SwiftUIView.swift */,
+				F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */,
+				F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */,
+				F2A5029B2A275BA5003C7107 /* CommonUI.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		F24FC5572A5E52DF007FEF55 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F26D707629DEEB9500EA2CBD /* Int+Extension.swift */,
+				F2F660072A5D781C00580C2D /* Double+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F26231A72A5A9FE5002BE0E8 /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
 				F2F7F88B2A4880B900898E5C /* BaseUIView.swift */,
 				F2F7F8892A4880AF00898E5C /* BaseTableViewCell.swift */,
 				F2F7F8852A4869ED00898E5C /* BaseViewController.swift */,
 			);
-			path = Base;
+			path = BaseUI;
 			sourceTree = "<group>";
 		};
 		F2707B2429DB0D7900F35D22 /* WorkoutViews */ = {
@@ -359,16 +381,10 @@
 		F29D292629D460C800491123 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				F26231A72A5A9FE5002BE0E8 /* Base */,
+				F24FC5572A5E52DF007FEF55 /* Extensions */,
+				F24FC5562A5E5263007FEF55 /* UI */,
 				F27B7B172A56955300142F64 /* Protocols */,
-				F2A5029B2A275BA5003C7107 /* CommonUI.swift */,
 				F29D292429D45FF300491123 /* Constant.swift */,
-				F26D707429DEE1F100EA2CBD /* TableView+Extension.swift */,
-				F2F660072A5D781C00580C2D /* Double+Extension.swift */,
-				F26D707629DEEB9500EA2CBD /* Int+Extension.swift */,
-				F28CDBA829E68B5B0043E995 /* GIFLibrary.swift */,
-				F2168A852A20E07600F86BCD /* SwiftUIView.swift */,
-				F2B99C3E2A4950A60067DB4C /* UIColor+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
