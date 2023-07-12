@@ -14,14 +14,14 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴.
     var viewModel: AddWorkoutViewModel
     // 이전 뷰에 데이터 passing
-    var addButtonTapped: ((Exercise) -> Void) = { _ in }
-    var viewDisappear: ((Exercise) -> Void) = { _ in }
+    var addButtonTapped: ((Workout) -> Void) = { _ in }
+    var viewDisappear: ((Workout) -> Void) = { _ in }
     
     private lazy var customView = AddWorkoutUIView()
     
     
     // MARK: - Life cyle
-    init(exercise: Exercise = Exercise()) {
+    init(exercise: Workout = Workout()) {
         viewModel = AddWorkoutViewModel(exercise: exercise)
         super.init() // VC의 custom init을 위해서 -> BaseVC Protocol에 코드 있음.
         
@@ -67,14 +67,14 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
         let view = customView
         
         view.addWorkoutButton.rx.tap
-            .map { [weak self] () -> (Bool, Exercise) in
-                guard let self = self else { return (false, Exercise()) }
+            .map { [weak self] () -> (Bool, Workout) in
+                guard let self = self else { return (false, Workout()) }
                 return (self.viewModel.isExerciseSavable.value, self.viewModel.exerciseRelay.value)
             }
             .bind { (isTrue, exercise) in
                 if isTrue {
                     self.addButtonTapped(self.viewModel.exerciseRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
-                    self.viewModel.exerciseRelay.accept(Exercise()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 exercise를 보내야함.
+                    self.viewModel.exerciseRelay.accept(Workout()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 exercise를 보내야함.
                     self.dismiss(animated: true)
                 } else {
                     self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addExerciseMessage, actions: nil)

@@ -50,7 +50,7 @@ final class ProgramListViewModel {
     
     func returnViewModelAt(_ index: Int) -> Program {
         let program = programsRelay.value[index]
-        return .init(exercises: program.exercises, title: program.title)
+        return .init(workouts: program.workouts, title: program.title)
     }
     
     func deleteProgram(_ index: Int) {

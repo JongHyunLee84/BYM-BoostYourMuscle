@@ -9,7 +9,7 @@ import UIKit
 
 final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
-    typealias T = Exercise
+    typealias T = Workout
     
     lazy var workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Name", alignment: .center)
     lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target", alignment: .center)
@@ -41,7 +41,7 @@ final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
         workoutNameLabel.numberOfLines = 0
     }
     
-    func passData(_ data: Exercise) {
+    func passData(_ data: Workout) {
         workoutNameLabel.text = data.name
         targetLabel.text = data.target.rawValue
         setsLabel.text = "\(data.sets.count)"

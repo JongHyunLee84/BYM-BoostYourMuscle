@@ -19,7 +19,7 @@ class NetworkService {
     
     private init() {}
     
-    static func fetchWorkoutDataByTargetRx() -> Observable<[ExercisesResponseDTO]> {
+    static func fetchWorkoutDataByTargetRx() -> Observable<[WorkoutResponseDTO]> {
         return Observable.create { emitter in
             let headers = [
                 "X-RapidAPI-Key": "ebc2b996f3msh33acb2f28ee906fp1fe0a9jsn766591dae788",
@@ -34,7 +34,7 @@ class NetworkService {
                     emitter.onError(NetworkError.retryError)
                 }
                 if let data {
-                    guard let entities = try? JSONDecoder().decode([ExercisesResponseDTO].self, from: data) else {
+                    guard let entities = try? JSONDecoder().decode([WorkoutResponseDTO].self, from: data) else {
 
                         emitter.onError(NetworkError.maxRequest)
                         return }

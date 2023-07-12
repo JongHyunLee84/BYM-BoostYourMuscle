@@ -10,18 +10,18 @@ import Foundation
 struct Program {
     
     // 운동 배열
-    var exercises: [Exercise]
+    var workouts: [Workout]
     
     // 프로그램 제목
     var title: String
     
-    init(exercises: [Exercise], title: String) {
-        self.exercises = exercises
+    init(workouts: [Workout], title: String) {
+        self.workouts = workouts
         self.title = title
     }
     
     init() {
-        self.init(exercises: [], title: "")
+        self.init(workouts: [], title: "")
     }
     
 }

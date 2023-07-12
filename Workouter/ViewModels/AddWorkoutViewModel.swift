@@ -14,7 +14,7 @@ final class AddWorkoutViewModel {
     
     let disposeBag = DisposeBag()
     
-    let exerciseRelay = BehaviorRelay<Exercise>(value: Exercise())
+    let exerciseRelay = BehaviorRelay<Workout>(value: Workout())
     
     // MARK: - Exercise properties
     let exerciseNameRelay: BehaviorRelay<String>
@@ -37,7 +37,7 @@ final class AddWorkoutViewModel {
     let addSetVolumeMessage = "Please provide the weight and reps for this set."
     let emptyMessage = "How many sets are you going to do? 🤔"
     
-        init(exercise: Exercise = Exercise()) {
+        init(exercise: Workout = Workout()) {
             // MARK: - init
             exerciseNameRelay = BehaviorRelay<String>(value: exercise.name)
             restTimeRelay = BehaviorRelay(value: exercise.rest)
@@ -45,8 +45,8 @@ final class AddWorkoutViewModel {
             setsRelay = BehaviorRelay(value: exercise.sets)
             
             // MARK: - Binding
-            Observable.combineLatest(targetRelay, exerciseNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Exercise in
-                Exercise(target: Target.allCases[targetRow], name: name, rest: restTime, sets: sets)
+            Observable.combineLatest(targetRelay, exerciseNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Workout in
+                Workout(target: Target.allCases[targetRow], name: name, rest: restTime, sets: sets)
             }
             .bind(to: exerciseRelay)
             .disposed(by: disposeBag)

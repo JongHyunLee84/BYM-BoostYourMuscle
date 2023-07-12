@@ -17,7 +17,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
     private let viewModel = SearchViewModel()
     
     // 해당 뷰가 사라질 때 Search하며 추가했던 운동들을 다시 AddProgramView로 보냄
-    var passWorkoutList: (([Exercise]) -> Void) = { _ in }
+    var passWorkoutList: (([Workout]) -> Void) = { _ in }
     
     private lazy var customView: SearchWorkoutUIView = SearchWorkoutUIView()
     
@@ -27,7 +27,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        passWorkoutList(viewModel.addedExercisesList.value)
+        passWorkoutList(viewModel.addedWorkoutList.value)
     }
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
             .bind(to: viewModel.searchBarStr)
             .disposed(by: disposeBag)
         
-        viewModel.totalExercises
+        viewModel.totalWorkouts
             .map{ $0.count }
             .bind { count in
                 count.isZero ?
@@ -91,7 +91,7 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
             }
             .disposed(by: disposeBag)
         
-        viewModel.filteredExercises
+        viewModel.filteredWorkouts
             .bind(to: customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
                                                  cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
                 UIImage.gifImageWithURL(item.gifUrl ?? "") { img in

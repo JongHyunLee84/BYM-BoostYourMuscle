@@ -11,28 +11,28 @@ import RxRelay
 class SearchViewModel {
     
     // MARK: - Rx
-    let totalExercises = BehaviorRelay<[Exercise]>(value: [])
-    let filteredExercises = BehaviorRelay<[Exercise]>(value: [])
+    let totalWorkouts = BehaviorRelay<[Workout]>(value: [])
+    let filteredWorkouts = BehaviorRelay<[Workout]>(value: [])
     let searchBarStr = PublishRelay<String>()
     let bodyPartStr = BehaviorRelay(value: "all")
     let workoutErrorSubject = PublishSubject<Error>()
-    let addedExercisesList = BehaviorRelay<[Exercise]>(value: [])
+    let addedWorkoutList = BehaviorRelay<[Workout]>(value: [])
     
-    var exercisesRepository: ExercisesRepository
+    var workoutsRepository: WorkoutsRepository
     
     let errorTitle = "Data Upgrade in Progress"
-    let errorMessage = "We apologize for the inconvenience,\n but we are currently upgrading the exercise data.\n We are unable to provide the data at the moment.\n We will update it as soon as possible."
+    let errorMessage = "We apologize for the inconvenience,\n but we are currently upgrading the workout data.\n We are unable to provide the data at the moment.\n We will update it as soon as possible."
     
     private let disposeBag = DisposeBag()
     
-    init(repository: ExercisesRepository = DefaultExercisesRepository()) {
+    init(repository: WorkoutsRepository = DefaultWorkoutsRepository()) {
         // MARK: - init
-        exercisesRepository = repository
+        workoutsRepository = repository
         
         // MARK: - Rx
-        exercisesRepository.fetchExercises()
+        workoutsRepository.fetchWorkouts()
                 .subscribe { [weak self] exerciseList in
-                    self?.totalExercises.accept(exerciseList)
+                    self?.totalWorkouts.accept(exerciseList)
                 } onError: { [weak self] error in
                     guard let self else { return }
                     self.workoutErrorSubject.onNext(error)
@@ -41,11 +41,11 @@ class SearchViewModel {
 
 
         bodyPartStr
-            .flatMap { [weak self] query -> Observable<[Exercise]> in
+            .flatMap { [weak self] query -> Observable<[Workout]> in
                 guard let self = self else { return .empty() }
                 let lowercaseQuery = query
-                return self.totalExercises
-                    .map { workouts -> [Exercise] in
+                return self.totalWorkouts
+                    .map { workouts -> [Workout] in
                         if lowercaseQuery.localizedCaseInsensitiveContains("all") {
                             return workouts
                         } else {
@@ -53,37 +53,37 @@ class SearchViewModel {
                         }
                     }
             }
-            .bind(to: filteredExercises)
+            .bind(to: filteredWorkouts)
             .disposed(by: disposeBag)
         
         searchBarStr
             .subscribe(onNext: { [weak self] query in
                 guard let self = self else { return }
                 let lowercaseQuery = query.replacingOccurrences(of: " ", with: "")
-                let filtered = self.totalExercises.value.filter { original in
-                    var exercise = original
-                    exercise.name = original.name.replacingOccurrences(of: " ", with: "")
-                    exercise.equipment = original.equipment?.replacingOccurrences(of: " ", with: "") ?? ""
+                let filtered = self.totalWorkouts.value.filter { original in
+                    var workout = original
+                    workout.name = original.name.replacingOccurrences(of: " ", with: "")
+                    workout.equipment = original.equipment?.replacingOccurrences(of: " ", with: "") ?? ""
                     if lowercaseQuery == "" {
                         if self.bodyPartStr.value.localizedCaseInsensitiveContains("all") {
                             return true
                         }
-                        return exercise.target.rawValue == self.bodyPartStr.value.lowercased()
+                        return workout.target.rawValue == self.bodyPartStr.value.lowercased()
                     } else {
                         if self.bodyPartStr.value.localizedCaseInsensitiveContains("all") {
-                            let containsQuery = exercise.equipment?.localizedCaseInsensitiveContains(lowercaseQuery) ?? false ||
-                                exercise.name.localizedCaseInsensitiveContains(lowercaseQuery) ||
-                            exercise.target.rawValue.localizedCaseInsensitiveContains(lowercaseQuery)
+                            let containsQuery = workout.equipment?.localizedCaseInsensitiveContains(lowercaseQuery) ?? false ||
+                                workout.name.localizedCaseInsensitiveContains(lowercaseQuery) ||
+                            workout.target.rawValue.localizedCaseInsensitiveContains(lowercaseQuery)
                             return containsQuery
                         } else {
-                            let containsQuery = (exercise.equipment?.localizedCaseInsensitiveContains(lowercaseQuery) ?? false ||
-                                exercise.name.localizedCaseInsensitiveContains(lowercaseQuery)) &&
-                            exercise.target.rawValue == self.bodyPartStr.value.lowercased()
+                            let containsQuery = (workout.equipment?.localizedCaseInsensitiveContains(lowercaseQuery) ?? false ||
+                                workout.name.localizedCaseInsensitiveContains(lowercaseQuery)) &&
+                            workout.target.rawValue == self.bodyPartStr.value.lowercased()
                             return containsQuery
                         }
                     }
                 }
-                filteredExercises.accept(filtered)
+                filteredWorkouts.accept(filtered)
             })
             .disposed(by: disposeBag)
     }
@@ -92,14 +92,14 @@ class SearchViewModel {
         bodyPartStr.accept(title ?? "all")
     }
     
-    func exerciseAdded(_ exercise: Exercise) {
-        Observable.just(exercise)
-            .withLatestFrom(addedExercisesList) { exercise, list in
+    func exerciseAdded(_ workout: Workout) {
+        Observable.just(workout)
+            .withLatestFrom(addedWorkoutList) { workout, list in
                 var willReturned = list
-                willReturned.append(exercise)
+                willReturned.append(workout)
                 return list
             }
-            .bind(to: addedExercisesList)
+            .bind(to: addedWorkoutList)
             .disposed(by: disposeBag)
     }
     

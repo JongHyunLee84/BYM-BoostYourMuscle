@@ -44,7 +44,7 @@ final class CoreDataProgramStorage {
                 entityData.title = program.title
                 // id 숫자를 저장해서 fetch해 올때 save된 순서대로 갖고 올 거임
                 var exerciseId: Int64 = 0
-                program.exercises.forEach { exerciseModel in
+                program.workouts.forEach { exerciseModel in
                     var psetId: Int64 = 0
                     let exerciseEntity = ExerciseEntity(context: context)
                     exerciseEntity.rest = Int64(exerciseModel.rest)

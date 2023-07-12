@@ -28,12 +28,12 @@ extension DefaultProgramsRepository: ProgramsRepository {
             self.storage.fetchProgramEntities { programEntities in
                 
                 let programModels: [Program] = programEntities.compactMap { entity in
-                    var model: Program = Program(exercises: [], title: "")
+                    var model: Program = Program(workouts: [], title: "")
                     model.title = entity.title ?? ""
-                    model.exercises = entity.exerciseArray.compactMap {
-                        var exercise = Exercise()
+                    model.workouts = entity.exerciseArray.compactMap {
+                        var exercise = Workout()
                         if let target = Target(rawValue: $0.target ?? "chest") {
-                            exercise = Exercise(target: target,
+                            exercise = Workout(target: target,
                                                 name: $0.name ?? "",
                                                 rest: Int($0.rest),
                                                 id: Int($0.id),
@@ -49,7 +49,7 @@ extension DefaultProgramsRepository: ProgramsRepository {
                         exercise.sets.sort { $0.id < $1.id }
                         return exercise
                     }
-                    model.exercises.sort { $0.id < $1.id }
+                    model.workouts.sort { $0.id < $1.id }
                     return model
                 }
                 emmiter.onNext(programModels)

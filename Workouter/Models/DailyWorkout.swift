@@ -13,7 +13,7 @@ struct DailyWorkOut {
     
     // 2. 총 볼륨
     var totalVolume: Double {
-        let exercises = program.exercises
+        let exercises = program.workouts
         let total = exercises.reduce(0) { $0 + $1.totalVolume }
         return total
     }

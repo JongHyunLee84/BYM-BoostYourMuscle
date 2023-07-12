@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Exercise {
+struct Workout {
     
     // 운동 부위
     var target: Target

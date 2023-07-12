@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExercisesResponseDTO: Codable {
+struct WorkoutResponseDTO: Codable {
     let bodyPart: String
     let equipment: String
     let gifURL: String
