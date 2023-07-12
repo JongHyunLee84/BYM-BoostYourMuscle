@@ -39,7 +39,6 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
                 }
                 vc.addButtonTapped = { [weak self] exercise in
                     self?.viewModel.addExercise([exercise])
-                    self?.viewModel.exerciseRelay.accept(Exercise()) // Add 되었으니 다시 AddWorkoutVC를 present할 때는 아무것도 안 채운 exercise를 보내야함.
                 }
                 self.present(vc, animated: true)
             }

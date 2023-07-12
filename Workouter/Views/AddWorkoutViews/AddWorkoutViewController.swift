@@ -74,6 +74,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
             .bind { (isTrue, exercise) in
                 if isTrue {
                     self.addButtonTapped(self.viewModel.exerciseRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
+                    self.viewModel.exerciseRelay.accept(Exercise()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 exercise를 보내야함.
                     self.dismiss(animated: true)
                 } else {
                     self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addExerciseMessage, actions: nil)

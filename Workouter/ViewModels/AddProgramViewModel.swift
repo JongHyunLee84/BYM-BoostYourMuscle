@@ -19,10 +19,11 @@ final class AddProgramViewModel {
     let exerciseListRelay = BehaviorRelay<[Exercise]>(value: [])
     let numberOfExercises = BehaviorRelay<Int>(value: 0)
     let isSavable = BehaviorRelay(value: false)
+    let exerciseRelay = BehaviorRelay(value: Exercise())
     let emptyMessage = "Please add workouts of your program! 🏋️"
     let saveAlert = (title: "SAVE", message: "Would you like to save this program?")
     let rejectAlert = (title: "Missing Information", message: "Program should have name \n and at least one workout")
-    let exerciseRelay = BehaviorRelay(value: Exercise())
+    
     init() {
         
         exerciseListRelay
