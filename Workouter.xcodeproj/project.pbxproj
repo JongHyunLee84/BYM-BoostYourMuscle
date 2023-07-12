@@ -32,7 +32,7 @@
 		F2707B2129DAE5DC00F35D22 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */; };
 		F2707B2329DAFC2C00F35D22 /* AddWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */; };
 		F27B775429E56B6200127AB9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775329E56B6200127AB9 /* NetworkService.swift */; };
-		F27B775629E56E3F00127AB9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775529E56E3F00127AB9 /* APIService.swift */; };
+		F27B775629E56E3F00127AB9 /* DefaultExercisesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775529E56E3F00127AB9 /* DefaultExercisesRepository.swift */; };
 		F27B775829E56EFA00127AB9 /* ExercisesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */; };
 		F27B7B192A5695A400142F64 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B7B182A5695A400142F64 /* Alertable.swift */; };
 		F2881C7529DBDC77006CB7EE /* CoreDataProgramStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2881C7429DBDC77006CB7EE /* CoreDataProgramStorage.swift */; };
@@ -95,7 +95,7 @@
 		F2707B2029DAE5DC00F35D22 /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
 		F2707B2229DAFC2B00F35D22 /* AddWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		F27B775329E56B6200127AB9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		F27B775529E56E3F00127AB9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		F27B775529E56E3F00127AB9 /* DefaultExercisesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExercisesRepository.swift; sourceTree = "<group>"; };
 		F27B775729E56EFA00127AB9 /* ExercisesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesResponseDTO.swift; sourceTree = "<group>"; };
 		F27B7B182A5695A400142F64 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		F2881C7429DBDC77006CB7EE /* CoreDataProgramStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProgramStorage.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				F2881C8929DC2CC3006CB7EE /* DefaultProgramsRepository.swift */,
-				F27B775529E56E3F00127AB9 /* APIService.swift */,
+				F27B775529E56E3F00127AB9 /* DefaultExercisesRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -565,7 +565,7 @@
 				F2A5029C2A275BA5003C7107 /* CommonUI.swift in Sources */,
 				F2FA05CD29DB1621003F6CED /* SetVolume.swift in Sources */,
 				F2707B1A29DAA3AD00F35D22 /* Workout+Extension.swift in Sources */,
-				F27B775629E56E3F00127AB9 /* APIService.swift in Sources */,
+				F27B775629E56E3F00127AB9 /* DefaultExercisesRepository.swift in Sources */,
 				F2F7F8882A487E0A00898E5C /* CommonProtocols.swift in Sources */,
 				F26D707729DEEB9500EA2CBD /* Int+Extension.swift in Sources */,
 				F26CB67429DD8D06009F9925 /* SetVolumeViewModel.swift in Sources */,

@@ -15,7 +15,9 @@ enum NetworkError: Error {
     case maxRequest
 }
 
-class APIRepository {
+class NetworkService {
+    
+    private init() {}
     
     static func fetchWorkoutDataByTargetRx() -> Observable<[ExercisesResponseDTO]> {
         return Observable.create { emitter in

@@ -16,14 +16,18 @@ class SearchViewModel {
     let bodyPartStr = BehaviorRelay(value: "all")
     let workoutErrorSubject = PublishSubject<Error>()
     
-    let apiService = APIService()
+    var exercisesRepository: ExercisesRepository
     
     // AddWorkoutView에 보낼 exercise
     var exercise: Exercise?
     private let disposeBag = DisposeBag()
     
-    init() {
-            apiService.fetchWorkouts()
+    init(repository: ExercisesRepository = DefaultExercisesRepository()) {
+        // MARK: - init
+        exercisesRepository = repository
+        
+        // MARK: - Rx
+        exercisesRepository.fetchExercises()
                 .subscribe { [weak self] exerciseList in
                     self?.totalExercises.accept(exerciseList)
                 } onError: { [weak self] error in
