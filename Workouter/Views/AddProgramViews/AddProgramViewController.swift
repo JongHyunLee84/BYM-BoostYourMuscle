@@ -33,12 +33,12 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         
         view.addWorkoutButton.rx.tap
             .bind {
-                let vc = AddWorkoutViewController(exercise: self.viewModel.exerciseRelay.value)
-                vc.viewDisappear = { [weak self] exercise in
-                    self?.viewModel.exerciseRelay.accept(exercise)
+                let vc = AddWorkoutViewController(workout: self.viewModel.workoutRelay.value)
+                vc.viewDisappear = { [weak self] workout in
+                    self?.viewModel.workoutRelay.accept(workout)
                 }
-                vc.addButtonTapped = { [weak self] exercise in
-                    self?.viewModel.addExercise([exercise])
+                vc.addButtonTapped = { [weak self] workout in
+                    self?.viewModel.addWorkout([workout])
                 }
                 self.present(vc, animated: true)
             }
@@ -47,8 +47,8 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         view.searchWorkoutButton.rx.tap
             .bind {
                 let vc = SearchWorkoutViewController()
-                vc.passWorkoutList = { [weak self] exerciseList in
-                        self?.viewModel.addExercise(exerciseList)
+                vc.passWorkoutList = { [weak self] workoutList in
+                        self?.viewModel.addWorkout(workoutList)
                 }
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -62,7 +62,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         
         view.tableView.rx.itemDeleted
             .bind { indexPath in
-                self.viewModel.removeExerciseAt(indexPath.row)
+                self.viewModel.removeWorkoutAt(indexPath.row)
             }
             .disposed(by: disposeBag)
         
@@ -86,14 +86,14 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
             }
             .disposed(by: disposeBag)
         
-        viewModel.exerciseListRelay
+        viewModel.workoutListRelay
             .bind(to: view.tableView.rx.items(cellIdentifier: Identifier.addProgramTableViewCell, cellType: AddProgramTableViewCell.self)) {
                 row, item, cell in
                 cell.passData(item)
             }
             .disposed(by: disposeBag)
         
-        viewModel.numberOfExercises
+        viewModel.numberOfWorkouts
             .bind {
                 $0.isZero ? self.customView.tableView.setEmptyMessage(self.viewModel.emptyMessage) : self.customView.tableView.restore()
             }

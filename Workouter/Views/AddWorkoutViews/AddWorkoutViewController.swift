@@ -21,13 +21,13 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     
     
     // MARK: - Life cyle
-    init(exercise: Workout = Workout()) {
-        viewModel = AddWorkoutViewModel(exercise: exercise)
+    init(workout: Workout = Workout()) {
+        viewModel = AddWorkoutViewModel(workout: workout)
         super.init() // VC의 custom init을 위해서 -> BaseVC Protocol에 코드 있음.
         
         // 초기 값 세팅
-        customView.workoutNameTF.text = exercise.name
-        customView.restTimeTF.text = exercise.rest.toString
+        customView.workoutNameTF.text = workout.name
+        customView.restTimeTF.text = workout.rest.toString
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +45,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // MARK: - 최초 한번만 이전 뷰에서 넘어온 workout data가 있다면 뷰에 바인딩 (피커뷰라서 viewWillAppear에)
-        viewModel.exerciseRelay
+        viewModel.workoutRelay
             .take(1)
             .bind {
                 self.customView.targetPickerView.selectRow(Target[$0.target], inComponent: 0, animated: false)
@@ -55,7 +55,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewDisappear(viewModel.exerciseRelay.value)
+        viewDisappear(viewModel.workoutRelay.value)
     }
     
     override func setupUI() {
@@ -69,15 +69,15 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
         view.addWorkoutButton.rx.tap
             .map { [weak self] () -> (Bool, Workout) in
                 guard let self = self else { return (false, Workout()) }
-                return (self.viewModel.isExerciseSavable.value, self.viewModel.exerciseRelay.value)
+                return (self.viewModel.isWorkoutSavable.value, self.viewModel.workoutRelay.value)
             }
-            .bind { (isTrue, exercise) in
+            .bind { (isTrue, workout) in
                 if isTrue {
-                    self.addButtonTapped(self.viewModel.exerciseRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
-                    self.viewModel.exerciseRelay.accept(Workout()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 exercise를 보내야함.
+                    self.addButtonTapped(self.viewModel.workoutRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
+                    self.viewModel.workoutRelay.accept(Workout()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 workout를 보내야함.
                     self.dismiss(animated: true)
                 } else {
-                    self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addExerciseMessage, actions: nil)
+                    self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addWorkoutMessage, actions: nil)
                 }
             }
             .disposed(by: disposeBag)
@@ -104,7 +104,7 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
             .orEmpty
             .distinctUntilChanged()
             .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)
-            .bind(to: viewModel.exerciseNameRelay)
+            .bind(to: viewModel.workoutNameRelay)
             .disposed(by: disposeBag)
         
         view.restTimeTF.rx.text

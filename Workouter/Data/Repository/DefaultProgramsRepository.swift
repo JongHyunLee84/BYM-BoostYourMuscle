@@ -31,9 +31,9 @@ extension DefaultProgramsRepository: ProgramsRepository {
                     var model: Program = Program(workouts: [], title: "")
                     model.title = entity.title ?? ""
                     model.workouts = entity.exerciseArray.compactMap {
-                        var exercise = Workout()
+                        var workout = Workout()
                         if let target = Target(rawValue: $0.target ?? "chest") {
-                            exercise = Workout(target: target,
+                            workout = Workout(target: target,
                                                 name: $0.name ?? "",
                                                 rest: Int($0.rest),
                                                 id: Int($0.id),
@@ -46,8 +46,8 @@ extension DefaultProgramsRepository: ProgramsRepository {
                             }
                             )
                         }
-                        exercise.sets.sort { $0.id < $1.id }
-                        return exercise
+                        workout.sets.sort { $0.id < $1.id }
+                        return workout
                     }
                     model.workouts.sort { $0.id < $1.id }
                     return model

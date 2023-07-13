@@ -19,8 +19,8 @@ class DefaultWorkoutsRepository: WorkoutsRepository {
                                                           name: $0.name.capitalized,
                                                           gifUrl: $0.gifURL,
                                                           equipment: $0.equipment)}}
-                .subscribe { exercises in
-                    emitter.onNext(exercises)
+                .subscribe { workouts in
+                    emitter.onNext(workouts)
                     emitter.onCompleted()
                 } onError: { error in
                     emitter.onError(error)
@@ -29,8 +29,8 @@ class DefaultWorkoutsRepository: WorkoutsRepository {
         
     }
     
-    func saveWorkout(_ exercise: Workout) { print("not needed yet") }
-    func deleteWorkout(_ exercise: Workout) { print("not needed yet") }
-    func updateWorkout(_ exercise: Workout) { print("not needed yet") }
+    func saveWorkout(_ workout: Workout) { print("not needed yet") }
+    func deleteWorkout(_ workout: Workout) { print("not needed yet") }
+    func updateWorkout(_ workout: Workout) { print("not needed yet") }
 }
 

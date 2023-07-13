@@ -103,9 +103,9 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
                 cell.targetLabel.text = item.target.rawValue.capitalized
                 cell.equipmentLabel.text = item.equipment?.capitalized
                 cell.plusButtonAction = { [weak self] in
-                    let vc = AddWorkoutViewController(exercise: item)
-                    vc.addButtonTapped = { [weak self] exercise in
-                        self?.viewModel.exerciseAdded(exercise)
+                    let vc = AddWorkoutViewController(workout: item)
+                    vc.addButtonTapped = { [weak self] workout in
+                        self?.viewModel.workoutAdded(workout)
                     }
                     self?.present(vc, animated: true)
                 }

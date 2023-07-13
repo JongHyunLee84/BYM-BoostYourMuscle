@@ -14,15 +14,15 @@ final class AddWorkoutViewModel {
     
     let disposeBag = DisposeBag()
     
-    let exerciseRelay = BehaviorRelay<Workout>(value: Workout())
+    let workoutRelay = BehaviorRelay<Workout>(value: Workout())
     
     // MARK: - Exercise properties
-    let exerciseNameRelay: BehaviorRelay<String>
+    let workoutNameRelay: BehaviorRelay<String>
     let restTimeRelay: BehaviorRelay<Int>
     let targetRelay: BehaviorRelay<Int>
     
     // MARK: - isSavable
-    let isExerciseSavable = BehaviorRelay(value: false)
+    let isWorkoutSavable = BehaviorRelay(value: false)
     let isSetSavable = BehaviorRelay(value: false)
     
     // MARK: - SetVloume Properties
@@ -33,22 +33,22 @@ final class AddWorkoutViewModel {
     
     // MARK: - Alerts and Message
     let alertTitle = "Missing Information"
-    let addExerciseMessage = "Please enter name and add at lease one set of this workout"
+    let addWorkoutMessage = "Please enter name and add at lease one set of this workout"
     let addSetVolumeMessage = "Please provide the weight and reps for this set."
     let emptyMessage = "How many sets are you going to do? 🤔"
     
-        init(exercise: Workout = Workout()) {
+        init(workout: Workout = Workout()) {
             // MARK: - init
-            exerciseNameRelay = BehaviorRelay<String>(value: exercise.name)
-            restTimeRelay = BehaviorRelay(value: exercise.rest)
-            targetRelay = BehaviorRelay(value: Target[exercise.target])
-            setsRelay = BehaviorRelay(value: exercise.sets)
+            workoutNameRelay = BehaviorRelay<String>(value: workout.name)
+            restTimeRelay = BehaviorRelay(value: workout.rest)
+            targetRelay = BehaviorRelay(value: Target[workout.target])
+            setsRelay = BehaviorRelay(value: workout.sets)
             
             // MARK: - Binding
-            Observable.combineLatest(targetRelay, exerciseNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Workout in
+            Observable.combineLatest(targetRelay, workoutNameRelay, restTimeRelay, setsRelay) { (targetRow, name, restTime, sets) -> Workout in
                 Workout(target: Target.allCases[targetRow], name: name, rest: restTime, sets: sets)
             }
-            .bind(to: exerciseRelay)
+            .bind(to: workoutRelay)
             .disposed(by: disposeBag)
             
             Observable.combineLatest(setsWeightRelay, setsRepsRelay) {
@@ -58,14 +58,14 @@ final class AddWorkoutViewModel {
             .bind(to: isSetSavable)
             .disposed(by: disposeBag)
             
-            exerciseRelay
+            workoutRelay
                 .map { $0.sets.count }
                 .bind(to: numberOfSetsRelay)
                 .disposed(by: disposeBag)
             
-            exerciseRelay
+            workoutRelay
                 .map { !$0.name.isEmpty && !$0.sets.count.isZero }
-                .bind(to: isExerciseSavable)
+                .bind(to: isWorkoutSavable)
                 .disposed(by: disposeBag)
     
         }

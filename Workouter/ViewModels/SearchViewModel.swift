@@ -31,8 +31,8 @@ class SearchViewModel {
         
         // MARK: - Rx
         workoutsRepository.fetchWorkouts()
-                .subscribe { [weak self] exerciseList in
-                    self?.totalWorkouts.accept(exerciseList)
+                .subscribe { [weak self] workoutList in
+                    self?.totalWorkouts.accept(workoutList)
                 } onError: { [weak self] error in
                     guard let self else { return }
                     self.workoutErrorSubject.onNext(error)
@@ -92,12 +92,12 @@ class SearchViewModel {
         bodyPartStr.accept(title ?? "all")
     }
     
-    func exerciseAdded(_ workout: Workout) {
+    func workoutAdded(_ workout: Workout) {
         Observable.just(workout)
             .withLatestFrom(addedWorkoutList) { workout, list in
                 var willReturned = list
                 willReturned.append(workout)
-                return list
+                return willReturned
             }
             .bind(to: addedWorkoutList)
             .disposed(by: disposeBag)
