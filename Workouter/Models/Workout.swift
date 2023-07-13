@@ -1,5 +1,5 @@
 //
-//  Exercise.swift
+//  Workout.swift
 //  BYM
 //
 //  Created by 이종현 on 2023/04/03.
@@ -26,7 +26,7 @@ struct Workout {
         return realVolume
     }
     
-    // 서버에서 오는 Exercise 맞춤
+    // 서버에서 오는 Workout 맞춤
     var gifUrl: String?
     var gif: UIImage?
     var equipment: String?

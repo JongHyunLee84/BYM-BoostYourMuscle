@@ -51,10 +51,9 @@ final class AddProgramViewModel {
 //        return programRelay.exercises.map { ExerciseViewModel(exercise: $0) }
 //    }
 
-    func
-    _ exercise: [Workout]) {
+    func addWorkout(_ workout: [Workout]) {
         Observable<[Workout]>
-            .just(exercise)
+            .just(workout)
             .withLatestFrom(workoutListRelay) { (new, array) -> [Workout] in
                 var willBeReturned = array
                 willBeReturned += new
