@@ -1,14 +1,14 @@
-////
-////  Workout+Extension.swift
-////  BYM
-////
-////  Created by 이종현 on 2023/04/03.
-////
 //
-//import UIKit
-//import AVFoundation
+//  Workout+Extension.swift
+//  BYM
 //
+//  Created by 이종현 on 2023/04/03.
 //
+
+import UIKit
+import AVFoundation
+
+
 //// MARK: - CustomView Extension
 //extension WorkoutViewController {
 //    
@@ -91,19 +91,7 @@
 //        customView.mainTimerLabel.text = timeString
 //    }
 //    
-//    private func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int) {
-//        return ((seconds / 3600), ((seconds % 3600) / 60),((seconds % 3600) % 60))
-//    }
-//    
-//    private func makeTimeString(hours: Int, minutes: Int, seconds : Int) -> String {
-//        var timeString = ""
-//        timeString += String(format: "%02d", hours)
-//        timeString += " : "
-//        timeString += String(format: "%02d", minutes)
-//        timeString += " : "
-//        timeString += String(format: "%02d", seconds)
-//        return timeString
-//    }
+
 //}
 //
 //
@@ -149,11 +137,11 @@
 //    }
 //}
 //
-//// MARK: - Cell Delegate Extension
-//extension WorkoutViewController: WorkoutRowCellDelegate {
-//    
-//    // 무게 or 횟수가 운동 중에 수정되면 해당 model의 바뀐 값을 다시 저장
-//    func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String) {
+// MARK: - Cell Delegate Extension
+extension WorkoutViewController: WorkoutRowCellDelegate {
+    
+    // 무게 or 횟수가 운동 중에 수정되면 해당 model의 바뀐 값을 다시 저장
+    func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String) {
 //        let tv = customView.tableView
 //        if let indexPath  = tv.indexPath(for: cell), let exerciseVM = exerciseListVM?[indexPath.section] {
 //            let pSetVM = exerciseVM.returnPsetAt(indexPath.row - 1)
@@ -161,12 +149,12 @@
 //            //            tag.isZero ? pSetVM.changeWeight(value) : pSetVM.changeReps(value)
 //            //            tv.reloadData()
 //        }
-//    }
-//    
-//    func keyboardDoneButtonTapped() {
-//        view.endEditing(true)
-//    }
-//    func checkButtonTapped(cell: WorkoutRowCell) {
+    }
+    
+    func keyboardDoneButtonTapped() {
+        view.endEditing(true)
+    }
+    func checkButtonTapped(cell: WorkoutRowCell) {
 //        let tv = customView.tableView
 //        if let indexPath  = tv.indexPath(for: cell), let exerciseVM = exerciseListVM?[indexPath.section] {
 //            let pSet = exerciseVM.sets[indexPath.row - 1]
@@ -182,9 +170,9 @@
 //            }
 //            tv.reloadRows(at: [indexPath], with: .automatic)
 //        }
-//    }
-//    
-//    @objc func restTimerCounter() {
+    }
+    
+    @objc func restTimerCounter() {
 //        let restTimerLB = customView.restTimerLabel
 //        restTimerCount -= 1
 //        restTimerLB.text = "\(restTimerCount) sec"
@@ -198,9 +186,9 @@
 //                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
 //            }
 //        }
-//    }
-//}
-//
+    }
+}
+
 //// MARK: - Timer + (Play Sound and Vibrate) Extension
 //extension WorkoutViewController {
 //    func playSound() {
@@ -220,7 +208,7 @@
 //        }
 //    }
 //}
-//
-//
-//
-//
+
+
+
+

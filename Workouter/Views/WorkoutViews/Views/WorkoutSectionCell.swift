@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class WorkoutSectionCell: BaseTableViewCell {
+final class WorkoutSectionCell: BaseTableViewCell, PassingDataProtocol {
+    
+    typealias T = (name: String, isExpanded: Bool)
     
     lazy var workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Label", size: 17)
     lazy var triangleImageView: UIImageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill"))
@@ -45,6 +47,14 @@ final class WorkoutSectionCell: BaseTableViewCell {
     
     override func setupUI() {
         triangleImageView.tintColor = .dynamicColor
+        self.selectionStyle = .none
+    }
+    
+    func passData(_ data: T) {
+        workoutNameLabel.text = data.name
+        triangleImageView.image = data.isExpanded ?
+        UIImage(systemName: "arrowtriangle.down.fill") :
+        UIImage(systemName: "arrowtriangle.right.fill")
     }
     
 }

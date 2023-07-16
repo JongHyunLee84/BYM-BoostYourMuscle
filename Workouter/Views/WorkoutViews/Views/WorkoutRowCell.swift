@@ -13,7 +13,9 @@ protocol WorkoutRowCellDelegate: AnyObject {
     func keyboardDoneButtonTapped()
 }
 
-final class WorkoutRowCell: BaseTableViewCell {
+final class WorkoutRowCell: BaseTableViewCell, PassingDataProtocol {
+    
+    typealias T = (Int, SetVolume)
     
     lazy var setLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1", size: 17)
     lazy var weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "weight", size: 17)
@@ -52,6 +54,17 @@ final class WorkoutRowCell: BaseTableViewCell {
         setupDoneButtonItem()
         repsTF.delegate = self
         weightTF.delegate = self
+    }
+    
+    func passData(_ data: T) {
+        let (index, setVolume) = data
+        setLabel.text = String(index)
+        repsTF.text = setVolume.reps.toString
+        weightTF.text = setVolume.weight.toString
+        setVolume.check ?
+                        checkButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                        :
+                        checkButton.setImage(UIImage(systemName: "square"), for: .normal)
     }
     
     @objc func checkButtonTapped() {

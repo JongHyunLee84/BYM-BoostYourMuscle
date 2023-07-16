@@ -39,20 +39,18 @@ final class ProgramListViewController: BaseViewController, Alertable {
             .disposed(by: disposeBag)
         
         // TODO: WorkoutView 리팩토링할 때 다시 
-//        tableView.rx.itemSelected
-//            .bind { indexPath in
-//                let program = self.viewModel.returnViewModelAt(indexPath.row)
-//                let action1 = UIAlertAction(title: "No", style: .cancel)
-//                let action2 = UIAlertAction(title: "Yes", style: .default) { _ in
-//                    // 운동 시작 뷰로 넘어가기
-//                    let nextViewController = WorkoutViewController()
-//                    let exerciseVM = program.exercises.map { ExerciseViewModel(exercise: $0) }
-//                    nextViewController.exerciseListVM = exerciseVM
-//                    self.navigationController?.pushViewController(nextViewController, animated: true)
-//                }
-//                self.showAlert(title: program.title, message: self.viewModel.alertMessage, actions: [action1, action2])
-//            }
-//            .disposed(by: disposeBag)
+        tableView.rx.itemSelected
+            .bind { indexPath in
+                let program = self.viewModel.returnViewModelAt(indexPath.row)
+                let action1 = UIAlertAction(title: "No", style: .cancel)
+                let action2 = UIAlertAction(title: "Yes", style: .default) { _ in
+                    // 운동 시작 뷰로 넘어가기
+                    let nextViewController = WorkoutViewController(workouts: self.viewModel.programsRelay.value[indexPath.row].workouts)
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+                self.showAlert(title: program.title, message: self.viewModel.alertMessage, actions: [action1, action2])
+            }
+            .disposed(by: disposeBag)
         
     }
     override func setupUI() {
