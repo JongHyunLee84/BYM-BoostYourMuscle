@@ -1,3 +1,4 @@
+
 # Workouter
 ![](https://github.com/JongHyunLee84/Workouter/assets/112399028/82bc0c6a-45c0-403e-be6e-b3959059f5bc)
 Main Feature : Workout Traker, Gym Log 
@@ -26,8 +27,19 @@ F[Persistence DB] --> D
 - Expandable ( Collapsible ) Table View
 - GIF Image
 - Dark Mode
+- SwiftUI Preview
 - UI Factory Pattern [(Workouter.UIFactory)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift)
 - Repository Pattern [(Reference)](https://github.com/kudoleh/iOS-Clean-Architecture-MVVM)
 - Base View Pattern [(ex. BaseViewController)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/BaseUI/BaseViewController.swift)
+## Framework and Library
+- UIKit
+- Snapkit : Layout
+- RxSwift / RxCocoa : Reactive Functional Programming
+- GIFLibrary : [Reference](https://github.com/kiritmodi2702/GIF-Swift/blob/master/GIF-Swift/iOSDevCenters+GIF.swift)
+- CoreData : Persistence DB
 
-
+**Network(Data) API**  :  [ExerciseDB](https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/)
+## Build
+1. git clone
+2. pod install (update)
+3. open .xcworkspace project
