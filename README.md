@@ -26,7 +26,7 @@ F[Persistence DB] --> D
 - Expandable ( Collapsible ) Table View
 - GIF Image
 - Dark Mode
-- UI Factory Pattern [(Code Here)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift)
+- UI Factory Pattern [(Workouter.UIFactory)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift)
 - Repository Pattern [(Reference)](https://github.com/kudoleh/iOS-Clean-Architecture-MVVM)
 - Base View Pattern [(ex. BaseViewController)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/BaseUI/BaseViewController.swift)
 
