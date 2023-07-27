@@ -7,7 +7,7 @@
 
 **Main Feature : Workout Traker, Gym Log** 
 
-**App Store Link :** [Workouter - Workout Traker Log](https://apps.apple.com/kr/app/workouter-workout-tracker-log/id6447367318)
+**App Store Link :** <a href="https://apps.apple.com/kr/app/workouter-workout-tracker-log/id6447367318" target="_blank">Workouter - Workout Traker Log</a>
 
 ## Layers
 -  Presentation Layer = View + ViewController ( Separated )
@@ -30,17 +30,17 @@ F[Persistence DB] --> D
 - GIF Image
 - Dark Mode
 - SwiftUI Preview
-- UI Factory Pattern [(Workouter.UIFactory)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift)
-- Repository Pattern [(Reference)](https://github.com/kudoleh/iOS-Clean-Architecture-MVVM)
-- Base View Pattern [(ex. BaseViewController)](https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/BaseUI/BaseViewController.swift)
+- UI Factory Pattern <a href="https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift" target="_blank">(Workouter.UIFactory)</a>
+- Repository Pattern <a href="https://github.com/kudoleh/iOS-Clean-Architecture-MVVM" target="_blank">(Reference)</a>
+- Base View Pattern <a href="https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/BaseUI/BaseViewController.swift" target="_blank">(ex. BaseViewController)</a>
 ## Framework and Library
 - UIKit
 - Snapkit : Layout
 - RxSwift / RxCocoa : Reactive Functional Programming
-- GIFLibrary : [Reference](https://github.com/kiritmodi2702/GIF-Swift/blob/master/GIF-Swift/iOSDevCenters+GIF.swift)
+- GIFLibrary : <a href="https://github.com/kiritmodi2702/GIF-Swift/blob/master/GIF-Swift/iOSDevCenters+GIF.swift" target="_blank">Reference</a>
 - CoreData : Persistence DB
 
-**Network(Data) API**  :  [ExerciseDB](https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/)
+**Network(Data) API**  :  <a href="https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/" target="_blank">ExerciseDB</a>
 ## Build
 1. git clone
 2. pod install (update)
