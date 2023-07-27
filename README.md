@@ -31,7 +31,7 @@ F[Persistence DB] --> D
 - Dark Mode
 - SwiftUI Preview
 - UI Factory Pattern <a href="https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/UIFactory.swift" target="_blank">(Workouter.UIFactory)</a>
-- Repository Pattern <a href="https://github.com/kudoleh/iOS-Clean-Architecture-MVVM" target="_blank">(Reference)</a>
+- Repository Pattern <a href="https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/tree/master/ExampleMVVM/Domain/Interfaces/Repositories" target="_blank">(Reference)</a>
 - Base View Pattern <a href="https://github.com/JongHyunLee84/Workouter/blob/main/Workouter/Utilities/UI/BaseUI/BaseViewController.swift" target="_blank">(ex. BaseViewController)</a>
 ## Framework and Library
 - UIKit
