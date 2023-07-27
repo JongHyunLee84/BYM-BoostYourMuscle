@@ -5,11 +5,10 @@
 //  Created by 이종현 on 2023/03/29.
 //
 
-import UIKit
-import AVFoundation
 import RxCocoa
+import UIKit
 
-final class WorkoutViewController: BaseViewController, KeyboardProtocol {
+final class WorkoutViewController: BaseViewController, KeyboardProtocol, Alertable {
     
     var viewModel: WorkoutViewModel
     
@@ -22,52 +21,21 @@ final class WorkoutViewController: BaseViewController, KeyboardProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var isSoundOn: Bool {
-        return UserDefaults.standard.bool(forKey: Identifier.soundButtonKey)
-    }
-    
-    // 메인 타이머 기능 구현
-    var mainTimer: Timer = Timer()
-    var mainTimerCount: Int = 0
-    var isMainTimerCounting: Bool = true
-    var appDidEnterBackgroundDate: Date?
-    
-    // rest Timer 구현
-    var restTimer: Timer = Timer()
-    var restTimerCount: Int = 0
-    
-    // 쉬는 시간 끝났을 때 사운드
-    var player: AVAudioPlayer?
-    
     var customView = WorkoutUIView()
     
     override func loadView() {
         view = customView
     }
     
-    // MARK: - deinit 시키기 (Timer변수를 weak으로 선언할까?)
-    override func viewWillDisappear(_ animated: Bool) {
-        mainTimer.invalidate()
-        restTimer.invalidate()
-    }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        mainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(mainTimerCounter), userInfo: nil, repeats: true)
-    //        RunLoop.current.add(mainTimer, forMode: .common)
-    //    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func setupUI() {
+        self.navigationController?.isNavigationBarHidden = true
         let view = customView
         view.tableView.register(WorkoutSectionCell.self, forCellReuseIdentifier: Identifier.workoutSectionIdentifier)
         view.tableView.register(WorkoutRowCell.self, forCellReuseIdentifier: Identifier.workoutRowIdentifier)
-        
-        //        setupButtonsUI()
-        //        setupNav()
-        //        setupTimer()
         setupKeyborad(view)
     }
     
@@ -76,39 +44,109 @@ final class WorkoutViewController: BaseViewController, KeyboardProtocol {
             .disposed(by: disposeBag)
         customView.tableView.rx.setDataSource(self)
             .disposed(by: disposeBag)
-        //        customView.tableView.delegate = self
-        //        customView.tableView.dataSource = self
     }
     
     override func setupRxBind() {
         let view = customView
-        customView.editButtonAction = { view.tableView.isEditing.toggle() }
+        
         viewModel.mainTimerCount
             .map { [weak self] in
                 return self?.viewModel.makeTimeTemplate($0) ?? ""
             }
-            .subscribe(onNext: { [weak self] in
-                self?.customView.mainTimerLabel.text = $0
-            })
+            .bind(to: view.mainTimerLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.isMainTimerCounting
+            .bind { _ in
+                let configuration = view.startStopButton.currentImage?.configuration // 현재 configuration 설정 안 해주면 자꾸 작아짐
+                view.startStopButton.setImage(UIImage(systemName: self.viewModel.mainTimerImageName, withConfiguration: configuration), for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.isEditingTableView
+            .bind {
+                view.tableView.reloadData()
+                view.tableView.isEditing = $0
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.isSoundOn
+            .bind { _ in
+                view.soundButton.setImage(UIImage(systemName: self.viewModel.soundButtonImageName), for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.restTimerCount
+            .map { $0.toSecond }
+            .bind(to: view.restTimerLabel.rx.text)
             .disposed(by: disposeBag)
         
         view.startStopButton.rx.tap
-            .bind { self.viewModel.mainTimerStartAndStop() }
+            .bind { self.viewModel.toggleBoolValue(.mainTimer) }
             .disposed(by: disposeBag)
-        //        customView.doneButtonAction = checkButtonTapped
-        //        customView.startStopButtonAction = startAndStopButtonTapped
-        //        customView.soundButtonAction = soundButtonTapped
-        //        customView.resetButtonAction = restButtonTapped(_:)
-        //        setupRestcount()
         
-        viewModel.workoutCellsRelay
-            .bind { _ in
-                    view.tableView.reloadData()
+        view.editButton.rx.tap
+            .bind { self.viewModel.toggleBoolValue(.tableView) }
+            .disposed(by: disposeBag)
+
+        view.soundButton.rx.tap
+            .bind { self.viewModel.toggleBoolValue(.sound) }
+            .disposed(by: disposeBag)
+        
+        view.minusButton.rx.tap
+            .bind { self.viewModel.restTimerCountChange(-10) }
+            .disposed(by: disposeBag)
+        
+        view.plusButton.rx.tap
+            .bind { self.viewModel.restTimerCountChange(10) }
+            .disposed(by: disposeBag)
+            
+        view.doneButton.rx.tap
+            .bind {
+                let noAction = UIAlertAction(title: "No", style: .cancel)
+                let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+                    // MARK: - 운동 종료시 세이브 해야할 코드들 들어와야 함.
+                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.isNavigationBarHidden = false // 현재 뷰뿐만 아니라 이전 뷰까지 네비게이션 바가 없어지는 현상 때문에
                 }
+                self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.alertMessage, actions: [noAction, yesAction])
+            }
+            .disposed(by: disposeBag)
+
+        view.resetButton.rx.tap
+            .bind {
+                self.viewModel.restTimerCountReset()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification)
+            .bind { _ in
+                self.viewModel.applicationDidEnterBackground()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
+            .bind { _ in
+                self.viewModel.applicationWillEnterForeground()
+            }
             .disposed(by: disposeBag)
     }
     
 }
 
+// MARK: - Cell Delegate Extension
+extension WorkoutViewController: WorkoutRowCellDelegate {
+    
+    // rx의 controlEvent에 똑같이 동작하는 것이 없어서 그냥 delegate 사용
+    func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String) {
+        if let indexPath = customView.tableView.indexPath(for: cell), let value = Double(value) {
+            self.viewModel.changeSetVolume(at: indexPath, to: value, which: tag.isZero ? .weight : .reps)
+        }
+    }
+    
+    func keyboardDoneButtonTapped() {
+        view.endEditing(true)
+    }
+}
 
 

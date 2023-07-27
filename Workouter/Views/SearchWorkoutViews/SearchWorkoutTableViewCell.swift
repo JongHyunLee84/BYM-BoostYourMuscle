@@ -5,18 +5,19 @@
 //  Created by 이종현 on 2023/04/12.
 //
 
+import SnapKit
 import UIKit
 
-final class SearchWorkoutTableViewCell: BaseTableViewCell {
+final class SearchWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
-    lazy var workoutImageView: UIImageView = UIImageView()
-    lazy var nameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "name", size: 17)
-    lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "target", size: 14)
-    lazy var equipmentLabel: UILabel = UIFactory.uiLabelWillReturned(title: "equipment", size: 14)
-    lazy var plusButton: UIButton = UIFactory.uiImageButtonWillReturned("plus", target: self, action: #selector(plusButtonTapped))
+    typealias T = Workout
+    
+    let workoutImageView: UIImageView = UIImageView()
+    let nameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "name", size: 17)
+    let targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "target", size: 14)
+    let equipmentLabel: UILabel = UIFactory.uiLabelWillReturned(title: "equipment", size: 14)
+    let plusButton: UIButton = UIFactory.uiImageButtonWillReturned("plus")
     lazy var labelsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [nameLabel, targetLabel, equipmentLabel], axis: .vertical, spacing: 0)
-    
-    var plusButtonAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,8 +55,11 @@ final class SearchWorkoutTableViewCell: BaseTableViewCell {
         nameLabel.textAlignment = .center
     }
     
-    @objc func plusButtonTapped() {
-        plusButtonAction?()
+    func passData(_ data: Workout) {
+        nameLabel.text = data.name
+        targetLabel.text = data.target.rawValue.capitalized
+        equipmentLabel.text = data.equipment
+        workoutImageView.image = data.gif
     }
     
 }

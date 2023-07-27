@@ -5,7 +5,6 @@
 //  Created by 이종현 on 2023/05/31.
 //
 
-import Foundation
 import UIKit
 
 final class UIFactory {

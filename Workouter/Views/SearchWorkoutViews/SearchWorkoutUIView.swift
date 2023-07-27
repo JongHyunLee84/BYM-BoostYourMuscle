@@ -5,26 +5,24 @@
 //  Created by 이종현 on 2023/06/05.
 //
 
+import SnapKit
 import UIKit
 
 final class SearchWorkoutUIView: BaseUIView {
     
-    var buttonTappedAction: ((UIButton)->Void)?
+    let scrollView: UIScrollView = UIScrollView()
+    let tableView: UITableView = UITableView()
+    let allButton: UIButton = UIFactory.uiButtonWillReturned(title: "All", fontSize: 13)
+    let chestButton: UIButton = UIFactory.uiButtonWillReturned(title: "Chest", fontSize: 13)
+    let backButton: UIButton = UIFactory.uiButtonWillReturned(title: "Back", fontSize: 13)
+    let lowerLegsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Legs", fontSize: 13)
+    let shouldersButton: UIButton = UIFactory.uiButtonWillReturned(title: "Shoulders", fontSize: 13)
+    let upperArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Arms", fontSize: 13)
+    let upperLegButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Legs", fontSize: 13)
+    let lowerArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Arms", fontSize: 13)
     
-    lazy var scrollView: UIScrollView = UIScrollView()
-    lazy var tableView: UITableView = UITableView()
-    lazy var allButton: UIButton = UIFactory.uiButtonWillReturned(title: "All", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var chestButton: UIButton = UIFactory.uiButtonWillReturned(title: "Chest", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var backButton: UIButton = UIFactory.uiButtonWillReturned(title: "Back", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var lowerLegsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var shouldersButton: UIButton = UIFactory.uiButtonWillReturned(title: "Shoulders", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var upperArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var upperLegButton: UIButton = UIFactory.uiButtonWillReturned(title: "Upper Legs", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-    lazy var lowerArmsButton: UIButton = UIFactory.uiButtonWillReturned(title: "Lower Arms", fontSize: 13, target: self, action: #selector(targetButtonTapped(_:)))
-
     lazy var buttonsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: buttons, alignment: .fill, spacing: 15)
     lazy var buttons: [UIButton] = [allButton, chestButton, backButton, lowerLegsButton, shouldersButton, upperArmsButton, upperLegButton, lowerArmsButton]
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,10 +69,6 @@ final class SearchWorkoutUIView: BaseUIView {
             button.layer.borderWidth = 2.0
             button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
-    }
-    
-    @objc func targetButtonTapped(_ sender: UIButton) {
-        buttonTappedAction?(sender)
     }
     
 }

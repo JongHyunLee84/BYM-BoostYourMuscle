@@ -5,32 +5,28 @@
 //  Created by 이종현 on 2023/05/27.
 //
 
+import SnapKit
 import UIKit
 
 final class AddWorkoutUIView: BaseUIView {
     
-    var addWorkoutAction: (() -> Void)?
-    var minusButtonAction: ((Int) -> Void)?
-    var plusButtonAction: ((Int) -> Void)?
-    var setsAddButtonAction: (() -> Void)?
-    
-    lazy var workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Workout Name:")
-    lazy var addWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add", target: self, action: #selector(addWorkoutTapped))
-    lazy var workoutNameTF: UITextField = UIFactory.uiTextFieldWillReturned(placeholder: "ex. Bench Press")
-    lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target:")
-    lazy var targetPickerView: UIPickerView = UIPickerView()
-    lazy var restLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Rest Time:")
-    lazy var restTimeTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "60", type: .numberPad)
-    lazy var secLabel: UILabel = UIFactory.uiLabelWillReturned(title: "sec")
-    lazy var minusButton: UIButton = UIFactory.uiButtonWillReturned(title: "-10", fontSize: 15, target: self, action: #selector(minusButtonTapped))
-    lazy var plusButton: UIButton = UIFactory.uiButtonWillReturned(title: "+10", fontSize: 15, target: self, action: #selector(plusButtonTapped))
-    lazy var setsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Sets:")
-    lazy var setsWeightTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "60", type: .decimalPad)
-    lazy var kgLabel: UILabel = UIFactory.uiLabelWillReturned(title: "kg")
-    lazy var setsRepsTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "10", type: .numberPad)
-    lazy var repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "reps")
-    lazy var addSetButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add", fontSize: 15, target: self, action: #selector(setsAddButtonTapped))
-    lazy var tableView: UITableView = UITableView()
+    let workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Workout Name:")
+    let addWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add")
+    let workoutNameTF: UITextField = UIFactory.uiTextFieldWillReturned(placeholder: "ex. Bench Press")
+    let targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target:")
+    let targetPickerView: UIPickerView = UIPickerView()
+    let restLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Rest Time:")
+    let restTimeTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "60", type: .numberPad)
+    let secLabel: UILabel = UIFactory.uiLabelWillReturned(title: "sec")
+    let minusButton: UIButton = UIFactory.uiButtonWillReturned(title: "-10", fontSize: 15)
+    let plusButton: UIButton = UIFactory.uiButtonWillReturned(title: "+10", fontSize: 15)
+    let setsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Sets:")
+    let setsWeightTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "60", type: .decimalPad)
+    let kgLabel: UILabel = UIFactory.uiLabelWillReturned(title: "kg")
+    let setsRepsTF: UITextField = UIFactory.uiTextFieldWillReturned(text: "10", type: .numberPad)
+    let repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "reps")
+    let addSetButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add", fontSize: 15)
+    let tableView: UITableView = UITableView()
     lazy var minusAndPlusSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [minusButton, plusButton])
     
     // MARK: - Rx로 TFDelegate 대체 위해서 모아놓음
@@ -141,11 +137,6 @@ final class AddWorkoutUIView: BaseUIView {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
-    @objc private func addWorkoutTapped() { addWorkoutAction?() }
-    @objc private func minusButtonTapped() { minusButtonAction?(0) }
-    @objc private func plusButtonTapped() { plusButtonAction?(1)}
-    @objc private func setsAddButtonTapped() { setsAddButtonAction?() }
     
 }
 

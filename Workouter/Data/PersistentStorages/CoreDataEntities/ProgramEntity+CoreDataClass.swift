@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 @objc(ProgramEntity)
@@ -21,30 +20,30 @@ extension ProgramEntity {
     }
 
     @NSManaged public var title: String?
-    @NSManaged public var programToExercise: Set<ExerciseEntity>?
+    @NSManaged public var programToWorkout: Set<WorkoutEntity>?
 
     // 내부에 있는 id를 갖고 정렬하는 코드인데 정확히는 잘 모르겠음
-     public var exerciseArray: [ExerciseEntity] {
-         return programToExercise!.sorted {
+     public var workoutArray: [WorkoutEntity] {
+         return programToWorkout!.sorted {
              return $0.id > $1.id
          }
      }
 }
 
-// MARK: Generated accessors for programToExercise
+// MARK: Generated accessors for programToWorkout
 extension ProgramEntity {
 
-    @objc(addProgramToExerciseObject:)
-    @NSManaged public func addToProgramToExercise(_ value: ExerciseEntity)
+    @objc(addProgramToWorkoutObject:)
+    @NSManaged public func addToProgramToWorkout(_ value: WorkoutEntity)
 
-    @objc(removeProgramToExerciseObject:)
-    @NSManaged public func removeFromProgramToExercise(_ value: ExerciseEntity)
+    @objc(removeProgramToWorkoutObject:)
+    @NSManaged public func removeFromProgramToWorkout(_ value: WorkoutEntity)
 
-    @objc(addProgramToExercise:)
-    @NSManaged public func addToProgramToExercise(_ values: NSSet)
+    @objc(addProgramToWorkout:)
+    @NSManaged public func addToProgramToWorkout(_ values: NSSet)
 
-    @objc(removeProgramToExercise:)
-    @NSManaged public func removeFromProgramToExercise(_ values: NSSet)
+    @objc(removeProgramToWorkout:)
+    @NSManaged public func removeFromProgramToWorkout(_ values: NSSet)
 
 }
 

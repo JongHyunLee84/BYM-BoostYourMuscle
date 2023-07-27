@@ -30,17 +30,17 @@ extension DefaultProgramsRepository: ProgramsRepository {
                 let programModels: [Program] = programEntities.compactMap { entity in
                     var model: Program = Program(workouts: [], title: "")
                     model.title = entity.title ?? ""
-                    model.workouts = entity.exerciseArray.compactMap {
+                    model.workouts = entity.workoutArray.compactMap {
                         var workout = Workout()
                         if let target = Target(rawValue: $0.target ?? "chest") {
                             workout = Workout(target: target,
                                                 name: $0.name ?? "",
                                                 rest: Int($0.rest),
                                                 id: Int($0.id),
-                                                sets: $0.psetArray.compactMap { psetEntity in
-                                let setVolume = SetVolume(reps: Int(psetEntity.reps),
-                                                weight: psetEntity.weight,
-                                                id: Int(psetEntity.id))
+                                                sets: $0.setVolumeArray.compactMap { setVolumeEntity in
+                                let setVolume = SetVolume(reps: Int(setVolumeEntity.reps),
+                                                weight: setVolumeEntity.weight,
+                                                id: Int(setVolumeEntity.id))
                                 
                                 return setVolume
                             }
@@ -58,7 +58,6 @@ extension DefaultProgramsRepository: ProgramsRepository {
             return Disposables.create()
         }
     }
-    
     
     func deleteProgram(_ program: Program) {
         storage.deleteProgramEntity(program)

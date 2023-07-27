@@ -10,15 +10,13 @@ import RxSwift
 import UIKit
 
 final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Alertable {
-    
-    // MARK: - exercise와 workout이 같은 개념임, 이전 뷰에서 exercise 데이터 받아옴.
+     
     var viewModel: AddWorkoutViewModel
     // 이전 뷰에 데이터 passing
     var addButtonTapped: ((Workout) -> Void) = { _ in }
     var viewDisappear: ((Workout) -> Void) = { _ in }
     
     private lazy var customView = AddWorkoutUIView()
-    
     
     // MARK: - Life cyle
     init(workout: Workout = Workout()) {
@@ -67,13 +65,11 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
         let view = customView
         
         view.addWorkoutButton.rx.tap
-            .map { [weak self] () -> (Bool, Workout) in
-                guard let self = self else { return (false, Workout()) }
-                return (self.viewModel.isWorkoutSavable.value, self.viewModel.workoutRelay.value)
-            }
-            .bind { (isTrue, workout) in
+            .bind { _ in
+                let isTrue = self.viewModel.isWorkoutSavable.value
+                let workout = self.viewModel.workoutRelay.value
                 if isTrue {
-                    self.addButtonTapped(self.viewModel.workoutRelay.value) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
+                    self.addButtonTapped(workout) // 추가된다면 이전 뷰가 리스트로 갖고 있음.
                     self.viewModel.workoutRelay.accept(Workout()) // Add 되었으니 다시 이전 뷰에서 present할 때는 아무것도 안 채운 workout를 보내야함.
                     self.dismiss(animated: true)
                 } else {
@@ -91,11 +87,8 @@ final class AddWorkoutViewController: BaseViewController, KeyboardProtocol, Aler
             .disposed(by: disposeBag)
         
         view.addSetButton.rx.tap
-            .map { [weak self] () -> Bool in
-                guard let self = self else { return false }
-                return self.viewModel.isSetSavable.value
-            }
-            .bind { isSavable in
+            .bind { _ in
+                let isSavable = self.viewModel.isSetSavable.value
                 isSavable ? self.viewModel.addSetVolume() : self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.addSetVolumeMessage, actions: nil)
             }
             .disposed(by: disposeBag)

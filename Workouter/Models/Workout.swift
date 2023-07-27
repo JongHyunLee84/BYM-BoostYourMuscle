@@ -63,4 +63,11 @@ struct Workout {
         self.equipment = equipment
     }
     
+    // SearchViewCell 전용 init
+    init(name: String, target: Target, equipment: String, gif: UIImage){
+        self.init(target: target, name: name.capitalized, rest: 0, sets: [])
+        self.equipment = equipment.capitalized
+        self.gif = gif
+    }
+    
 }

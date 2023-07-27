@@ -5,10 +5,10 @@
 //  Created by 이종현 on 2023/03/31.
 //
 
+import SnapKit
 import UIKit
 
 protocol WorkoutRowCellDelegate: AnyObject {
-    func checkButtonTapped(cell: WorkoutRowCell)
     func textFieldDidEndEditing(cell: WorkoutRowCell, tag: Int, value: String)
     func keyboardDoneButtonTapped()
 }
@@ -17,12 +17,12 @@ final class WorkoutRowCell: BaseTableViewCell, PassingDataProtocol {
     
     typealias T = (Int, SetVolume)
     
-    lazy var setLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1", size: 17)
-    lazy var weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "weight", size: 17)
-    lazy var weightTF: UITextField = UIFactory.uiTextFieldWillReturned()
-    lazy var repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "reps", size: 17)
-    lazy var repsTF: UITextField = UIFactory.uiTextFieldWillReturned(tag: 1)
-    lazy var checkButton: UIButton = UIFactory.uiImageButtonWillReturned("square", target: self, action: #selector(checkButtonTapped))
+    let setLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1", size: 17)
+    let weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "weight", size: 17)
+    let weightTF: UITextField = UIFactory.uiTextFieldWillReturned()
+    let repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "reps", size: 17)
+    let repsTF: UITextField = UIFactory.uiTextFieldWillReturned(tag: 1)
+    let checkButton: UIButton = UIFactory.uiImageButtonWillReturned("square")
     lazy var weightSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [weightLabel,weightTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
     lazy var repsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [repsLabel, repsTF], alignment: .fill, spacing: 5, distribution: .fillEqually)
     lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [setLabel, weightSTV, repsSTV, checkButton], alignment: .fill, spacing: 0, distribution: .equalSpacing)
@@ -67,10 +67,6 @@ final class WorkoutRowCell: BaseTableViewCell, PassingDataProtocol {
                         checkButton.setImage(UIImage(systemName: "square"), for: .normal)
     }
     
-    @objc func checkButtonTapped() {
-        delegate?.checkButtonTapped(cell: self)
-    }
-    
 }
 
 // MARK: - cell안에 TF 관련 Delegate
@@ -79,15 +75,15 @@ extension WorkoutRowCell: UITextFieldDelegate {
     
     // 키보드 위에 Done 버튼 만들기
     func setupDoneButtonItem() {
-        let toolbar = UIToolbar()
+        let toolbar = UIToolbar(frame:CGRect(x:0, y:0, width:100, height:100))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                         target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done,
                                          target: self, action: #selector(keyboardDoneButtonTapped))
-        
+
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()
-        
+
         repsTF.inputAccessoryView = toolbar
         weightTF.inputAccessoryView = toolbar
     }

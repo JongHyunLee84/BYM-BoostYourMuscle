@@ -5,9 +5,9 @@
 //  Created by 이종현 on 2023/04/11.
 //
 
-import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
+
 class SearchViewModel {
     
     // MARK: - Rx

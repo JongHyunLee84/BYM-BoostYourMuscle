@@ -1,10 +1,10 @@
 //
-//  Pset.swift
+//  SetVolume.swift
 //  BYM
 //
 //  Created by 이종현 on 2023/04/03.
 //
-import Differentiator
+
 import Foundation
 
 struct SetVolume {
@@ -24,11 +24,5 @@ struct SetVolume {
         self.reps = reps
         self.weight = weight
         self.id = id
-    }
-}
-
-extension SetVolume: IdentifiableType, Equatable {
-    var identity: String {
-        return UUID().uuidString
     }
 }

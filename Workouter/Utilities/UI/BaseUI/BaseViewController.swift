@@ -5,8 +5,9 @@
 //  Created by 이종현 on 2023/06/25.
 //
 
-import UIKit
 import RxSwift
+import UIKit
+
 class BaseViewController: UIViewController, BaseViewControllerProtocol {
 
     let disposeBag: DisposeBag = DisposeBag()

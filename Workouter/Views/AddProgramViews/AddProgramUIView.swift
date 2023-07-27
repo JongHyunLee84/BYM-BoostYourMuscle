@@ -5,17 +5,16 @@
 //  Created by 이종현 on 2023/05/24.
 //
 
+import SnapKit
 import UIKit
+
 final class AddProgramUIView: BaseUIView {
     
-    var addWorkoutButtonAction: (() -> Void)?
-    var searchWorkoutButtonAction: (() -> Void)?
-    
-    lazy var programNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
-    lazy var programNameTF: UITextField = UIFactory.uiTextFieldWillReturned(placeholder: "ex. Push Day")
-    lazy var addWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add Workout", target: self, action: #selector(addWorkoutButtonDidTapped))
-    lazy var searchWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Search Workout", target: self, action: #selector(searchWorkoutButtonDidTapped))
-    lazy var tableView: UITableView = UITableView()
+    let programNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Program Name", size: 21, weight: .bold)
+    let programNameTF: UITextField = UIFactory.uiTextFieldWillReturned(placeholder: "ex. Push Day")
+    let addWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Add Workout")
+    let searchWorkoutButton: UIButton = UIFactory.uiButtonWillReturned(title: "Search Workout")
+    let tableView: UITableView = UITableView()
     lazy var buttonsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [addWorkoutButton, searchWorkoutButton], alignment: .fill, spacing: 25)
     
     
@@ -53,18 +52,6 @@ final class AddProgramUIView: BaseUIView {
     
     override func setupUI() {
         tableView.rowHeight = 70
-    }
-    
-    @objc private func addWorkoutButtonDidTapped() {
-        if let closure = addWorkoutButtonAction {
-            closure()
-        }
-    }
-    
-    @objc private func searchWorkoutButtonDidTapped() {
-        if let closure = searchWorkoutButtonAction {
-            closure()
-        }
     }
     
 }

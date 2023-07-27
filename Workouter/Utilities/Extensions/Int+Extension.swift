@@ -14,4 +14,7 @@ extension Int {
     var toString: String {
         return String(self)
     }
+    var toSecond: String {
+        return "\(self) sec"
+    }
 }

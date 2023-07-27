@@ -5,31 +5,26 @@
 //  Created by 이종현 on 2023/06/06.
 //
 
+import SnapKit
 import UIKit
 
 final class WorkoutUIView: BaseUIView {
     
-    var editButtonAction: (()->Void)?
-    var doneButtonAction: (()->Void)?
-    var startStopButtonAction: (()->Void)?
-    var soundButtonAction: (()->Void)?
-    var resetButtonAction: ((UIButton)->Void)?
-    
-    lazy var editButton: UIButton = UIFactory.uiButtonWillReturned(title: "Edit", fontSize: 20, target: self, action: #selector(editButtonDidTapped), backgroundColor: .clear)
-    lazy var doneButton: UIButton = UIFactory.uiButtonWillReturned(title: "Done", fontSize: 20, target: self, action: #selector(doneButtonDidTapped), backgroundColor: .clear)
-    lazy var mainTimerLabel: UILabel = UIFactory.uiLabelWillReturned(title: "00 : 00 : 00", size: 35, weight: .semibold)
-    lazy var startStopButton: UIButton = UIFactory.uiImageButtonWillReturned("pause.circle", size: 36, weight: .semibold, scale: .default, target: self, action: #selector(startStopButtonDidTapped))
-    lazy var tableView: UITableView = UITableView()
+    let editButton: UIButton = UIFactory.uiButtonWillReturned(title: "Edit", fontSize: 20, backgroundColor: .clear)
+    let doneButton: UIButton = UIFactory.uiButtonWillReturned(title: "Done", fontSize: 20, backgroundColor: .clear)
+    let mainTimerLabel: UILabel = UIFactory.uiLabelWillReturned(title: "00 : 00 : 00", size: 35, weight: .semibold)
+    let startStopButton: UIButton = UIFactory.uiImageButtonWillReturned("pause.circle", size: 36, weight: .semibold, scale: .default)
+    let tableView: UITableView = UITableView()
     // Rest Views
-    lazy var restLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Rest", size: 15)
-    lazy var soundButton: UIButton = UIFactory.uiImageButtonWillReturned("speaker.wave.2", target: self, action: #selector(soundButtonDidTapped))
-    lazy var restTimerLabel: UILabel = UIFactory.uiLabelWillReturned(title: "00 sec", size: 30, weight: .medium, alignment: .center)
-    lazy var minusButton: UIButton = UIFactory.uiButtonWillReturned(title: "-10", fontSize: 18, target: self, action: #selector(restButtonDidTapped(_:)), tag: 1)
-    lazy var resetButton: UIButton = UIFactory.uiButtonWillReturned(title: "Reset", target: self, action: #selector(restButtonDidTapped(_:)), tag: 2)
-    lazy var plusButton: UIButton = UIFactory.uiButtonWillReturned(title: "+10", fontSize: 18, target: self, action: #selector(restButtonDidTapped(_:)), tag: 3)
+    let restLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Rest", size: 15)
+    let soundButton: UIButton = UIFactory.uiImageButtonWillReturned("speaker.wave.2")
+    let restTimerLabel: UILabel = UIFactory.uiLabelWillReturned(title: "00 sec", size: 30, weight: .medium, alignment: .center)
+    let minusButton: UIButton = UIFactory.uiButtonWillReturned(title: "-10", fontSize: 18, tag: 1)
+    let resetButton: UIButton = UIFactory.uiButtonWillReturned(title: "Reset")
+    let plusButton: UIButton = UIFactory.uiButtonWillReturned(title: "+10", fontSize: 18, tag: 3)
     lazy var editDoneBtsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [editButton, doneButton], alignment: .fill, distribution: .equalSpacing)
-    lazy var mainTimerSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [mainTimerLabel, startStopButton], distribution: .fill)
-    lazy var restBackgroundView: UIView = UIView()
+    lazy var  mainTimerSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [mainTimerLabel, startStopButton], distribution: .fill)
+    let restBackgroundView: UIView = UIView()
     lazy var restLabelAndSoundBTSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [restLabel, soundButton], distribution: .fill)
     lazy var restBTsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [minusButton, resetButton, plusButton], distribution: .fillEqually)
     lazy var restTimerAndResetBTsSTV: UIStackView = UIFactory.uiStackViewWillReturned(views: [restTimerLabel, restBTsSTV], distribution: .fill)
@@ -80,13 +75,8 @@ final class WorkoutUIView: BaseUIView {
     
     override func setupUI() {
         restBackgroundView.backgroundColor = .dynamicBackground
+        restTimerLabel.adjustsFontSizeToFitWidth = true // 텍스트 잘리지 않게 자동 크기 조절
     }
-    
-    @objc private func editButtonDidTapped() { editButtonAction?() }
-    @objc private func doneButtonDidTapped() { doneButtonAction?() }
-    @objc private func startStopButtonDidTapped() { startStopButtonAction?() }
-    @objc private func soundButtonDidTapped() { soundButtonAction?() }
-    @objc private func restButtonDidTapped(_ sender: UIButton) { resetButtonAction?(sender) }
     
 }
 

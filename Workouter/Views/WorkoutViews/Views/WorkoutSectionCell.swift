@@ -5,6 +5,7 @@
 //  Created by 이종현 on 2023/03/31.
 //
 
+import SnapKit
 import UIKit
 
 final class WorkoutSectionCell: BaseTableViewCell, PassingDataProtocol {

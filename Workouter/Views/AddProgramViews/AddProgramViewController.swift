@@ -4,8 +4,9 @@
 //
 //  Created by 이종현 on 2023/04/03.
 //
-import RxSwift
+
 import RxCocoa
+import RxSwift
 import UIKit
 
 final class AddProgramViewController: BaseViewController, KeyboardProtocol, Alertable {
@@ -13,7 +14,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
     private var viewModel = AddProgramViewModel()
     
     let customView = AddProgramUIView()
-    var addProgram: (Program) -> Void = { program in } // 이전 뷰와 바인딩을 위한 클로저
+    var addProgram: (Program) -> Void = { _ in } // 이전 뷰와 바인딩을 위한 클로저
     
     override func loadView() {
         view = customView
@@ -68,7 +69,7 @@ final class AddProgramViewController: BaseViewController, KeyboardProtocol, Aler
         
         navigationItem.rightBarButtonItem?.rx.tap
             .flatMap { [weak self] () -> Observable<(Bool, Program)> in
-                guard let self = self else { return Observable.empty().take(1) }
+                guard let self = self else { return Observable.empty() }
                 return Observable.combineLatest(self.viewModel.isSavable, self.viewModel.programRelay).take(1)
             }
             .bind { (isTrue, program) in

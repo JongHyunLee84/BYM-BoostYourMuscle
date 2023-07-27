@@ -5,7 +5,6 @@
 //  Created by 이종현 on 2023/04/04.
 //
 
-import UIKit
 import CoreData
 
 final class CoreDataProgramStorage {
@@ -43,24 +42,24 @@ final class CoreDataProgramStorage {
                 let entityData = ProgramEntity(context: context)
                 entityData.title = program.title
                 // id 숫자를 저장해서 fetch해 올때 save된 순서대로 갖고 올 거임
-                var exerciseId: Int64 = 0
-                program.workouts.forEach { exerciseModel in
-                    var psetId: Int64 = 0
-                    let exerciseEntity = ExerciseEntity(context: context)
-                    exerciseEntity.rest = Int64(exerciseModel.rest)
-                    exerciseEntity.target = exerciseModel.target.rawValue
-                    exerciseEntity.name = exerciseModel.name
-                    exerciseEntity.id = exerciseId
-                    exerciseId += 1
-                    exerciseModel.sets.forEach {
-                        let entity = PsetEntity(context: context)
+                var workoutId: Int64 = 0
+                program.workouts.forEach { workoutModel in
+                    var setVolumeId: Int64 = 0
+                    let workoutEntity = WorkoutEntity(context: context)
+                    workoutEntity.rest = Int64(workoutModel.rest)
+                    workoutEntity.target = workoutModel.target.rawValue
+                    workoutEntity.name = workoutModel.name
+                    workoutEntity.id = workoutId
+                    workoutId += 1
+                    workoutModel.sets.forEach {
+                        let entity = SetVolumeEntity(context: context)
                         entity.reps = Int64($0.reps)
                         entity.weight = $0.weight
-                        entity.id = psetId
-                        psetId += 1
-                        exerciseEntity.addToExerciseToPset(entity)
+                        entity.id = setVolumeId
+                        setVolumeId += 1
+                        workoutEntity.addToWorkoutToSetVolume(entity)
                     }
-                    entityData.addToProgramToExercise(exerciseEntity)
+                    entityData.addToProgramToWorkout(workoutEntity)
                 }
                 try context.save()
             } catch {

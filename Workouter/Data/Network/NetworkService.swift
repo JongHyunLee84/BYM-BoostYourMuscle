@@ -5,7 +5,6 @@
 //  Created by 이종현 on 2023/04/11.
 //
 
-import Foundation
 import RxSwift
 
 // MARK: - 서버에서 데이터 Fetch 해오기

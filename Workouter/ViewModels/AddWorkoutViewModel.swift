@@ -1,14 +1,12 @@
 //
-//  ExerciseViewModel.swift
+//  WorkoutViewModel.swift
 //  BYM
 //
 //  Created by 이종현 on 2023/04/05.
 //
 
-import RxSwift
 import RxRelay
-
-// TODO: AddExerciseViewModel로 이름 바꾸기
+import RxSwift
 
 final class AddWorkoutViewModel {
     
@@ -16,7 +14,7 @@ final class AddWorkoutViewModel {
     
     let workoutRelay = BehaviorRelay<Workout>(value: Workout())
     
-    // MARK: - Exercise properties
+    // MARK: - Workout properties
     let workoutNameRelay: BehaviorRelay<String>
     let restTimeRelay: BehaviorRelay<Int>
     let targetRelay: BehaviorRelay<Int>

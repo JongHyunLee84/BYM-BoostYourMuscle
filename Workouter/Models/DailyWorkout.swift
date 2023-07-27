@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct DailyWorkOut {
     // 1. 총 운동 시간
     

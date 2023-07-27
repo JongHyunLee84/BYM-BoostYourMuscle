@@ -5,9 +5,9 @@
 //  Created by 이종현 on 2023/04/12.
 //
 
-import UIKit
 import RxCocoa
 import RxSwift
+import UIKit
 
 final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, Alertable {
     
@@ -66,7 +66,8 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
         
         viewModel.totalWorkouts
             .map{ $0.count }
-            .bind { count in
+            .asDriver(onErrorJustReturn: 0)
+            .drive { count in
                 count.isZero ?
                 self.customView.tableView.setEmptyMessage("Loading...") :
                 self.customView.tableView.restore()
@@ -95,20 +96,20 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
             .bind(to: customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
                                                  cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
                 UIImage.gifImageWithURL(item.gifUrl ?? "") { img in
+                    guard let img = img else { return }
                     DispatchQueue.main.async {
-                        cell.workoutImageView.image = img
+                        cell.passData(Workout(name: item.name, target: item.target, equipment: item.equipment ?? "", gif: img))
                     }
                 }
-                cell.nameLabel.text = item.name.capitalized
-                cell.targetLabel.text = item.target.rawValue.capitalized
-                cell.equipmentLabel.text = item.equipment?.capitalized
-                cell.plusButtonAction = { [weak self] in
-                    let vc = AddWorkoutViewController(workout: item)
-                    vc.addButtonTapped = { [weak self] workout in
-                        self?.viewModel.workoutAdded(workout)
+                cell.plusButton.rx.tap
+                    .bind {
+                        let vc = AddWorkoutViewController(workout: item)
+                        vc.addButtonTapped = { [weak self] workout in
+                            self?.viewModel.workoutAdded(workout)
+                        }
+                        self.present(vc, animated: true)
                     }
-                    self?.present(vc, animated: true)
-                }
+                    .disposed(by: self.disposeBag)
             }
             .disposed(by: disposeBag)
     }
@@ -135,36 +136,3 @@ extension SearchWorkoutViewController: UISearchBarDelegate {
     }
     
 }
-//// MARK: - UI
-//extension SearchWorkoutViewController {
-//
-//    private func targetButtonTapped(_ sender: UIButton) {
-//        // TODO: customview에서부터 binding시켜서 vm으로 넘겨야함.
-//        viewModel.targetButtonTapped(title: <#T##String?#>)
-//        searchBar.text = "" // 부위 카테코리가 변하면 searchBar는 자동으로 비어진다.
-//        customView.buttons.forEach { button in
-//            if button.currentTitle ==  sender.currentTitle {
-//                button.backgroundColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
-//            } else {
-//                button.backgroundColor = .opaqueSeparator
-//            }
-//        }
-//    }
-//
-//}
-
-// MARK: - RX 관련
-
-//extension SearchWorkoutViewController {
-//
-//    func filterExercise(query: String, exercise: Exercise) -> Bool {
-//        let lowerQuery = query.lowercased()
-//        let equipment = exercise.equipment?.lowercased() ?? ""
-//        if query.isEmpty || exercise.name.lowercased().contains(lowerQuery) || equipment.contains(lowerQuery) || exercise.target.rawValue.lowercased().contains(lowerQuery) {
-//            return true
-//        } else {
-//            return false
-//        }
-//
-//    }
-//}

@@ -5,15 +5,16 @@
 //  Created by 이종현 on 2023/04/03.
 //
 
+import SnapKit
 import UIKit
 
 final class AddProgramTableViewCell: BaseTableViewCell, PassingDataProtocol {
     
     typealias T = Workout
     
-    lazy var workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Name", alignment: .center)
-    lazy var targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target", alignment: .center)
-    lazy var setsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Sets", alignment: .center)
+    let workoutNameLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Name", alignment: .center)
+    let targetLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Target", alignment: .center)
+    let setsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "Sets", alignment: .center)
     lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [workoutNameLabel,targetLabel,setsLabel])
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

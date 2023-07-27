@@ -5,14 +5,16 @@
 //  Created by 이종현 on 2023/04/03.
 //
 
+import SnapKit
 import UIKit
 
 final class AddWorkoutTableViewCell: BaseTableViewCell, PassingDataProtocol {
+    
     typealias T = (SetVolume, Int)
     
-    lazy var numberLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1")
-    lazy var weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "60 kg")
-    lazy var repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "10 reps")
+    let numberLabel: UILabel = UIFactory.uiLabelWillReturned(title: "1")
+    let weightLabel: UILabel = UIFactory.uiLabelWillReturned(title: "60 kg")
+    let repsLabel: UILabel = UIFactory.uiLabelWillReturned(title: "10 reps")
     lazy var stackView: UIStackView = UIFactory.uiStackViewWillReturned(views: [numberLabel,weightLabel,repsLabel], distribution: .equalSpacing )
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

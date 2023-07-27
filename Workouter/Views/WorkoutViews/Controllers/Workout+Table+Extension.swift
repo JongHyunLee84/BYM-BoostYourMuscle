@@ -6,33 +6,40 @@
 //
 
 import RxCocoa
+import RxSwift
 import UIKit
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
-//     MARK: - datasource
-
+    //     MARK: - datasource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.workoutCellsRelay.value.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let exerciseCell = viewModel.workoutCellsRelay.value[section]
-        return exerciseCell.isExpanded ? exerciseCell.sets.count + 1 : 1
+        let workoutCell = viewModel.workoutCellsRelay.value[section]
+        return workoutCell.isExpanded ? workoutCell.sets.count + 1 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let sectionData = viewModel.workoutCellsRelay.value[indexPath.section]
+        
         if indexPath.row.isZero {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.workoutSectionIdentifier) as! WorkoutSectionCell
-            cell.passData((sectionData.name, sectionData.isExpanded))
+            let (name, isExpaneded) = viewModel.workoutSectionCellData(indexPath)
+            cell.passData((name, isExpaneded))
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.workoutRowIdentifier) as! WorkoutRowCell
-            let index = indexPath.row - 1
-            let setVolume = viewModel.workoutCellsRelay.value[indexPath.section].sets[index]
             cell.delegate = self
-            cell.passData((index+1, setVolume))
+            cell.passData(viewModel.workoutRowCellData(indexPath))
+            // TODO: 아래 코드들 적용되는지 테스트 (배열 통해서 하나로 줄일 수 있으면 줄이기)
+            cell.checkButton.rx.tap
+                .bind {
+                    self.viewModel.checkButtonTapped(indexPath: indexPath)
+                    cell.passData(self.viewModel.workoutRowCellData(indexPath))
+                }
+                .disposed(by: disposeBag)
             return cell
         }
     }
@@ -40,19 +47,19 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row.isZero ? true : false
     }
-
+    
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         viewModel.swapElement(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
-     // MARK: - delegate
-
+    // MARK: - delegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: - 선택 취소 관련 코드인데 정확히 어떤 기능인지 모르겠음 공부해봐야함.
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row.isZero {
             viewModel.expandSection(at: indexPath)
-//            tableView.reloadSections([indexPath.section], with: .none)
+            tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     
