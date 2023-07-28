@@ -17,7 +17,8 @@
 **Dependency Direction**
 ```mermaid
 graph LR
-A[View] --> B[ViewController] --> C[ViewModel]
+A[View] --> B[ViewController]
+C[ViewModel] --> B
 D[DataRepository] --> C
 E[Network] --> D
 F[Persistence DB] --> D
