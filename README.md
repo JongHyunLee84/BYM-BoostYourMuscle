@@ -17,11 +17,11 @@
 **Dependency Direction**
 ```mermaid
 graph LR
-A[View] --> B[ViewController]
-C[ViewModel] --> B
-D[DataRepository] --> C
-E[Network] --> D
-F[Persistence DB] --> D
+B[ViewController] --> A[View]
+B --> C[ViewModel]
+C --> D[DataRepository]
+D --> E[Network]
+D --> F[Persistence DB]
 ```
 ## Includes
 - Reactive Functional Programming with RxSwift
