@@ -25,30 +25,30 @@ final class ProgramListViewController: BaseViewController, Alertable {
     
     override func setupRxBind() {
         viewModel.programsRelay
-            .bind(to: tableView.rx.items(cellIdentifier: Identifier.programListCell, cellType: ProgramListTableViewCell.self)) {
+            .bind(to: tableView.rx.items(cellIdentifier: Identifier.programListCell, cellType: ProgramListTableViewCell.self)) { [weak self]
                 row, element, cell in
-                cell.deleteProgram = { self.viewModel.deleteProgram(row) }
+                cell.deleteProgram = { self?.viewModel.deleteProgram(row) }
                 cell.passData(element)
             }
             .disposed(by: disposeBag)
         
         viewModel.numberOfRows
-            .bind { count in
-                count.isZero ? self.tableView.setEmptyMessage(self.viewModel.emptyMessage) : self.tableView.restore()
+            .bind(with: self) { owner, count in
+                count.isZero ? owner.tableView.setEmptyMessage(owner.viewModel.emptyMessage) : owner.tableView.restore()
             }
             .disposed(by: disposeBag)
         
         // TODO: WorkoutView 리팩토링할 때 다시 
         tableView.rx.itemSelected
-            .bind { indexPath in
-                let program = self.viewModel.returnViewModelAt(indexPath.row)
+            .bind(with: self) { owner, indexPath in
+                let program = owner.viewModel.returnViewModelAt(indexPath.row)
                 let action1 = UIAlertAction(title: "No", style: .cancel)
                 let action2 = UIAlertAction(title: "Yes", style: .default) { _ in
                     // 운동 시작 뷰로 넘어가기
-                    let nextViewController = WorkoutViewController(workouts: self.viewModel.programsRelay.value[indexPath.row].workouts)
+                    let nextViewController = WorkoutViewController(workouts: owner.viewModel.programsRelay.value[indexPath.row].workouts)
                     self.navigationController?.pushViewController(nextViewController, animated: true)
                 }
-                self.showAlert(title: program.title, message: self.viewModel.alertMessage, actions: [action1, action2])
+                owner.showAlert(title: program.title, message: owner.viewModel.alertMessage, actions: [action1, action2])
             }
             .disposed(by: disposeBag)
         

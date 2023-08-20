@@ -27,19 +27,9 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
     
-    public class func gifImageWithData(_ data: Data) -> UIImage? {
-        
-        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("image doesn't exist")
-            return nil
-        }
-        
-        return UIImage.animatedImageWithSource(source)
-    }
-    
     // 너무 느려서 async로
     public class func gifImageWithURL(_ gifUrl:String, completion: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .userInteractive).async {
             guard let bundleURL = URL(string: gifUrl)
                 else {
                     print("image named \"\(gifUrl)\" doesn't exist")
@@ -49,37 +39,23 @@ extension UIImage {
                 print("image named \"\(gifUrl)\" into NSData")
                 return
             }
-            completion(gifImageWithData(imageData))
+            gifImageWithData(imageData) { img in
+                completion(img)
+            }
         }
-    }
-
-    // MARK: - 리턴받으며 미리 UIImage로 변환할 때
-    public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-
-            guard let bundleURL = URL(string: gifUrl)
-                else {
-                    print("image named \"\(gifUrl)\" doesn't exist")
-                    return nil
-            }
-            guard let imageData = try? Data(contentsOf: bundleURL) else {
-                print("image named \"\(gifUrl)\" into NSData")
-                return nil
-            }
-           return gifImageWithData(imageData)
     }
     
-    public class func gifImageWithName(_ name: String) -> UIImage? {
-        guard let bundleURL = Bundle.main
-            .url(forResource: name, withExtension: "gif") else {
-                print("SwiftGif: This image named \"\(name)\" does not exist")
-                return nil
+    public class func gifImageWithData(_ data: Data, completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+                print("image doesn't exist")
+                completion(nil)
+                return
+            }
+            UIImage.animatedImageWithSource(source) { img in
+                completion(img)
+            }
         }
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
-            return nil
-        }
-        
-        return gifImageWithData(imageData)
     }
     
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
@@ -155,49 +131,51 @@ extension UIImage {
         return gcd
     }
     
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
-        let count = CGImageSourceGetCount(source)
-        var images = [CGImage]()
-        var delays = [Int]()
-        
-        for i in 0..<count {
-            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
-                images.append(image)
+    class func animatedImageWithSource(_ source: CGImageSource, completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global().async {
+            let count = CGImageSourceGetCount(source)
+            var images = [CGImage]()
+            var delays = [Int]()
+            
+            for i in 0..<count {
+                if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                    images.append(image)
+                }
+                
+                let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
+                    source: source)
+                delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
             }
             
-            let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
-                source: source)
-            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
+            let duration: Int = {
+                var sum = 0
+                
+                for val: Int in delays {
+                    sum += val
+                }
+                
+                return sum
+            }()
+            
+            let gcd = gcdForArray(delays)
+            var frames = [UIImage]()
+            
+            var frame: UIImage
+            var frameCount: Int
+            for i in 0..<count {
+                frame = UIImage(cgImage: images[Int(i)])
+                frameCount = Int(delays[Int(i)] / gcd)
+                
+                for _ in 0..<frameCount {
+                    frames.append(frame)
+                }
+            }
+            let animation = UIImage.animatedImage(with: frames,
+                duration: Double(duration) / 1000.0)
+            
+            completion(animation)
         }
-        
-        let duration: Int = {
-            var sum = 0
-            
-            for val: Int in delays {
-                sum += val
-            }
-            
-            return sum
-        }()
-        
-        let gcd = gcdForArray(delays)
-        var frames = [UIImage]()
-        
-        var frame: UIImage
-        var frameCount: Int
-        for i in 0..<count {
-            frame = UIImage(cgImage: images[Int(i)])
-            frameCount = Int(delays[Int(i)] / gcd)
-            
-            for _ in 0..<frameCount {
-                frames.append(frame)
-            }
-        }
-        
-        let animation = UIImage.animatedImage(with: frames,
-            duration: Double(duration) / 1000.0)
-        
-        return animation
     }
+    
 }
 

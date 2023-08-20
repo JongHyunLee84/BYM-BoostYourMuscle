@@ -95,10 +95,12 @@ final class SearchWorkoutViewController: BaseViewController, KeyboardProtocol, A
         viewModel.filteredWorkouts
             .bind(to: customView.tableView.rx.items(cellIdentifier: Identifier.searchWorkoutTableViewCell,
                                                  cellType: SearchWorkoutTableViewCell.self)) { index, item, cell in
+                
+                cell.passData(Workout(name: item.name, target: item.target, equipment: item.equipment ?? "", gif: #imageLiteral(resourceName: "imagePlaceholder")))
                 UIImage.gifImageWithURL(item.gifUrl ?? "") { img in
                     guard let img = img else { return }
                     DispatchQueue.main.async {
-                        cell.passData(Workout(name: item.name, target: item.target, equipment: item.equipment ?? "", gif: img))
+                        cell.workoutImageView.image = img
                     }
                 }
                 cell.plusButton.rx.tap
