@@ -9,11 +9,6 @@
 
 **App Store Link :** <a href="https://apps.apple.com/kr/app/workouter-workout-tracker-log/id6447367318" target="_blank">Workouter - Workout Traker Log</a>
 
-## Layers
--  Presentation Layer = View + ViewController ( Separated )
--  Domain Layer = ViewModel ( Presentation Logic )
--  Data Repository Layer = Business Logic (Repositories Implementations + Network + Persistence DB)
-
 **Dependency Direction**
 ```mermaid
 graph LR
