@@ -27,7 +27,7 @@ D --> F[Persistence DB]
 - Reactive Functional Programming with RxSwift
 - Code Base UI with Snapkit (Refactored from storyboard)
 - Separated View and View Controller
-- Expandable ( Collapsable ) Table View
+- Expandable ( Collapsable ) Table View 
 - GIF Image
 - Dark Mode
 - SwiftUI Preview
