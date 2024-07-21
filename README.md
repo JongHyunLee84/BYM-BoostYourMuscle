@@ -11,8 +11,8 @@
 
 ## Layers
 -  Presentation Layer = View + ViewController ( Separated )
-- Domain Layer = ViewModel ( Business Logic )
--  Data Repository Layer = Repositories Implementations + Network + Persistence DB
+-  Domain Layer = ViewModel ( Presentation Logic )
+-  Data Repository Layer = Business Logic (Repositories Implementations + Network + Persistence DB)
 
 **Dependency Direction**
 ```mermaid
